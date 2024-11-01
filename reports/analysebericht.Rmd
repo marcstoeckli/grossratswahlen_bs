@@ -112,24 +112,14 @@ model_sp_weitere <- lm("rank ~ kreis*incumbent + year + kreis*gender + age + abo
 
 # Anteil
 
-model_sp_kreis_share <- lm("share_scale ~ kreis*incumbent + year + kreis*gender + either + kreis*list_place", 
+scale_factors <- data_final %>% 
+  group_by(year, kreis) %>% 
+  summarise(share_sd = sd(share),
+            list_place_sd = sd(list_place)) %>% 
+  mutate(scale_factor = share_sd/list_place_sd)
+
+model_sp_kreis_share <- lm("share_scale ~ kreis*incumbent + year + kreis*gender + kreis*list_place_scale", 
    data = data_final)
-
-# Backlog
-
-data_final %>% 
-  mutate(rank_pred = predict(lm("rank ~ kreis*incumbent + year + gender + kreis*list_place", data = .))) %>% 
-  ggplot() +
-  geom_point(aes(x = list_place, y = -rank, col = gender, shape = incumbent)) +
-  geom_line(aes(x = list_place, y = -rank_pred, col = gender, shape = incumbent)) +
-  facet_wrap(~ kreis + year)
-
-data_final %>% 
-  mutate(rank_pred = predict(lm("rank ~ kreis*incumbent + year + gender*kreis*list_place", data = .))) %>% 
-  ggplot() +
-  geom_point(aes(x = list_place, y = -rank, col = gender, shape = incumbent)) +
-  geom_line(aes(x = list_place, y = -rank_pred, col = gender, shape = incumbent)) +
-  facet_wrap(~ kreis + year)
 ```
 
 # Einführung

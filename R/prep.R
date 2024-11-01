@@ -86,7 +86,9 @@ data_final_2024_all <- data_2024 %>%
          share_others_scale = as.numeric(scale(share_others, center = TRUE, scale = TRUE)),
          share_own_scale = as.numeric(scale(share_own, center = TRUE, scale = TRUE)),
          rank_own = as.integer(rank(-share_own)),
-         rank_others = as.integer(rank(-share_others))) %>% 
+         rank_others = as.integer(rank(-share_others)),
+         list_place_scale = as.numeric(scale(list_place, 
+                                             center = TRUE, scale = TRUE))) %>% 
   ungroup() %>%
   filter(!(party %in% c("AB", "BDV", "PB", "PP", "EDU",
                         "fuk", "KL", "VA", "EVP", "PdA",
@@ -210,7 +212,9 @@ data_final_2020_all <- data_2020 %>%
          share_others_scale = as.numeric(scale(share_others, center = TRUE, scale = TRUE)),
          share_own_scale = as.numeric(scale(share_own, center = TRUE, scale = TRUE)),
          rank_own = as.integer(rank(-share_own)),
-         rank_others = as.integer(rank(-share_others))) %>% 
+         rank_others = as.integer(rank(-share_others)),
+         list_place_scale = as.numeric(scale(list_place, 
+                                             center = TRUE, scale = TRUE))) %>% 
   ungroup() %>%
   filter(!(party %in% c("AB", "BDV", "PB", "PP", 
                         "fuk", "KL", "VA", "EVP"))) %>% 
@@ -265,6 +269,8 @@ data_final_2016 <- data_2016 %>%
   arrange(kreis, list_place) %>% 
   group_by(kreis) %>% 
   mutate(share_scale = as.numeric(scale(share, center = TRUE, scale = TRUE)),
+         list_place_scale = as.numeric(scale(list_place, 
+                                             center = TRUE, scale = TRUE)),
          below = (lag(incumbent) == TRUE) &
            (incumbent == FALSE),
          above = (lead(incumbent) == TRUE) &
@@ -302,6 +308,8 @@ data_final_2012 <- data_2012 %>%
   arrange(kreis, list_place) %>%
   group_by(kreis) %>% 
   mutate(share_scale = as.numeric(scale(share, center = TRUE, scale = TRUE)),
+         list_place_scale = as.numeric(scale(list_place, 
+                                             center = TRUE, scale = TRUE)),
          below = (lag(incumbent) == TRUE) &
            (incumbent == FALSE),
          above = (lead(incumbent) == TRUE) &
@@ -339,6 +347,8 @@ data_final_2008 <- data_2008 %>%
   arrange(kreis, list_place) %>% 
   group_by(kreis) %>% 
   mutate(share_scale = as.numeric(scale(share, center = TRUE, scale = TRUE)),
+         list_place_scale = as.numeric(scale(list_place, 
+                                             center = TRUE, scale = TRUE)),
          below = (lag(incumbent) == TRUE) &
            (incumbent == FALSE),
          above = (lead(incumbent) == TRUE) &
@@ -364,36 +374,41 @@ data_final_2008 <- data_2008 %>%
 
 data_final <- rbind(data_final_2024 %>% 
                       mutate(name = paste(name, firstname)) %>% 
-                      select(kreis, list_place, name, gender, incumbent, votes,
-                             elected, votes_kreis_party, list_total, share,
-                             share_scale, below, above, either, last_four, first_four,
-                             last_two_gender, first_two_gender, last_three_gender, first_three_gender,
-                             rank, place_last, year),
+                      select(kreis, list_place, list_place_scale, name, gender, 
+                             incumbent, votes, elected, votes_kreis_party, 
+                             list_total, share, share_scale, below, above, 
+                             either, last_four, first_four, last_two_gender, 
+                             first_two_gender, last_three_gender, 
+                             first_three_gender, rank, place_last, year),
                     data_final_2020 %>% 
                     mutate(name = paste(name, firstname)) %>% 
-                    select(kreis, list_place, name, gender, incumbent, votes,
-                           elected, votes_kreis_party, list_total, share,
-                           share_scale, below, above, either, last_four, first_four,
-                           last_two_gender, first_two_gender, last_three_gender, first_three_gender,
-                           rank, place_last, year),
+                      select(kreis, list_place, list_place_scale, name, gender, 
+                             incumbent, votes, elected, votes_kreis_party, 
+                             list_total, share, share_scale, below, above, 
+                             either, last_four, first_four, last_two_gender, 
+                             first_two_gender, last_three_gender, 
+                             first_three_gender, rank, place_last, year),
                   data_final_2016 %>% 
-                    select(kreis, list_place, name, gender, incumbent, votes,
-                           elected, votes_kreis_party, list_total, share,
-                           share_scale, below, above, either, last_four, first_four,
-                           last_two_gender, first_two_gender, last_three_gender, first_three_gender,
-                           rank, place_last, year),
+                    select(kreis, list_place, list_place_scale, name, gender, 
+                           incumbent, votes, elected, votes_kreis_party, 
+                           list_total, share, share_scale, below, above, 
+                           either, last_four, first_four, last_two_gender, 
+                           first_two_gender, last_three_gender, 
+                           first_three_gender, rank, place_last, year),
                   data_final_2012 %>% 
-                    select(kreis, list_place, name, gender, incumbent, votes,
-                           elected, votes_kreis_party, list_total, share,
-                           share_scale, below, above, either, last_four, first_four,
-                           last_two_gender, first_two_gender, last_three_gender, first_three_gender,
-                           rank, place_last, year),
+                    select(kreis, list_place, list_place_scale, name, gender, 
+                           incumbent, votes, elected, votes_kreis_party, 
+                           list_total, share, share_scale, below, above, 
+                           either, last_four, first_four, last_two_gender, 
+                           first_two_gender, last_three_gender, 
+                           first_three_gender, rank, place_last, year),
                   data_final_2008 %>% 
-                    select(kreis, list_place, name, gender, incumbent, votes,
-                           elected, votes_kreis_party, list_total, share,
-                           share_scale, below, above, either, last_four, first_four,
-                           last_two_gender, first_two_gender, last_three_gender, first_three_gender,
-                           rank, place_last, year)) %>% 
+                    select(kreis, list_place, list_place_scale, name, gender, 
+                           incumbent, votes, elected, votes_kreis_party, 
+                           list_total, share, share_scale, below, above, 
+                           either, last_four, first_four, last_two_gender, 
+                           first_two_gender, last_three_gender, 
+                           first_three_gender, rank, place_last, year)) %>% 
   arrange(kreis, year, list_place) %>% 
   group_by(kreis, year, gender) %>% 
   mutate(rank_gender = ifelse(gender == "M", rank(list_place), 
@@ -401,16 +416,20 @@ data_final <- rbind(data_final_2024 %>%
   ungroup()
 
 data_final_all <- rbind(data_final_2024_all %>% 
-                          select(kreis, party, list_place, name, gender, age, incumbent, votes,
+                          select(kreis, party, list_place, list_place_scale, 
+                                 name, gender, age, incumbent, votes,
                                  elected, votes_kreis_party, list_total, share,
-                                 share_scale, below, above, either, last_four, first_four,
-                                 last_two_gender, first_two_gender, last_three_gender, first_three_gender,
+                                 share_scale, below, above, either, last_four, 
+                                 first_four, last_two_gender, first_two_gender, 
+                                 last_three_gender, first_three_gender,
                                  rank, rank_own, rank_others, place_last, year),
                         data_final_2020_all %>% 
-                          select(kreis, party, list_place, name, gender, age, incumbent, votes,
+                          select(kreis, party, list_place, list_place_scale, 
+                                 name, gender, age, incumbent, votes,
                                  elected, votes_kreis_party, list_total, share,
-                                 share_scale, below, above, either, last_four, first_four,
-                                 last_two_gender, first_two_gender, last_three_gender, first_three_gender,
+                                 share_scale, below, above, either, last_four, 
+                                 first_four, last_two_gender, first_two_gender, 
+                                 last_three_gender, first_three_gender,
                                  rank, rank_own, rank_others, place_last, year))
 
 save(data_final, file = "./data/processed/data_final.Rdata")
