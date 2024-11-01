@@ -1,4 +1,4 @@
-# Der Einfluss des Listenplatzes auf den Wahlerfolg
+# Der Listenrangeffekt bei den Grossratswahlen Basel-Stadt
 ## Analyse
 
 Work in progress
