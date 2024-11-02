@@ -13,6 +13,7 @@ header-includes:
   - \floatsetup[table]{capposition=top}
   - \floatsetup[figure]{capposition=top}
 title: "Der Listenrangeffekt bei den Grossratswahlen Basel-Stadt: Analysebericht"
+subtitle: "Work in Progress -- aktuelleste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
 thanks: "Der Code und die Daten der Analysen sind auf Github abgelegt ([[Link]{.ul}](https://github.com/marcstoeckli/grossratswahlen_bs)). Ich freue mich über Kommentare und Anregungen via kontakt@marcstoeckli.ch."
 author: "Marc Stöckli"
 abstract: "In diesem Bericht untersuche ich den Einfluss des Listenrangs auf den Wahlerfolg bei den Grossratswahlen 2008 bis 2024 in Basel-Stadt. Meine Analysen zeigen, dass ein höherer Listenrang zu einem geringeren Wahlerfolg führt. Der Effekt tritt besonders bei der GLP, der SP, der SVP und der BastA! auf und variiert je nach Wahljahr und -kreis. Ich stelle einen deutlichen Anstieg des Listenrangeffekts in den Wahljahren 2020 und 2024 fest."
@@ -28,8 +29,15 @@ library(knitr)
 library(margins)
 library(kableExtra)
 library(gridExtra)
+library(cowplot)
 load("../data/processed/data_final.RData")
 load("../data/processed/data_final_all.RData")
+
+get_legend <- function(myplot) {
+  g <- ggplotGrob(myplot)
+  legend <- g$grobs[which(sapply(g$grobs, function(x) x$name) == "guide-box")][[1]]
+  return(legend)
+}
 
 add_stars <- function(p_value) {
   if (p_value < 0.001) {
@@ -146,7 +154,7 @@ Zusammenfassend finde ich in meinen Analysen Folgendes:
 
 -   Der Listenrangeffekt hat **über die Jahre stark zugenommen**. Während ich bei den Wahlen 2008 noch keinen Effekt finden kann, finde ich (nicht signifikante) Effekte bei den Wahlen 2012 (Effektstärke: `r margins_sp_years["2012"]`) und 2016 (Effektstärke: `r margins_sp_years["2016"]`). Bei der Grossratswahl von 2020 sowie 2024 finde ich statistisch signifikante und hohe Listenrangeffekte (Effektstärke: **`r margins_sp_years["2020"]` bzw. `r margins_sp_years["2024"]`**).
 
--   Innerhalb der SP gibt es **deutliche Unterschiede des Effekts über die Wahlkreise**. Am stärksten ist der Listenrangeffekt in Riehen (**Effektstärke =** **`r margins_sp_kreis["Riehen"]`**) und Grossbasel Ost (**Effektstärke =** **`r margins_sp_kreis["Grossbasel Ost"]`**), gefolgt vom Kleinbasel (**Effektstärke =** **`r margins_sp_kreis["Kleinbasel"]`**). Der Listenrangeffekt in Riehen ist zwar gross, aber nicht statistisch signifikant, vermutlich aufgrund der kleinen Stichprobengrösse (wenig Sitze im Grossen Rat). In Grossbasel West kann ich keinen Effekt finden.
+-   Innerhalb der SP gibt es **deutliche Unterschiede des Effekts über die Wahlkreise**. Am stärksten ist der Listenrangeffekt in Riehen (**Effektstärke =** **`r margins_sp_kreis["Riehen"]`**) und Grossbasel Ost (**Effektstärke =** **`r margins_sp_kreis["Grossbasel Ost"]`**), gefolgt vom Kleinbasel (**Effektstärke =** **`r margins_sp_kreis["Kleinbasel"]`**). Der Listenrangeffekt in Riehen ist zwar gross, aber nicht statistisch signifikant, vermutlich aufgrund der kleinen Stichprobengrösse (Riehen ist mit deutlich weniger Sitzen im Grossen Rat vertreten). In Grossbasel West kann ich keinen eindeutigen Effekt finden (die Richtung und Stärke des Effekts verändert sich in Grossbasel West von 2008 bis 2024 beachtlich).
 
 -   In Bezug auf die Geschlechter stelle ich fest, dass Frauen zwar die besseren Wahlergebnisse erzielen, diese aber statistisch gesehen durch ihre besseren Listenplätze erklärt werden können: Wird auf den Listenrang kontrolliert, **kann kein statistisch signifikanter Geschlechtereffekt mehr festgestellt werden**.
 
@@ -170,13 +178,15 @@ Der Wahlergebnisrang und der Stimmenanteil eine:r Kandidat:in sind zwar hoch mit
 
 ## Deskriptive Analyse
 
-Die unteren Abbildungen zeigen den Zusammenhang zwischen dem Listenrang (X-Achse) und dem Wahlergebnisrang (Y-Achse) für die SP, jeweils separat für die Wahlkreise Kleinbasel, Grossbasel Ost, Grossbasel West und Riehen. Jeder Punkt ist eine kandidierende Person in dem jeweiligen Wahlkreis und Jahr. Je weiter rechts eine Person auf der X-Achse liegt, desto höher ist ihr Listenrang; je weiter oben ein Punkt auf der Y-Achse liegt, desto niedriger ist der Wahlergebnisrang, d.h. desto besser ist das Wahlergebnis dieser Person. Ein (nicht zwingend kausaler) Listenrangeffekt zeigt sich in den Abbildungen dadurch, dass das Wahlergebnis in Durchschnitt schlechter ausfällt, je weiter rechts eine Person liegt. Die blaue Regressionslinie visualisiert diesen Zusammenhang. Die Regressionslinie wird in jedem Jahr und Wahlkreis so durch die Punktewolke gezogen, dass sie die Summe der (quadrierten) vertikalen Abstände zu den Punkten minimiert.
+Die unteren Abbildungen zeigen den Zusammenhang zwischen dem Listenrang (X-Achse) und dem Wahlergebnisrang (Y-Achse) für die SP, jeweils separat für die Wahlkreise Kleinbasel, Grossbasel Ost, Grossbasel West und Riehen. Jeder Punkt ist eine kandidierende Person in dem jeweiligen Wahlkreis und -jahr. Je weiter rechts eine Person auf der X-Achse liegt, desto höher ist ihr Listenrang; je weiter oben ein Punkt auf der Y-Achse liegt, desto niedriger ist der Wahlergebnisrang, d.h. desto besser ist das Wahlergebnis dieser Person.
 
 Frauen (blau) und Männer (grün) sind farblich hervorgehoben. Dabei zeigt sich die eingangs erwähnte Regelung der SP Basel-Stadt, dass zuerst die Frauen und anschliessend die Männer auf der Liste aufzuführen sind. Ebenfalls hervorgehoben sind die amtierenden Grossrät:innen (Dreiecke) und die neuen Kandidierenden (Kreise). Die amtierenden Grossrät:innen weisen über alle Wahlkreise und Jahre die deutlich besseren Wahlergebnisse aus. Dieser Effekt ist wohlbekannt, da er bei jeder Grossratswahl so offensichtlich und stark ausgeprägt ist.
 
-Beim Betrachten der Abbildung und insbesondere der Regressionslinien lässt sich in mehreren Wahlkreisen ein Zusammenhang zwischen dem Listenrang und dem Wahlergebnisrang erkennen. Ebenso zeigt sich, dass dieser Zusammenhang über die Jahre zugenommen hat und deutliche Unterschiede zwischen den Wahlkreisen bestehen. Besonders stark ist der Effekt in den Jahren 2020 und 2024. 2008 war der Zusammenhang in den meisten Wahlkreisen hingegen noch weniger stark ausgeprägt (in Grossbasel West ist der Effekt sogar gegenteilig).
+Ein (nicht zwingend kausaler) Listenrangeffekt zeigt sich in den Abbildungen dadurch, dass das Wahlergebnis im Durchschnitt schlechter ausfällt, je weiter rechts eine Person liegt. Die blauen Regressionslinien visualisiert diesen Zusammenhang. Eine Regressionslinie wird in jedem Wahlkreis und -jahr so durch die Punktewolke gezogen, dass sie die Summe der (quadrierten) vertikalen Abstände zu den Punkten minimiert. In jedem Wahlkreis und -jahr sind jeweils zwei Regressionslinien eingezeichnet, je einmal für die amtierenden Grossrät:innen (gestrichelte Linie) und die neuen Kandidierenden (durchgezogene Linie).
 
-Aus diesem Zusammenhang kann jedoch noch kein kausaler Listenrangeffekt ableitet werden, da es noch andere Effekte geben kann, die das Ergebnis verzerren. In Grossbasel Ost sind 2024 beispielsweise überproportional viele amtierende Grossrät:innen mit niedrigem Listenrang angetreten. Diese Grossrät:innen haben erwartungsgemäss das beste Wahlergebnis erzielt, jedoch vermutlich wegen ihrer Amtsinhaberschaft und nicht wegen ihrem Listenrang. Die Regressionslinie (die den Listenrangeffekt widerspiegelt) ist dadurch zu \enquote{steil}, weil sie bei den niedrigen Listenrängen von dem guten Wahlergebnis der amtierenden Grossrät:innen nach oben \enquote{gezerrt} wird. Das Gegenteil ist in Grossbasel West 2016 zu beobachten. Die vier amtierenden Grossrät:innen mit den hohen Listenrängen zerren die Regressionslinie so stark nach oben, dass die Regressionslinie sogar eine gegenteilige Steigung aufweist. Mit einem statistischen Modell können (und müssen) diese anderen Effekte \enquote{herausgerechnet} werden. Die von mir verwendeten Modelle werden in den kommenden Kapiteln beschrieben.
+Beim Betrachten der Abbildung und insbesondere der Regressionslinien lässt sich in mehreren Wahlkreisen ein Zusammenhang zwischen dem Listenrang und dem Wahlergebnisrang erkennen. Ebenso zeigt sich, dass dieser Zusammenhang über die Jahre zugenommen hat und deutliche Unterschiede zwischen den Wahlkreisen bestehen. Besonders stark ist der Effekt in den Jahren 2024 und 2020. 2008 war der Zusammenhang in den meisten Wahlkreisen hingegen noch weniger stark ausgeprägt (in Grossbasel West ist der Effekt teilweise sogar gegenteilig).
+
+Aus diesem Zusammenhang kann jedoch noch kein kausaler Listenrangeffekt ableitet werden, da es noch andere Effekte geben kann, die das Ergebnis verzerren. Wenn es beispielsweise noch zusätzlich einen Geschlechtereffekt gibt, ist die Regressionslinie (die den Listenrangeffekt widerspiegelt) dadurch zu \enquote{steil}, weil sie bei den niedrigen Listenrängen durch die guten Wahlergebnisse der Frauen nach oben \enquote{gezerrt} wird. Mit einem statistischen Modell können (und müssen) diese anderen Effekte \enquote{herausgerechnet} werden. Die von mir verwendeten Modelle werden in den kommenden Kapiteln beschrieben.
 
 Im Anhang zeige ich die Abbildung der Jahre 2020 und 2024 für die restlichen Parteien bzw. Listen. Bei den anderen Parteien zeigt sich ein noch deutlicherer Listenrangeffekt, insbesondere bei der BastA!, den Grünen (inkl. dem Grünen Bündnis) und der GLP.
 
@@ -184,78 +194,88 @@ Im Anhang zeige ich die Abbildung der Jahre 2020 und 2024 für die restlichen Pa
 plots <- list()
 for(i in c("Kleinbasel", "Grossbasel Ost")) {
   plot <- data_final %>% 
-    mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE))) %>% 
+    mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+           year = factor(year, levels = seq(2024, 2008, by = -4))) %>% 
     filter(kreis == i) %>% 
-    mutate(rank_pred = predict(lm(rank ~ year*list_place, 
-                                data = .))) %>%
+    mutate(rank_pred = predict(lm(rank ~ incumbent*year*list_place, 
+                                  data = .))) %>%
     ggplot(aes(x = list_place, y = rank)) +
     geom_point(aes(col = gender, shape = incumbent)) +
-    geom_line(aes(x = list_place, y = rank_pred), col = "blue") +
+    geom_line(aes(x = list_place, y = rank_pred, linetype = incumbent), 
+              col = "blue") +
     scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                        labels = c("M" = "M", "F" = "F")) +
     scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
                        labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+    scale_linetype_manual(values = c("TRUE" = 2, "FALSE" = 1),
+                          labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
     scale_x_continuous(breaks = seq(1, 34, 4), limits = c(1, 35)) +
     scale_y_reverse(breaks = seq(1, 34, 8), limits = c(35, 1)) +
     facet_wrap(~ year, ncol = 1) +
     labs(title = i, x = "Listenrang", y = "Wahlergebnisrang") +
     theme_minimal() +
     guides(color = guide_legend(title = "Geschlecht"),
-           shape = guide_legend(title = "Amtierend")) +
-  theme(legend.position = "bottom",
-        legend.direction = "vertical",
-        legend.box = "horizontal",
-        legend.background = element_blank(),
-        legend.title = element_text(size = 10, face = "bold"),
-        legend.text = element_text(size = 9),
-        legend.key.size = unit(0.5, "lines"),
-        legend.margin = margin(t = 2, r = 2, b = 2, l = 2),
-        plot.title = element_text(size = 10))
+           shape = guide_legend(title = "Amtierend"),
+           linetype = guide_legend(title = "Regressionslinie")) +
+    theme(legend.position = "bottom",
+          legend.direction = "vertical",
+          legend.box = "horizontal",
+          legend.background = element_blank(),
+          legend.title = element_text(size = 10, face = "bold"),
+          legend.text = element_text(size = 9),
+          legend.key.size = unit(0.5, "lines"),
+          legend.margin = margin(t = 2, r = 2, b = 2, l = 2),
+          plot.title = element_text(size = 10))
   plots[[length(plots) + 1]] <- plot
 }
 
-for (i in seq(1, length(plots), by = 2)) {
-  grid.arrange(grobs = plots[i:(i+1)], ncol = 2)
-}
+plot_nolegend <- lapply(plots, function(x) x + theme(legend.position = "none"))
+plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 2, align = "v")
+plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
 ```{r fig_2, fig.cap="Listen- und Wahlergebnisrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plots <- list()
 for(i in c("Grossbasel West", "Riehen")) {
   plot <- data_final %>% 
-    mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE))) %>% 
+    mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+           year = factor(year, levels = seq(2024, 2008, by = -4))) %>% 
     filter(kreis == i) %>% 
-    mutate(rank_pred = predict(lm(rank ~ year*list_place, 
-                                data = .))) %>%
+    mutate(rank_pred = predict(lm(rank ~ incumbent*year*list_place, 
+                                  data = .))) %>%
     ggplot(aes(x = list_place, y = rank)) +
     geom_point(aes(col = gender, shape = incumbent)) +
-    geom_line(aes(x = list_place, y = rank_pred), col = "blue") +
+    geom_line(aes(x = list_place, y = rank_pred, linetype = incumbent), 
+              col = "blue") +
     scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                        labels = c("M" = "M", "F" = "F")) +
     scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
                        labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+    scale_linetype_manual(values = c("TRUE" = 2, "FALSE" = 1),
+                          labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
     scale_x_continuous(breaks = seq(1, 34, 4), limits = c(1, 35)) +
     scale_y_reverse(breaks = seq(1, 34, 8), limits = c(35, 1)) +
     facet_wrap(~ year, ncol = 1) +
     labs(title = i, x = "Listenrang", y = "Wahlergebnisrang") +
     theme_minimal() +
     guides(color = guide_legend(title = "Geschlecht"),
-           shape = guide_legend(title = "Amtierend")) +
-  theme(legend.position = "bottom",
-        legend.direction = "vertical",
-        legend.box = "horizontal",
-        legend.background = element_blank(),
-        legend.title = element_text(size = 10, face = "bold"),
-        legend.text = element_text(size = 9),
-        legend.key.size = unit(0.5, "lines"),
-        legend.margin = margin(t = 2, r = 2, b = 2, l = 2),
-        plot.title = element_text(size = 10))
+           shape = guide_legend(title = "Amtierend"),
+           linetype = guide_legend(title = "Regressionslinie")) +
+    theme(legend.position = "bottom",
+          legend.direction = "vertical",
+          legend.box = "horizontal",
+          legend.background = element_blank(),
+          legend.title = element_text(size = 10, face = "bold"),
+          legend.text = element_text(size = 9),
+          legend.key.size = unit(0.5, "lines"),
+          legend.margin = margin(t = 2, r = 2, b = 2, l = 2),
+          plot.title = element_text(size = 10))
   plots[[length(plots) + 1]] <- plot
 }
 
-for (i in seq(1, length(plots), by = 2)) {
-  grid.arrange(grobs = plots[i:(i+1)], ncol = 2)
-}
+plot_nolegend <- lapply(plots, function(x) x + theme(legend.position = "none"))
+plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 2, align = "v")
+plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
 # Statistisches Modell
@@ -593,22 +613,27 @@ marginal_effects %>%
 plots <- list()
 for(i in c("Kleinbasel", "Grossbasel Ost")) {
   plot <- data_final %>% 
-    mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE))) %>% 
+    mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+           year = factor(year, levels = seq(2024, 2008, by = -4))) %>% 
     filter(kreis == i) %>% 
-    mutate(share_pred = predict(lm(share ~ year*list_place, 
-                                data = .))) %>%
+    mutate(share_pred = predict(lm(share ~ incumbent*year*list_place, 
+                                  data = .))) %>%
     ggplot(aes(x = list_place, y = share)) +
     geom_point(aes(col = gender, shape = incumbent)) +
-    geom_line(aes(x = list_place, y = share_pred), col = "blue") +
+    geom_line(aes(x = list_place, y = share_pred, linetype = incumbent), 
+              col = "blue") +
     scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                        labels = c("M" = "M", "F" = "F")) +
     scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
                        labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+    scale_linetype_manual(values = c("TRUE" = 2, "FALSE" = 1),
+                          labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
     facet_wrap(~ year, ncol = 1, scales = "free") +
     labs(title = i, x = "Listenrang", y = "Stimmenanteil") +
     theme_minimal() +
     guides(color = guide_legend(title = "Geschlecht"),
-           shape = guide_legend(title = "Amtierend")) +
+           shape = guide_legend(title = "Amtierend"),
+           linetype = guide_legend(title = "Regressionslinie")) +
   theme(legend.position = "bottom",
         legend.direction = "vertical",
         legend.box = "horizontal",
@@ -621,31 +646,36 @@ for(i in c("Kleinbasel", "Grossbasel Ost")) {
   plots[[length(plots) + 1]] <- plot
 }
 
-for (i in seq(1, length(plots), by = 2)) {
-  grid.arrange(grobs = plots[i:(i+1)], ncol = 2)
-}
+plot_nolegend <- lapply(plots, function(x) x + theme(legend.position = "none"))
+plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 2, align = "v")
+plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
 ```{r fig_4, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plots <- list()
 for(i in c("Grossbasel West", "Riehen")) {
   plot <- data_final %>% 
-    mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE))) %>% 
+    mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+           year = factor(year, levels = seq(2024, 2008, by = -4))) %>% 
     filter(kreis == i) %>% 
-    mutate(share_pred = predict(lm(share ~ year*list_place, 
-                                data = .))) %>%
+    mutate(share_pred = predict(lm(share ~ incumbent*year*list_place, 
+                                  data = .))) %>%
     ggplot(aes(x = list_place, y = share)) +
     geom_point(aes(col = gender, shape = incumbent)) +
-    geom_line(aes(x = list_place, y = share_pred), col = "blue") +
+    geom_line(aes(x = list_place, y = share_pred, linetype = incumbent), 
+              col = "blue") +
     scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                        labels = c("M" = "M", "F" = "F")) +
     scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
                        labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+    scale_linetype_manual(values = c("TRUE" = 2, "FALSE" = 1),
+                          labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
     facet_wrap(~ year, ncol = 1, scales = "free") +
     labs(title = i, x = "Listenrang", y = "Stimmenanteil") +
     theme_minimal() +
     guides(color = guide_legend(title = "Geschlecht"),
-           shape = guide_legend(title = "Amtierend")) +
+           shape = guide_legend(title = "Amtierend"),
+           linetype = guide_legend(title = "Regressionslinie")) +
   theme(legend.position = "bottom",
         legend.direction = "vertical",
         legend.box = "horizontal",
@@ -658,9 +688,9 @@ for(i in c("Grossbasel West", "Riehen")) {
   plots[[length(plots) + 1]] <- plot
 }
 
-for (i in seq(1, length(plots), by = 2)) {
-  grid.arrange(grobs = plots[i:(i+1)], ncol = 2)
-}
+plot_nolegend <- lapply(plots, function(x) x + theme(legend.position = "none"))
+plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 2, align = "v")
+plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
 ## Andere Parteien
@@ -753,12 +783,17 @@ plot_basta <- data_final_all %>%
         legend.margin = margin(t = 2, r = 2, b = 2, l = 2),
         plot.title = element_text(size = 10))
 
-grid.arrange(plot_gb, plot_gruene, plot_basta, ncol = 3)
+plots <- list(plot_gb, plot_gruene, plot_basta)
+
+plot_nolegend <- lapply(plots, function(x) x + theme(legend.position = "none"))
+plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 3, align = "v")
+plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
 ```{r fig_6, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 data_final_all %>% 
-  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE))) %>% 
+  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+         year = factor(year, levels = seq(2024, 2020, by = -2))) %>% 
   filter(party == "GLP") %>% 
   mutate(rank_pred = predict(lm(rank ~ year*kreis*list_place, 
                                 data = .))) %>%
@@ -789,7 +824,8 @@ data_final_all %>%
 
 ```{r fig_7, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 data_final_all %>% 
-  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE))) %>% 
+  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+         year = factor(year, levels = seq(2024, 2020, by = -2))) %>% 
   filter(party == "FDP") %>% 
   mutate(rank_pred = predict(lm(rank ~ year*kreis*list_place, 
                                 data = .))) %>%
@@ -820,7 +856,8 @@ data_final_all %>%
 
 ```{r fig_8, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 data_final_all %>% 
-  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE))) %>% 
+  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+         year = factor(year, levels = seq(2024, 2020, by = -2))) %>% 
   filter(party == "LDP") %>% 
   mutate(rank_pred = predict(lm(rank ~ year*kreis*list_place, 
                                 data = .))) %>%
@@ -851,7 +888,8 @@ data_final_all %>%
 
 ```{r fig_9, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 data_final_all %>% 
-  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE))) %>% 
+  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+         year = factor(year, levels = seq(2024, 2020, by = -2))) %>% 
   filter(party == "Mitte") %>% 
   mutate(rank_pred = predict(lm(rank ~ year*kreis*list_place, 
                                 data = .))) %>%
@@ -882,7 +920,8 @@ data_final_all %>%
 
 ```{r fig_10, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 data_final_all %>% 
-  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE))) %>% 
+  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+         year = factor(year, levels = seq(2024, 2020, by = -2))) %>% 
   filter(party == "SVP") %>% 
   mutate(rank_pred = predict(lm(rank ~ year*kreis*list_place, 
                                 data = .))) %>%

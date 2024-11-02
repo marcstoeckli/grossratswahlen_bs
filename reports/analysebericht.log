@@ -1,29 +1,29 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.1)  1 NOV 2024 22:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.2)  2 NOV 2024 11:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **analysebericht.tex
 (./analysebericht.tex
-LaTeX2e <2024-06-01> patch level 2
+LaTeX2e <2024-11-01>
 L3 programming layer <2024-10-09>
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2024/02/08 v1.4n Standard LaTeX document class
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2024/02/08 v1.4n Standard LaTeX file (size option)
+File: size10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count194
-\c@section=\count195
-\c@subsection=\count196
-\c@subsubsection=\count197
-\c@paragraph=\count198
-\c@subparagraph=\count199
-\c@figure=\count266
-\c@table=\count267
+\c@part=\count196
+\c@section=\count197
+\c@subsection=\count198
+\c@subsubsection=\count199
+\c@paragraph=\count266
+\c@subparagraph=\count267
+\c@figure=\count268
+\c@table=\count269
 \abovecaptionskip=\skip49
 \belowcaptionskip=\skip50
 \bibindent=\dimen141
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2024/05/23 v2.17q AMS math features
+Package: amsmath 2024/10/30 v2.17s AMS math features
 \@mathmargin=\skip51
 For additional information on amsmath, use the `?' option.
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -38,40 +38,40 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count268
+\inf@bad=\count270
 LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count269
-\leftroot@=\count270
+\uproot@=\count271
+\leftroot@=\count272
 LaTeX Info: Redefining \overline on input line 398.
 LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count271
-\DOTSCASE@=\count272
-LaTeX Info: Redefining \ldots on input line 495.
-LaTeX Info: Redefining \dots on input line 498.
-LaTeX Info: Redefining \cdots on input line 619.
+\classnum@=\count273
+\DOTSCASE@=\count274
+LaTeX Info: Redefining \ldots on input line 502.
+LaTeX Info: Redefining \dots on input line 505.
+LaTeX Info: Redefining \cdots on input line 638.
 \Mathstrutbox@=\box52
 \strutbox@=\box53
-LaTeX Info: Redefining \big on input line 721.
-LaTeX Info: Redefining \Big on input line 722.
-LaTeX Info: Redefining \bigg on input line 723.
-LaTeX Info: Redefining \Bigg on input line 724.
+LaTeX Info: Redefining \big on input line 740.
+LaTeX Info: Redefining \Big on input line 741.
+LaTeX Info: Redefining \bigg on input line 742.
+LaTeX Info: Redefining \Bigg on input line 743.
 \big@size=\dimen144
-LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count273
-LaTeX Info: Redefining \bmod on input line 904.
-LaTeX Info: Redefining \pmod on input line 909.
-LaTeX Info: Redefining \smash on input line 939.
-LaTeX Info: Redefining \relbar on input line 969.
-LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count274
+LaTeX Font Info:    Redeclaring font encoding OML on input line 761.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 762.
+\macc@depth=\count275
+LaTeX Info: Redefining \bmod on input line 923.
+LaTeX Info: Redefining \pmod on input line 928.
+LaTeX Info: Redefining \smash on input line 958.
+LaTeX Info: Redefining \relbar on input line 988.
+LaTeX Info: Redefining \Relbar on input line 989.
+\c@MaxMatrixCols=\count276
 \dotsspace@=\muskip17
-\c@parentequation=\count275
-\dspbrk@lvl=\count276
+\c@parentequation=\count277
+\dspbrk@lvl=\count278
 \tag@help=\toks18
-\row@=\count277
-\column@=\count278
-\maxfields@=\count279
+\row@=\count279
+\column@=\count280
+\maxfields@=\count281
 \andhelp@=\toks19
 \eqnshift@=\dimen145
 \alignsep@=\dimen146
@@ -83,8 +83,8 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \multlinegap=\skip52
 \multlinetaggap=\skip53
 \mathdisplay@stack=\toks21
-LaTeX Info: Redefining \[ on input line 2953.
-LaTeX Info: Redefining \] on input line 2954.
+LaTeX Info: Redefining \[ on input line 2972.
+LaTeX Info: Redefining \] on input line 2973.
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
@@ -164,9 +164,9 @@ Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count280
-\Gm@cntv=\count281
-\c@Gm@tempcnt=\count282
+\Gm@cnth=\count282
+\Gm@cntv=\count283
+\c@Gm@tempcnt=\count284
 \Gm@bindingoffset=\dimen151
 \Gm@wd@mp=\dimen152
 \Gm@odd@mp=\dimen153
@@ -179,7 +179,7 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2024/05/23 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
@@ -205,10 +205,10 @@ Package: soul-ori 2023-06-14 v3.1 letterspacing/underlining (mf)
 \SOUL@hyphkern=\dimen164
 \SOUL@dimen=\dimen165
 \SOUL@dimeni=\dimen166
-\SOUL@minus=\count283
-\SOUL@comma=\count284
-\SOUL@apo=\count285
-\SOUL@grave=\count286
+\SOUL@minus=\count285
+\SOUL@comma=\count286
+\SOUL@apo=\count287
+\SOUL@grave=\count288
 \SOUL@spaceskip=\skip54
 \SOUL@ttwidth=\dimen167
 \SOUL@uldp=\dimen168
@@ -224,12 +224,12 @@ LaTeX Font Info:    Trying to load font information for T1+lmr on input line 116
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2024/10/20 v24.12 The multilingual framework for pdfLaTeX, LuaLaTeX and XeLaTeX
-\babel@savecnt=\count287
+\babel@savecnt=\count289
 \U@D=\dimen170
 \l@unhyphenated=\language8
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
-\bbl@dirlevel=\count288
+\bbl@dirlevel=\count290
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel-german/ngerman.ldf
 Language: ngerman 2024/01/19 v2.14 German support for babel (post-1996 orthography)
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel-german/ngermanb.ldf
@@ -242,14 +242,14 @@ Package babel Info: Importing font and identification data for ngerman
 Package: csquotes 2024-04-04 v5.2o context-sensitive quotations (JAW)
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count289
+\etb@tempcnta=\count291
 )
-\csq@reset=\count290
-\csq@gtype=\count291
-\csq@glevel=\count292
-\csq@qlevel=\count293
-\csq@maxlvl=\count294
-\csq@tshold=\count295
+\csq@reset=\count292
+\csq@gtype=\count293
+\csq@glevel=\count294
+\csq@qlevel=\count295
+\csq@maxlvl=\count296
+\csq@tshold=\count297
 \csq@ltx@everypar=\toks32
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2024-04-04 v5.2o csquotes generic definitions (JAW)
@@ -274,7 +274,7 @@ Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@hangindent=\dimen178
 Package caption Info: Standard document class detected.
 )
-\c@float@type=\count296
+\c@float@type=\count298
 \float@exts=\toks33
 \float@box=\box54
 \@floatcapt=\box55
@@ -291,18 +291,18 @@ Package floatrow Info: Modified rotfloat package code loaded on input line 473.
 \FBo@max=\skip58
 \FBc@max=\skip59
 \FBf@max=\skip60
-\c@FBl@b=\count297
-\floatbox@depth=\count298
-\c@FRobj=\count299
-\c@FRsobj=\count300
+\c@FBl@b=\count299
+\floatbox@depth=\count300
+\c@FRobj=\count301
+\c@FRsobj=\count302
 \Xhsize=\skip61
 \sXhsize=\skip62
 \Zhsize=\skip63
 \sZhsize=\skip64
 \flrow@rowbox=\box56
 \FR@Zunitlength=\dimen182
-\c@FBcnt=\count301
-\FPOScnt=\count302
+\c@FBcnt=\count303
+\FPOScnt=\count304
 \LTleft=\skip65
 \LTright=\skip66
 \LTleft=\skip67
@@ -320,33 +320,33 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen190
 \cmidrulekern=\dimen191
 \defaultaddspace=\dimen192
-\@cmidla=\count303
-\@cmidlb=\count304
+\@cmidla=\count305
+\@cmidlb=\count306
 \@aboverulesep=\dimen193
 \@belowrulesep=\dimen194
-\@thisruleclass=\count305
-\@lastruleclass=\count306
+\@thisruleclass=\count307
+\@lastruleclass=\count308
 \@thisrulewidth=\dimen195
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2024-04-26 v4.20 Multi-page Table package (DPC)
+Package: longtable 2024-10-27 v4.22 Multi-page Table package (DPC)
 \LTleft=\skip69
 \LTright=\skip70
 \LTpre=\skip71
 \LTpost=\skip72
-\LTchunksize=\count307
+\LTchunksize=\count309
 \LTcapwidth=\dimen196
 \LT@head=\box57
 \LT@firsthead=\box58
 \LT@foot=\box59
 \LT@lastfoot=\box60
 \LT@gbox=\box61
-\LT@cols=\count308
-\LT@rows=\count309
-\c@LT@tables=\count310
-\c@LT@chunks=\count311
+\LT@cols=\count310
+\LT@rows=\count311
+\c@LT@tables=\count312
+\c@LT@chunks=\count313
 \LT@p@ftn=\toks36
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
-Package: array 2024/06/14 v2.6d Tabular extension package (FMi)
+Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
 \col@sep=\dimen197
 \ar@mcellbox=\box62
 \extrarowheight=\dimen198
@@ -357,13 +357,13 @@ Package: array 2024/06/14 v2.6d Tabular extension package (FMi)
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip75
-\multirow@cntb=\count312
+\multirow@cntb=\count314
 \multirow@dima=\skip76
 \bigstrutjot=\dimen199
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen256
 \WF@size=\dimen257
-\c@WF@wrappedlines=\count313
+\c@WF@wrappedlines=\count315
 \WF@box=\box64
 \WF@everypar=\toks38
 Package: wrapfig 2003/01/31  v 3.6
@@ -371,7 +371,7 @@ Package: wrapfig 2003/01/31  v 3.6
 Package: colortbl 2024/07/06 v1.0i Color table columns (DPC)
 \everycr=\toks39
 \minrowclearance=\skip77
-\rownum=\count314
+\rownum=\count316
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
@@ -385,16 +385,16 @@ Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box65
-\sift@deathcycles=\count315
+\sift@deathcycles=\count317
 \@vwid@loff=\dimen258
 \@vwid@roff=\dimen259
 )
-\c@taburow=\count316
-\tabu@nbcols=\count317
-\tabu@cnt=\count318
-\tabu@Xcol=\count319
-\tabu@alloc=\count320
-\tabu@nested=\count321
+\c@taburow=\count318
+\tabu@nbcols=\count319
+\tabu@cnt=\count320
+\tabu@Xcol=\count321
+\tabu@alloc=\count322
+\tabu@nested=\count323
 \tabu@target=\dimen260
 \tabu@spreadtarget=\dimen261
 \tabu@naturalX=\dimen262
@@ -428,7 +428,7 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \UL@skip=\skip80
 \UL@hook=\toks42
 \UL@height=\dimen269
-\UL@pe=\count322
+\UL@pe=\count324
 \UL@pixel=\dimen270
 \ULC@box=\box73
 Package: ulem 2019/11/18
@@ -436,7 +436,7 @@ Package: ulem 2019/11/18
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \rotheadsize=\dimen272
-\c@nlinenum=\count323
+\c@nlinenum=\count325
 \TeXr@lab=\toks43
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
@@ -466,13 +466,13 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count324
+\c@section@level=\count326
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
 \@linkdim=\dimen273
-\Hy@linkcounter=\count325
-\Hy@pagecounter=\count326
+\Hy@linkcounter=\count327
+\Hy@pagecounter=\count328
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2024-10-30 v7.01k Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -480,7 +480,7 @@ Now handling font encoding PD1 ...
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count327
+\Hy@SavedSpaceFactor=\count329
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2024-10-30 v7.01k Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -494,7 +494,7 @@ Package hyperref Info: Plain pages OFF on input line 4172.
 Package hyperref Info: Backreferencing OFF on input line 4177.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4424.
-\c@Hy@tempcnt=\count328
+\c@Hy@tempcnt=\count330
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -506,7 +506,7 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count329
+\Fld@menulength=\count331
 \Field@Width=\dimen275
 \Fld@charsize=\dimen276
 Package hyperref Info: Hyper figures OFF on input line 6042.
@@ -520,9 +520,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6072.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count330
-\c@Item=\count331
-\c@Hfootnote=\count332
+\Hy@abspage=\count332
+\c@Item=\count333
+\c@Hfootnote=\count334
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
@@ -531,8 +531,8 @@ File: hpdftex.def 2024-10-30 v7.01k Hyperref driver for pdfTeX
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
 )
-\Fld@listcount=\count333
-\c@bookmark@seq@number=\count334
+\Fld@listcount=\count335
+\c@bookmark@seq@number=\count336
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -543,7 +543,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 \Hy@SectionHShift=\skip81
 ) (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
 File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO)
-\BKM@id=\count335
+\BKM@id=\count337
 ))
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
@@ -551,7 +551,7 @@ Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'ngerman'.
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count336
+\l__color_backend_stack_int=\count338
 \l__pdf_internal_box=\box74
 ) (./analysebericht.aux
 
@@ -563,24 +563,24 @@ LaTeX Warning: Label `tab:unnamed-chunk-5' multiply defined.
 )
 \openout1 = `analysebericht.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -627,49 +627,49 @@ Package caption Info: End \AtBeginDocument code.
 Package: fr-longtable 2007/11/28 v0.1b (beta) floatrow: additions for longtable
 \flrow@LT@lasthead=\box75
 \flrow@LT@prelastfoot=\box76
-\c@FBLTpage=\count337
+\c@FBLTpage=\count339
 )
-Package hyperref Info: Link coloring OFF on input line 99.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 101.
+Package hyperref Info: Link coloring OFF on input line 108.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 110.
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 101.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 110.
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 101.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 110.
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 101.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 110.
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <17.28> on input line 101.
+(Font)              <17.28> on input line 110.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 101.
+(Font)              <12> on input line 110.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 101.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 101.
+(Font)              <10> on input line 110.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 110.
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 101.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 110.
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 101.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 110.
 (c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 101.
+(Font)              <8> on input line 110.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 101.
+(Font)              <6> on input line 110.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 101.
+(Font)              <5> on input line 110.
 
 
 [1
@@ -678,23 +678,23 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 [2]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 281.
+(Font)              <7> on input line 292.
 
 
 [3]
-<analysebericht_files/figure-latex/fig_1-1.pdf, id=41, 423.5825pt x 565.11125pt>
+<analysebericht_files/figure-latex/fig_1-1.pdf, id=42, 423.5825pt x 562.1pt>
 File: analysebericht_files/figure-latex/fig_1-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_1-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_1-1.pdf  used on input line 356.
-(pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_1-1.pdf  used on input line 366.
+(pdftex.def)             Requested size: 423.59439pt x 562.11578pt.
 
 
 [4]
-<analysebericht_files/figure-latex/fig_2-1.pdf, id=46, 423.5825pt x 565.11125pt>
+<analysebericht_files/figure-latex/fig_2-1.pdf, id=47, 423.5825pt x 562.1pt>
 File: analysebericht_files/figure-latex/fig_2-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_2-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_2-1.pdf  used on input line 365.
-(pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_2-1.pdf  used on input line 375.
+(pdftex.def)             Requested size: 423.59439pt x 562.11578pt.
 
 
 [5 <./analysebericht_files/figure-latex/fig_1-1.pdf>]
@@ -702,46 +702,46 @@ Package pdftex.def Info: analysebericht_files/figure-latex/fig_2-1.pdf  used on 
 [6 <./analysebericht_files/figure-latex/fig_2-1.pdf>]
 
 [7{c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 475--475
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 485--485
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 511--511
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 521--521
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
 
 [8{c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 547--547
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 557--557
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 591--591
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 601--601
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
 
 [9]
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 645--645
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 655--655
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 662--662
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 672--672
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 679--679
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 689--689
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 703--703
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 713--713
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
@@ -751,70 +751,70 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 [10]
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 741--741
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 751--751
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
-<analysebericht_files/figure-latex/fig_3-1.pdf, id=121, 423.5825pt x 565.11125pt>
+<analysebericht_files/figure-latex/fig_3-1.pdf, id=122, 423.5825pt x 562.1pt>
 File: analysebericht_files/figure-latex/fig_3-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_3-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_3-1.pdf  used on input line 765.
-(pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_3-1.pdf  used on input line 775.
+(pdftex.def)             Requested size: 423.59439pt x 562.11578pt.
 
 
 [11]
-<analysebericht_files/figure-latex/fig_4-1.pdf, id=130, 423.5825pt x 565.11125pt>
+<analysebericht_files/figure-latex/fig_4-1.pdf, id=131, 423.5825pt x 562.1pt>
 File: analysebericht_files/figure-latex/fig_4-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_4-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_4-1.pdf  used on input line 774.
-(pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_4-1.pdf  used on input line 784.
+(pdftex.def)             Requested size: 423.59439pt x 562.11578pt.
 
 
 [12 <./analysebericht_files/figure-latex/fig_3-1.pdf>]
-<analysebericht_files/figure-latex/fig_5-1.pdf, id=147, 428.60126pt x 565.11125pt>
+<analysebericht_files/figure-latex/fig_5-1.pdf, id=149, 423.5825pt x 562.1pt>
 File: analysebericht_files/figure-latex/fig_5-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_5-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_5-1.pdf  used on input line 786.
-(pdftex.def)             Requested size: 428.6002pt x 565.10986pt.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_5-1.pdf  used on input line 796.
+(pdftex.def)             Requested size: 423.59439pt x 562.11578pt.
 
 
 [13 <./analysebericht_files/figure-latex/fig_4-1.pdf>]
-<analysebericht_files/figure-latex/fig_6-1.pdf, id=163, 423.5825pt x 565.11125pt>
+<analysebericht_files/figure-latex/fig_6-1.pdf, id=164, 423.5825pt x 565.11125pt>
 File: analysebericht_files/figure-latex/fig_6-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_6-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_6-1.pdf  used on input line 795.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_6-1.pdf  used on input line 805.
 (pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
 
 
 [14 <./analysebericht_files/figure-latex/fig_5-1.pdf>]
-<analysebericht_files/figure-latex/fig_7-1.pdf, id=179, 423.5825pt x 565.11125pt>
+<analysebericht_files/figure-latex/fig_7-1.pdf, id=180, 423.5825pt x 565.11125pt>
 File: analysebericht_files/figure-latex/fig_7-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_7-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_7-1.pdf  used on input line 804.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_7-1.pdf  used on input line 814.
 (pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
 
 
 [15 <./analysebericht_files/figure-latex/fig_6-1.pdf>]
-<analysebericht_files/figure-latex/fig_8-1.pdf, id=193, 423.5825pt x 565.11125pt>
+<analysebericht_files/figure-latex/fig_8-1.pdf, id=194, 423.5825pt x 565.11125pt>
 File: analysebericht_files/figure-latex/fig_8-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_8-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_8-1.pdf  used on input line 813.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_8-1.pdf  used on input line 823.
 (pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
 
 
 [16 <./analysebericht_files/figure-latex/fig_7-1.pdf>]
-<analysebericht_files/figure-latex/fig_9-1.pdf, id=207, 423.5825pt x 565.11125pt>
+<analysebericht_files/figure-latex/fig_9-1.pdf, id=208, 423.5825pt x 565.11125pt>
 File: analysebericht_files/figure-latex/fig_9-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_9-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_9-1.pdf  used on input line 822.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_9-1.pdf  used on input line 832.
 (pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
 
 
 [17 <./analysebericht_files/figure-latex/fig_8-1.pdf>]
-<analysebericht_files/figure-latex/fig_10-1.pdf, id=221, 423.5825pt x 565.11125pt>
+<analysebericht_files/figure-latex/fig_10-1.pdf, id=222, 423.5825pt x 565.11125pt>
 File: analysebericht_files/figure-latex/fig_10-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_10-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_10-1.pdf  used on input line 831.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_10-1.pdf  used on input line 841.
 (pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
 
 
@@ -822,7 +822,7 @@ Package pdftex.def Info: analysebericht_files/figure-latex/fig_10-1.pdf  used on
 
 [19 <./analysebericht_files/figure-latex/fig_10-1.pdf>] (./analysebericht.aux)
  ***********
-LaTeX2e <2024-06-01> patch level 2
+LaTeX2e <2024-11-01>
 L3 programming layer <2024-10-09>
  ***********
 
@@ -830,18 +830,18 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16323 strings out of 475507
- 266454 string characters out of 5774058
- 703681 words of memory out of 5000000
- 38606 multiletter control sequences out of 15000+600000
+ 16331 strings out of 475312
+ 266619 string characters out of 5767014
+ 706068 words of memory out of 5000000
+ 38803 multiletter control sequences out of 15000+600000
  639694 words of font info for 100 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  89i,11n,93p,609b,510s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx9.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib10.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb>
-Output written on analysebericht.pdf (19 pages, 543393 bytes).
+Output written on analysebericht.pdf (19 pages, 544216 bytes).
 PDF statistics:
- 395 PDF objects out of 1000 (max. 8388607)
- 303 compressed objects within 4 object streams
+ 396 PDF objects out of 1000 (max. 8388607)
+ 304 compressed objects within 4 object streams
  70 named destinations out of 1000 (max. 500000)
  171 words of extra memory for PDF output out of 10000 (max. 10000000)
 
