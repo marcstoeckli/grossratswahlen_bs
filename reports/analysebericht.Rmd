@@ -14,7 +14,7 @@ header-includes:
   - \floatsetup[figure]{capposition=top}
 title: "Der Listenrangeffekt bei den Grossratswahlen Basel-Stadt: Analysebericht"
 subtitle: "Work in Progress -- aktuelleste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
-thanks: "Der Code und die Daten der Analysen sind auf Github abgelegt ([[Link]{.ul}](https://github.com/marcstoeckli/grossratswahlen_bs)). Ich freue mich über Kommentare und Anregungen via kontakt@marcstoeckli.ch."
+thanks: "Der Code und die Daten der Analysen sind auf Github abgelegt ([[Link]{.ul}](https://github.com/marcstoeckli/grossratswahlen_bs)). Ich freue mich über Kommentare und Anregungen via kontakt@stoecklieconomics.ch."
 author: "Marc Stöckli"
 abstract: "In diesem Bericht untersuche ich den Einfluss des Listenrangs auf den Wahlerfolg bei den Grossratswahlen 2008 bis 2024 in Basel-Stadt. Meine Analysen zeigen, dass ein höherer Listenrang zu einem geringeren Wahlerfolg führt. Der Effekt tritt besonders bei der GLP, der SP, der SVP und der BastA! auf und variiert je nach Wahljahr und -kreis. Ich stelle einen deutlichen Anstieg des Listenrangeffekts in den Wahljahren 2020 und 2024 fest."
 date: "`r format(Sys.time(), '%d. %B %Y')`"
@@ -202,7 +202,7 @@ for(i in c("Kleinbasel", "Grossbasel Ost")) {
     ggplot(aes(x = list_place, y = rank)) +
     geom_point(aes(col = gender, shape = incumbent)) +
     geom_line(aes(x = list_place, y = rank_pred, linetype = incumbent), 
-              col = "blue") +
+              col = "blue", alpha = 0.5) +
     scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                        labels = c("M" = "M", "F" = "F")) +
     scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
@@ -246,7 +246,7 @@ for(i in c("Grossbasel West", "Riehen")) {
     ggplot(aes(x = list_place, y = rank)) +
     geom_point(aes(col = gender, shape = incumbent)) +
     geom_line(aes(x = list_place, y = rank_pred, linetype = incumbent), 
-              col = "blue") +
+              col = "blue", alpha = 0.4) +
     scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                        labels = c("M" = "M", "F" = "F")) +
     scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
@@ -469,7 +469,7 @@ margins(model_sp_ownothers, variables = "list_place",
   select(`Wahlkreis`, `Marginaler Effekt`, `Standardfehler`, 
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
-      caption = "Durchschnittliche marginale Effekte des Listenrangs nach Wahlkreisen (Wahljahre 2020 und 2024)", booktabs = TRUE, linesep = "") %>% 
+      caption = "Durchschnittliche marginale Effekte des Listenrangs nach Wahlkreisen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
   kable_styling(latex_options = c("hold_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
@@ -490,7 +490,7 @@ margins(model_sp_own, variables = "list_place",
   select(`Wahlkreis`, `Marginaler Effekt`, `Standardfehler`, 
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
-      caption = "Durchschnittliche marginale Effekte des Listenrangs der SP-Stimmen nach Wahlkreisen (Wahljahre 2020 und 2024)", booktabs = TRUE, linesep = "") %>% 
+      caption = "Durchschnittliche marginale Effekte des Listenrangs der SP-Stimmen nach Wahlkreisen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
   kable_styling(latex_options = c("hold_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
@@ -511,7 +511,7 @@ margins(model_sp_others, variables = "list_place",
   select(`Wahlkreis`, `Marginaler Effekt`, `Standardfehler`, 
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
-      caption = "Durchschnittliche marginale Effekte des Listenrangs der Panaschierstimmen nach Wahlkreisen (Wahljahre 2020 und 2024)", booktabs = TRUE, linesep = "") %>% 
+      caption = "Durchschnittliche marginale Effekte des Listenrangs der Panaschierstimmen nach Wahlkreisen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
   kable_styling(latex_options = c("hold_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
@@ -524,7 +524,9 @@ margins(model_sp_others, variables = "list_place",
 
 ## Weitere erklärende Variablen
 
-Ich untersuche, ob auch weitere Variablen eine Effekt auf den Wahlerfolg haben.
+Ich untersuche, ob auch weitere Variablen eine Effekt auf den Wahlerfolg haben. Ich verwende das Basismodell und nehme zusätzlich das Alter der kandidierenden Person auf sowie je eine Dummy-Variable, die angibt, ob ein:e neue:r Kandidat:in einen Listenplatz oberhalb oder unterhalb einer amtierenden kandidierenden Person hat. Mit dem Alter untersuche ich, ob das Alter einen Einfluss auf den Wahlerfolg hat. Mit den beiden Dummy-Variablen untersuche ich, ob es eine Rolle spielt, ob sich ein:e neue:r Kandidat:in auf dem Wahlzettel in unmittelbarer Nähe einer amtierenden Person befindet (und dadurch häufiger gestrichen wird, wenn die amtierende Person kumuliert wird).
+
+Die Ergebnisse in der Tabelle unten zeigen, dass weder das Alter noch die Nähe zu einer amtierenden Person einen statistisch signifikanten Effekt auf den Wahlergebnisrang haben. Ich finde insofern keine eindeutigen Hinweise darauf, dass jüngere oder ältere Kandidierende bessere Wahlergebnisse haben. Ebenso finde ich keine Hinweise darauf, dass es für den Wahlerfolg eine Rolle spielt, ob sich ein:e neue:r Kandidat:in auf dem Wahlzettel in der unmittelbaren Nähe einer amtierenden Person befindet.
 
 ```{r echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_sp_weitere
@@ -551,7 +553,7 @@ margins(model) %>%
   select(`Variable`, `Marginaler Effekt`, `Standardfehler`, 
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
-      caption = "Durchschnittliche marginale Effekte weiterer erklärender Variablen", booktabs = TRUE, linesep = "") %>% 
+      caption = "Durchschnittliche marginale Effekte weiterer erklärender Variablen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
   kable_styling(latex_options = c("hold_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "4.75cm") %>%
@@ -564,7 +566,7 @@ margins(model) %>%
 
 # Ergebnisse für weitere Parteien
 
-Für die Wahljahre 2020 und 2024 untersuche ich zusätzlich den Listenrangeffekt für die BastA!, FDP, GLP, GRÜNE, Grünes Bündnis, LDP, Die Mitte, SP und SVP.
+Für die Wahljahre 2024 und 2020 untersuche ich zusätzlich den Listenrangeffekt für die BastA!, FDP, GLP, GRÜNE, Grünes Bündnis, LDP, Die Mitte, SP und SVP.
 
 Ich verwende erneut das Basismodell und nehme zusätzlich eine Variable für die Partei der kandidierenden Person $Partei_{it}$ auf sowie Interaktionen aus der Partei mit dem Bisherigen-Status ($Partei \times Bisher_{it}$), dem Geschlecht ($Partei \times Geschlecht_{it}$) und dem Listenrang ($Partei \times Rang_{it}$).
 
@@ -621,7 +623,7 @@ for(i in c("Kleinbasel", "Grossbasel Ost")) {
     ggplot(aes(x = list_place, y = share)) +
     geom_point(aes(col = gender, shape = incumbent)) +
     geom_line(aes(x = list_place, y = share_pred, linetype = incumbent), 
-              col = "blue") +
+              col = "blue", alpha = 0.5) +
     scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                        labels = c("M" = "M", "F" = "F")) +
     scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
@@ -663,7 +665,7 @@ for(i in c("Grossbasel West", "Riehen")) {
     ggplot(aes(x = list_place, y = share)) +
     geom_point(aes(col = gender, shape = incumbent)) +
     geom_line(aes(x = list_place, y = share_pred, linetype = incumbent), 
-              col = "blue") +
+              col = "blue", alpha = 0.5) +
     scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                        labels = c("M" = "M", "F" = "F")) +
     scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
@@ -703,7 +705,8 @@ plot_gb <- data_final_all %>%
                                 data = .))) %>%
   ggplot(aes(x = list_place, y = rank)) +
   geom_point(aes(col = gender, shape = incumbent)) +
-  geom_line(aes(x = list_place, y = rank_pred), col = "blue") +
+  geom_line(aes(x = list_place, y = rank_pred), col = "blue", 
+            alpha = 0.5) +
   scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                      labels = c("M" = "M", "F" = "F")) +
   scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
@@ -732,7 +735,8 @@ plot_gruene <- data_final_all %>%
                                 data = .))) %>%
   ggplot(aes(x = list_place, y = rank)) +
   geom_point(aes(col = gender, shape = incumbent)) +
-  geom_line(aes(x = list_place, y = rank_pred), col = "blue") +
+  geom_line(aes(x = list_place, y = rank_pred), col = "blue", 
+            alpha = 0.5) +
   scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                      labels = c("M" = "M", "F" = "F")) +
   scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
@@ -761,7 +765,8 @@ plot_basta <- data_final_all %>%
                                 data = .))) %>%
   ggplot(aes(x = list_place, y = rank)) +
   geom_point(aes(col = gender, shape = incumbent)) +
-  geom_line(aes(x = list_place, y = rank_pred), col = "blue") +
+  geom_line(aes(x = list_place, y = rank_pred), col = "blue", 
+            alpha = 0.5) +
   scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                      labels = c("M" = "M", "F" = "F")) +
   scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
@@ -799,7 +804,8 @@ data_final_all %>%
                                 data = .))) %>%
   ggplot(aes(x = list_place, y = rank)) +
   geom_point(aes(col = gender, shape = incumbent)) +
-  geom_line(aes(x = list_place, y = rank_pred), col = "blue") +
+  geom_line(aes(x = list_place, y = rank_pred), col = "blue", 
+            alpha = 0.5) +
   scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                      labels = c("M" = "M", "F" = "F")) +
   scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
@@ -831,7 +837,8 @@ data_final_all %>%
                                 data = .))) %>%
   ggplot(aes(x = list_place, y = rank)) +
   geom_point(aes(col = gender, shape = incumbent)) +
-  geom_line(aes(x = list_place, y = rank_pred), col = "blue") +
+  geom_line(aes(x = list_place, y = rank_pred), col = "blue", 
+            alpha = 0.5) +
   scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                      labels = c("M" = "M", "F" = "F")) +
   scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
@@ -863,7 +870,8 @@ data_final_all %>%
                                 data = .))) %>%
   ggplot(aes(x = list_place, y = rank)) +
   geom_point(aes(col = gender, shape = incumbent)) +
-  geom_line(aes(x = list_place, y = rank_pred), col = "blue") +
+  geom_line(aes(x = list_place, y = rank_pred), col = "blue",
+            alpha = 0.5) +
   scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                      labels = c("M" = "M", "F" = "F")) +
   scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
@@ -895,7 +903,8 @@ data_final_all %>%
                                 data = .))) %>%
   ggplot(aes(x = list_place, y = rank)) +
   geom_point(aes(col = gender, shape = incumbent)) +
-  geom_line(aes(x = list_place, y = rank_pred), col = "blue") +
+  geom_line(aes(x = list_place, y = rank_pred), col = "blue",
+            alpha = 0.5) +
   scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                      labels = c("M" = "M", "F" = "F")) +
   scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
@@ -927,7 +936,8 @@ data_final_all %>%
                                 data = .))) %>%
   ggplot(aes(x = list_place, y = rank)) +
   geom_point(aes(col = gender, shape = incumbent)) +
-  geom_line(aes(x = list_place, y = rank_pred), col = "blue") +
+  geom_line(aes(x = list_place, y = rank_pred), col = "blue",
+            alpha = 0.5) +
   scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
                      labels = c("M" = "M", "F" = "F")) +
   scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
