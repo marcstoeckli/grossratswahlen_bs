@@ -16,7 +16,7 @@ title: "Der Listenrangeffekt bei den Grossratswahlen in Basel-Stadt: Analyseberi
 subtitle: "Work in Progress -- aktuelleste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
 thanks: "Der Code und die Daten der Analysen sind auf Github abgelegt ([[Link]{.ul}](https://github.com/marcstoeckli/grossratswahlen_bs)). Ich freue mich über Kommentare und Anregungen via kontakt@stoecklieconomics.ch."
 author: "Marc Stöckli"
-abstract: "In diesem Bericht untersuche ich den Einfluss des Listenrangs auf den Wahlerfolg bei den Grossratswahlen 2008 bis 2024 in Basel-Stadt. Meine Analysen zeigen, dass ein höherer Listenrang zu einem geringeren Wahlerfolg führt. Der Effekt tritt besonders bei der GLP, der SP, der SVP und der BastA! auf und variiert je nach Wahljahr und -kreis. Bei der SP stelle ich einen deutlichen Anstieg des Listenrangeffekts in den Wahljahren 2020 und 2024 fest."
+abstract: "In diesem Bericht untersuche ich den Einfluss des Listenrangs auf den Wahlerfolg bei den Grossratswahlen 2008 bis 2024 in Basel-Stadt. Meine Analysen zeigen, dass ein höherer Listenrang zu einem geringeren Wahlerfolg führt. Der Effekt tritt besonders bei der GLP, SP, SVP und der BastA! auf und variiert je nach Wahljahr und -kreis. Bei der SP stelle ich einen deutlichen Anstieg des Listenrangeffekts in den Wahljahren 2020 und 2024 fest."
 date: "`r format(Sys.time(), '%d. %B %Y')`"
 geometry: margin=1in
 ---
@@ -156,7 +156,7 @@ Methodisch verwende ich multivariate Regressionsanalysen. Dies ermöglicht es mi
 
 Zusammenfassend finde ich in meinen Analysen Folgendes:
 
--   Bei fast allen Parteien **finde ich einen Listenrangeffekt**. Der Effekt ist am stärksten ausgeprägt bei der GLP, der SP, der SVP und der BastA! (in dieser Reihenfolge). Einzig bei der LDP gibt es keine Hinweise darauf, dass der Listenrang relevant für den Wahlerfolg ist.
+-   Bei fast allen Parteien **finde ich einen Listenrangeffekt**. Der Effekt ist am stärksten ausgeprägt bei der GLP, SP, SVP und der BastA! (in dieser Reihenfolge). Einzig bei der LDP gibt es keine Hinweise darauf, dass der Listenrang relevant für den Wahlerfolg ist.
 
 -   Über alle Wahljahre und -kreise hinweg verliert bei der SP ein:e Kandidat:in pro Listenplatz weiter unten -- bei sonst gleichen Bedingungen -- im Durchschnitt **`r margins_sp["list_place"]`** **Wahlergebnisränge**.
 
