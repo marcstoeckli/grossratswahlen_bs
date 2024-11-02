@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.2)  2 NOV 2024 11:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.2)  2 NOV 2024 13:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -555,10 +555,10 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__pdf_internal_box=\box74
 ) (./analysebericht.aux
 
-LaTeX Warning: Label `tab:unnamed-chunk-5' multiply defined.
+LaTeX Warning: Label `tab:tab_5' multiply defined.
 
 
-LaTeX Warning: Label `tab:unnamed-chunk-5' multiply defined.
+LaTeX Warning: Label `tab:tab_5' multiply defined.
 
 )
 \openout1 = `analysebericht.aux'.
@@ -678,14 +678,14 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 [2]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 292.
+(Font)              <7> on input line 293.
 
 
 [3]
 <analysebericht_files/figure-latex/fig_1-1.pdf, id=42, 423.5825pt x 562.1pt>
 File: analysebericht_files/figure-latex/fig_1-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_1-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_1-1.pdf  used on input line 366.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_1-1.pdf  used on input line 367.
 (pdftex.def)             Requested size: 423.59439pt x 562.11578pt.
 
 
@@ -693,7 +693,7 @@ Package pdftex.def Info: analysebericht_files/figure-latex/fig_1-1.pdf  used on 
 <analysebericht_files/figure-latex/fig_2-1.pdf, id=47, 423.5825pt x 562.1pt>
 File: analysebericht_files/figure-latex/fig_2-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_2-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_2-1.pdf  used on input line 375.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_2-1.pdf  used on input line 376.
 (pdftex.def)             Requested size: 423.59439pt x 562.11578pt.
 
 
@@ -702,122 +702,128 @@ Package pdftex.def Info: analysebericht_files/figure-latex/fig_2-1.pdf  used on 
 [6 <./analysebericht_files/figure-latex/fig_2-1.pdf>]
 
 [7{c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 485--485
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 486--486
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 521--521
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 522--522
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
 
 [8{c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 557--557
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 558--558
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 601--601
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 602--602
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
 
 [9]
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 655--655
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 656--656
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 672--672
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 673--673
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 689--689
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 690--690
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
 
 [10]
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 730--730
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 731--731
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
 
-Overfull \hbox (21.54297pt too wide) in paragraph at lines 768--768
+Overfull \hbox (21.54297pt too wide) in paragraph at lines 780--780
  []|\T1/lmr/m/n/10 Standardfehler|
  []
 
-<analysebericht_files/figure-latex/fig_3-1.pdf, id=127, 423.5825pt x 562.1pt>
-File: analysebericht_files/figure-latex/fig_3-1.pdf Graphic file (type pdf)
-<use analysebericht_files/figure-latex/fig_3-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_3-1.pdf  used on input line 792.
-(pdftex.def)             Requested size: 423.59439pt x 562.11578pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 
 
 [11]
-<analysebericht_files/figure-latex/fig_4-1.pdf, id=137, 423.5825pt x 562.1pt>
+<analysebericht_files/figure-latex/fig_3-1.pdf, id=134, 423.5825pt x 562.1pt>
+File: analysebericht_files/figure-latex/fig_3-1.pdf Graphic file (type pdf)
+<use analysebericht_files/figure-latex/fig_3-1.pdf>
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_3-1.pdf  used on input line 806.
+(pdftex.def)             Requested size: 423.59439pt x 562.11578pt.
+
+
+[12]
+<analysebericht_files/figure-latex/fig_4-1.pdf, id=141, 423.5825pt x 562.1pt>
 File: analysebericht_files/figure-latex/fig_4-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_4-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_4-1.pdf  used on input line 801.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_4-1.pdf  used on input line 815.
 (pdftex.def)             Requested size: 423.59439pt x 562.11578pt.
 
 
-[12 <./analysebericht_files/figure-latex/fig_3-1.pdf>]
-<analysebericht_files/figure-latex/fig_5-1.pdf, id=158, 423.5825pt x 562.1pt>
+[13 <./analysebericht_files/figure-latex/fig_3-1.pdf>]
+<analysebericht_files/figure-latex/fig_5-1.pdf, id=163, 423.5825pt x 562.1pt>
 File: analysebericht_files/figure-latex/fig_5-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_5-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_5-1.pdf  used on input line 813.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_5-1.pdf  used on input line 827.
 (pdftex.def)             Requested size: 423.59439pt x 562.11578pt.
 
 
-[13 <./analysebericht_files/figure-latex/fig_4-1.pdf>]
-<analysebericht_files/figure-latex/fig_6-1.pdf, id=176, 423.5825pt x 565.11125pt>
+[14 <./analysebericht_files/figure-latex/fig_4-1.pdf>]
+<analysebericht_files/figure-latex/fig_6-1.pdf, id=180, 423.5825pt x 565.11125pt>
 File: analysebericht_files/figure-latex/fig_6-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_6-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_6-1.pdf  used on input line 822.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_6-1.pdf  used on input line 836.
 (pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
 
 
-[14 <./analysebericht_files/figure-latex/fig_5-1.pdf>]
-<analysebericht_files/figure-latex/fig_7-1.pdf, id=195, 423.5825pt x 565.11125pt>
+[15 <./analysebericht_files/figure-latex/fig_5-1.pdf>]
+<analysebericht_files/figure-latex/fig_7-1.pdf, id=199, 423.5825pt x 565.11125pt>
 File: analysebericht_files/figure-latex/fig_7-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_7-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_7-1.pdf  used on input line 831.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_7-1.pdf  used on input line 845.
 (pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
 
 
-[15 <./analysebericht_files/figure-latex/fig_6-1.pdf>]
-<analysebericht_files/figure-latex/fig_8-1.pdf, id=212, 423.5825pt x 565.11125pt>
+[16 <./analysebericht_files/figure-latex/fig_6-1.pdf>]
+<analysebericht_files/figure-latex/fig_8-1.pdf, id=216, 423.5825pt x 565.11125pt>
 File: analysebericht_files/figure-latex/fig_8-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_8-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_8-1.pdf  used on input line 840.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_8-1.pdf  used on input line 854.
 (pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
 
 
-[16 <./analysebericht_files/figure-latex/fig_7-1.pdf>]
-<analysebericht_files/figure-latex/fig_9-1.pdf, id=229, 423.5825pt x 565.11125pt>
+[17 <./analysebericht_files/figure-latex/fig_7-1.pdf>]
+<analysebericht_files/figure-latex/fig_9-1.pdf, id=233, 423.5825pt x 565.11125pt>
 File: analysebericht_files/figure-latex/fig_9-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_9-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_9-1.pdf  used on input line 849.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_9-1.pdf  used on input line 863.
 (pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
 
 
-[17 <./analysebericht_files/figure-latex/fig_8-1.pdf>]
-<analysebericht_files/figure-latex/fig_10-1.pdf, id=246, 423.5825pt x 565.11125pt>
+[18 <./analysebericht_files/figure-latex/fig_8-1.pdf>]
+<analysebericht_files/figure-latex/fig_10-1.pdf, id=250, 423.5825pt x 565.11125pt>
 File: analysebericht_files/figure-latex/fig_10-1.pdf Graphic file (type pdf)
 <use analysebericht_files/figure-latex/fig_10-1.pdf>
-Package pdftex.def Info: analysebericht_files/figure-latex/fig_10-1.pdf  used on input line 858.
+Package pdftex.def Info: analysebericht_files/figure-latex/fig_10-1.pdf  used on input line 872.
 (pdftex.def)             Requested size: 423.59439pt x 565.1271pt.
 
 
-[18 <./analysebericht_files/figure-latex/fig_9-1.pdf>]
+[19 <./analysebericht_files/figure-latex/fig_9-1.pdf>]
 
-[19 <./analysebericht_files/figure-latex/fig_10-1.pdf>] (./analysebericht.aux)
+[20 <./analysebericht_files/figure-latex/fig_10-1.pdf>] (./analysebericht.aux)
  ***********
 LaTeX2e <2024-11-01>
 L3 programming layer <2024-10-09>
@@ -827,18 +833,18 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16331 strings out of 475312
- 266619 string characters out of 5767014
- 702104 words of memory out of 5000000
+ 16332 strings out of 475312
+ 266555 string characters out of 5767014
+ 700104 words of memory out of 5000000
  38803 multiletter control sequences out of 15000+600000
  639694 words of font info for 100 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  89i,11n,93p,609b,510s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx9.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib10.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/marcc/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb>
-Output written on analysebericht.pdf (19 pages, 546321 bytes).
+Output written on analysebericht.pdf (20 pages, 547345 bytes).
 PDF statistics:
- 426 PDF objects out of 1000 (max. 8388607)
- 334 compressed objects within 4 object streams
- 70 named destinations out of 1000 (max. 500000)
+ 430 PDF objects out of 1000 (max. 8388607)
+ 337 compressed objects within 4 object streams
+ 71 named destinations out of 1000 (max. 500000)
  171 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -58,6 +58,14 @@ add_stars <- function(p_value) {
 ## Alle Parteien
 model_all <- lm("rank ~ party*incumbent + year + kreis + party*gender + party*list_place", data = data_final_all)
 
+margins_model_all <- margins(model_all, 
+                              variables = "list_place", 
+                              at = list(party = model_all$xlevels$party)) %>% 
+  summary() %>% 
+  select(party, AME) %>% 
+  mutate(AME = round(AME, 2)) %>% 
+  deframe()
+
 ## SP gesamt
 model_sp <- lm("rank ~ kreis*incumbent + year + kreis*gender + list_place", 
    data = data_final)
@@ -148,7 +156,7 @@ Methodisch verwende ich die multivariate Regressionsanalyse. Dies ermöglicht es
 
 Zusammenfassend finde ich in meinen Analysen Folgendes:
 
--   Bei fast allen Parteien **finde ich einen Listenrangeffekt**. Der Effekt ist am stärksten ausgeprägt bei der GLP, der SP, der SVP und der BastA! (in dieser Reihenfolge). Einzig bei der LDP gibt es keine Hinweise darauf, dass der Listenrang relevant für den Wahlerfolg ist.
+-   Bei fast allen Parteien **finde ich einen Listenrangeffekt**. Der Effekt ist am stärksten ausgeprägt bei der GLP, der SP, der SVP und der BastA! (in dieser Reihenfolge). Einzig bei den Grünen und der LDP gibt es keine Hinweise darauf, dass der Listenrang relevant für den Wahlerfolg ist.
 
 -   Über alle Wahljahre und -kreise hinweg verliert bei der SP ein:e Kandidat:in pro Listenplatz weiter unten -- bei sonst gleichen Bedingungen -- im Durchschnitt **`r margins_sp["list_place"]`** **Wahlergebnisränge**.
 
@@ -318,7 +326,7 @@ Im Basismodell nehme ich als zusätzliche Kontrollvariablen $\boldsymbol{X}$ die
 
 Die Tabelle unten zeigt die geschätzten marginalen Listenrangeffekte. Ich finde einen signifikanten Effekt des Listenrangs: Im Durchschnitt verliert ein:e Kandidierende:r pro Listenplatz weiter unten `r margins_sp["list_place"]` Wahlergebnisränge. Weiter finde ich einen signifikanten Effekt der Amtsinhaberschaft. Amtierende Grossrät:innen haben im Durchschnitt einen `r abs(margins_sp["incumbent"])` tieferen Wahlergebnisrang. Keinen Effekt kann ich hingegen für das Geschlecht finden. Dies deutet darauf hin, dass der Unterschied im Wahlerfolg zwischen Frauen und Männern durch die Unterschiede in den Listenrängen erklärt werden kann.
 
-```{r echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab1, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_sp
 
 margins(model) %>%
@@ -358,7 +366,7 @@ margins(model) %>%
 
 Um zu untersuchen, ob sich der Effekt über die Jahre verändert hat, verwende ich das Basismodell und nehme zusätzlich eine Interaktion aus dem Listenrang und dem Wahljahr ($Rang \times Jahr_t$) auf. Dadurch kann ich für jedes Wahljahr einen separaten marginalen Effekt schätzen. Die Ergebnisse in der Tabelle unten zeigen, dass in den Jahren 2008, 2012 und 2016 der Effekt noch nicht statistisch signifikant war. 2020 und 2024 finde ich jedoch hohe Listenrangeffekte (Effektstärke `r margins_sp_years["2020"]` bzw. `r margins_sp_years["2024"]`).
 
-```{r echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab_2, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_sp_years
 
 margins(model, 
@@ -388,7 +396,7 @@ margins(model,
 
 Analog untersuche ich, ob sich der Effekt über die Wahlkreise unterscheidet. Hierfür verwende ich das Basismodell und nehme zusätzlich eine Interaktion aus dem Listenrang und dem Wahlkreis ($Rang \times Wahlkreis_{it}$) auf. Die Ergebnisse zeigen, dass es deutliche Unterschiede gibt: Während ich in Grossbasel Ost und dem Kleinbasel statistisch signifikante Effekte finde (Effektstärke `r margins_sp_kreis["Grossbasel Ost"]` bzw. `r margins_sp_kreis["Kleinbasel"]`), deutet das Ergebns in Grossbasel West (Effektstärke: `r margins_sp_kreis["Grossbasel West"]`) auf keinen Listenplatzeffekt hin. Der Effekt ist in Riehen zwar am grössten (Effektstärke `r margins_sp_kreis["Riehen"]`) jedoch nicht statistisch signifikant. Dies liegt vermutlich daran, dass Riehen deutlich weniger Sitze im Grossen Rat hat und die Stichprobengrösse entsprechend kleiner ausfällt (die statistische Signifikanz ist stark durch die Stichprobengrösse beeinflusst).
 
-```{r echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab_3, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_sp_kreis
 
 margins(model, 
@@ -420,7 +428,7 @@ Weiter untersuche ich, ob der Listenrangeffekt unterschiedlich stark für Frauen
 
 Ich finde sowohl für Frauen als auch für Männer einen statistisch signifikanten Listenrangeffekt (Effektstärke `r margins_sp_gender["F"]` bzw. `r margins_sp_gender["M"]`). Der Effekt ist für Frauen und Männer äusserst ähnlich. Innerhalb der Frauen sowie innerhalb der Männer spielt es für den Wahlerfolg insofern gleichermassen eine Rolle, auf einem \enquote{guten} Listenplatz zu sein.
 
-```{r echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab_4, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_sp_gender
 
 margins(model, 
@@ -457,7 +465,7 @@ Ich nehmen wiederum die Interaktion $Rang \times Wahlkreis_{it}$ in das Basismod
 
 Die drei Tabellen unten zeigen die Resultate für $Rang_{it}$, $Rang_{it}^{SP}$ und $Rang_{it}^{-SP}$. Die Ergebnisse für $Rang_{it}$ und $Rang_{it}^{SP}$ sind relativ ähnlich. Interessant ist jedoch, dass ich in zwei Wahlkreisen auch für $Rang_{it}^{-SP}$ statistisch signifikante, und vor allem hohe, Effekte finde (Grossbasel West: `r margins_sp_others["Grossbasel West"]`, Kleinbasel: `r margins_sp_others["Kleinbasel"]`). Dies deutet darauf hin, dass Wähler:innen selbst beim Panaschieren -- bei sonst gleichen Bedingungen -- Kandidat:innen mit niedrigem Listenrang bevorzugen.
 
-```{r echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab_5, echo=FALSE, message=TRUE, warning=FALSE}
 margins(model_sp_ownothers, variables = "list_place", 
         at = list(kreis = model_sp_ownothers$xlevels$kreis)) %>% 
   tidy() %>% 
@@ -528,7 +536,7 @@ Ich untersuche, ob auch weitere Variablen eine Effekt auf den Wahlerfolg haben. 
 
 Die Ergebnisse in der Tabelle unten zeigen, dass weder das Alter noch die Nähe zu einer amtierenden Person einen statistisch signifikanten Effekt auf den Wahlergebnisrang haben. Ich finde insofern keine eindeutigen Hinweise darauf, dass jüngere oder ältere Kandidierende bessere Wahlergebnisse haben. Ebenso finde ich keine Hinweise darauf, dass es für den Wahlerfolg eine Rolle spielt, ob sich ein:e neue:r Kandidat:in auf dem Wahlzettel in der unmittelbaren Nähe einer amtierenden Person befindet.
 
-```{r echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab_6, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_sp_weitere
 
 margins(model) %>%
@@ -566,18 +574,18 @@ margins(model) %>%
 
 # Ergebnisse für weitere Parteien
 
-Für die Wahljahre 2024 und 2020 untersuche ich zusätzlich den Listenrangeffekt für die BastA!, FDP, GLP, GRÜNE, Grünes Bündnis, LDP, Die Mitte, SP und SVP.
+Für die Wahljahre 2024 und 2020 untersuche ich zusätzlich den Listenrangeffekt für die BastA!, FDP, GLP, GRÜNE, Grünes Bündnis, LDP, Die Mitte, SP und SVP. Ich verwende erneut das Basismodell und nehme zusätzlich eine Variable für die Partei der kandidierenden Person ($Partei_{it}$) auf sowie Interaktionen aus der Partei mit dem Bisherigen-Status ($Partei \times Bisher_{it}$), dem Geschlecht ($Partei \times Geschlecht_{it}$) und dem Listenrang ($Partei \times Rang_{it}$) auf.
 
-Ich verwende erneut das Basismodell und nehme zusätzlich eine Variable für die Partei der kandidierenden Person $Partei_{it}$ auf sowie Interaktionen aus der Partei mit dem Bisherigen-Status ($Partei \times Bisher_{it}$), dem Geschlecht ($Partei \times Geschlecht_{it}$) und dem Listenrang ($Partei \times Rang_{it}$).
+Die Ergebnisse in der Tabelle unten zeigen, dass der Listenrangeffekt bei fast allen Parteien vorkommt. Einzig bei den Grünen und der LDP finde ich keine statistisch signifikanten Effekte. Der Effekt ist am grössten bei der GLP (Effektstärke: `r margins_model_all["GLP"]`), der SP (Effektstärke: `r margins_model_all["SP"]`), der SVP (Effektstärke: `r margins_model_all["SVP"]`) und der BastA! (Effektstärke: `r margins_model_all["BastA"]`). Der Listenrangeffekt des Grünen Bündnisses -- das als Liste nur in den Daten von 2020 vorkommt -- entsteht vermutlich durch die BastA!.
 
-```{r echo=FALSE, message=TRUE, warning=FALSE}
+Der Effekt für die SP ist in dieser Tabelle grösser als im Basismodell (siehe Tabelle 1), weil ausschliesslich die Wahljahre 2024 und 2020 berücksichtigt werden. Wie ich in Tabelle 2 gezeigt habe, ist in diesen beiden Jahren der Listenrangeffekt besonders ausgeprägt.
+
+```{r tab_8, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_all
 
-marginal_effects <- margins(model, 
-                            variables = "list_place", 
-                            at = list(party = model$xlevels$party))
-
-marginal_effects %>%
+margins(model, 
+        variables = "list_place", 
+        at = list(party = model$xlevels$party)) %>%
   tidy() %>%
   arrange(desc(estimate)) %>% 
   mutate(`Wahlkreis` = case_when(`at.value` == "BastA" ~ "BastA!",
@@ -606,6 +614,8 @@ marginal_effects %>%
            general_title = "Hinweis:", 
            footnote_as_chunk = TRUE)
 ```
+
+\newpage
 
 # Anhang
 
