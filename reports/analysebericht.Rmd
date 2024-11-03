@@ -14,9 +14,9 @@ header-includes:
   - \floatsetup[figure]{capposition=top}
 title: "Der Listenrangeffekt bei den Grossratswahlen in Basel-Stadt: Analysebericht"
 subtitle: "Work in Progress -- aktuelleste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
-thanks: "Der Code und die Daten der Analysen sind auf Github abgelegt ([[Link]{.ul}](https://github.com/marcstoeckli/grossratswahlen_bs)). Ich freue mich über Kommentare und Anregungen via kontakt@stoecklieconomics.ch."
+thanks: "Der Code und die Daten der Analysen sind auf Github abgelegt ([[Link]{.ul}](https://github.com/marcstoeckli/grossratswahlen_bs)). Ich freue mich über Kommentare und Anregungen via kontakt@stoecklieconomics.ch. Einen herzlichen Dank für ihr Feedback gehen an Tamina Graber, Edibe Gölgeli und Michela Seggiani."
 author: "Marc Stöckli"
-abstract: "In diesem Bericht untersuche ich den Einfluss des Listenrangs auf den Wahlerfolg bei den Grossratswahlen 2008 bis 2024 in Basel-Stadt. Meine Analysen zeigen, dass ein höherer Listenrang zu einem geringeren Wahlerfolg führt. Der Effekt tritt besonders bei der GLP, SP, SVP und der BastA! auf und variiert je nach Wahljahr und -kreis. Bei der SP stelle ich einen deutlichen Anstieg des Listenrangeffekts in den Wahljahren 2020 und 2024 fest."
+abstract: "In diesem Bericht untersuche ich den Einfluss des Listenrangs auf den Wahlerfolg bei den Grossratswahlen 2008 bis 2024 in Basel-Stadt. Meine Analysen zeigen, dass ein niedrigerer Listenrang (= weiter oben auf der Liste) zu einem besseren Wahlergebnis führt. Der Effekt tritt besonders bei der GLP, SP, SVP und der BastA! auf und variiert je nach Wahljahr und -kreis. Bei der SP stelle ich einen deutlichen Anstieg des Listenrangeffekts in den Wahljahren 2020 und 2024 fest. Die Ergebnisse zeigen, dass es aus Sicht der Frauenförderung ein effektives Instrument ist, die Frauen bei Listenwahlen zuerst aufzuführen, so wie es die SP in ihrem Wahl- und Abstimmungsreglement festlegt. Hingegen kann es problematisch sein, Kandidierende alphabetisch aufzulisten."
 date: "`r format(Sys.time(), '%d. %B %Y')`"
 geometry: margin=1in
 ---
@@ -138,15 +138,15 @@ model_sp_kreis_share <- lm("share_scale ~ kreis*incumbent + year + kreis*gender 
    data = data_final)
 ```
 
-# Einführung
+# 1. Einführung
 
-In diesem Bericht untersuche ich den Einfluss der Reihenfolge, in der die Kandidierenden bei den Grossratswahlen in Basel-Stadt auf der Liste aufgeführt werden -- der Listenrang -- auf den Wahlerfolg. Ich untersuche, ob ein höherer Listenrang zu weniger Stimmen im Vergleich zu den anderen Kandidierenden auf derselben Liste im gleichen Wahlkreis führt. Ein solcher \enquote{Listenrangeffekt} erscheint plausibel, da anzunehmen ist, dass Wählende beim Kumulieren oder Panaschieren \enquote{von unten her} streichen. Kandidierende auf den unteren Listenplätzen werden dadurch mechanisch öfter gestrichen als jene weiter oben.
+In diesem Bericht untersuche ich den Einfluss der Reihenfolge, in der die Kandidierenden bei den Grossratswahlen in Basel-Stadt auf der Liste aufgeführt werden -- der Listenrang -- auf den Wahlerfolg. Ich untersuche, ob ein niedrigerer Listenrang (d.h. als Kandidat:in weiter oben auf der Liste aufgeführt zu sein) zu mehr Stimmen im Vergleich zu den anderen Kandidierenden auf derselben Liste im gleichen Wahlkreis führt. Oder äquivalent: Ob ein *höherer* Listenrang (d.h. weiter *unten* auf der Liste) zu *weniger* Stimmen führt. Ein solcher \enquote{Listenrangeffekt} erscheint plausibel, da anzunehmen ist, dass Wählende beim Kumulieren oder Panaschieren \enquote{von unten her} streichen. Kandidierende auf den unteren Listenplätzen werden dadurch mechanisch öfter gestrichen als jene weiter oben.
 
-Es gibt mehrere Hypothesen, wieso Wählende von unten her streichen. Einerseits können die Listenplätze die Präferenz der Partei widerspiegeln (wie es in manchen Kantonen durchaus üblich ist). Wenn Wählende dieser Präferenz folgen möchten, streichen sie daher die unteren Listenplätze, wenn sie kumulieren oder panaschieren. Andererseits ist es beim Kumulieren mehrerer Kandidierender einfacher, die erforderliche Anzahl an zu streichenden Personen als \enquote{Gruppe} von unten her zu streichen, bis genug Kandidierende entfernt wurden.
+Es gibt mehrere Hypothesen, wieso Wählende von unten her streichen. Einerseits können die Listenplätze die Präferenz der Partei widerspiegeln (wie es bei anderen Parteien durchaus üblich ist). Wenn Wählende dieser Präferenz folgen möchten, streichen sie daher die unteren Listenplätze, wenn sie kumulieren oder panaschieren. Andererseits ist es beim Kumulieren mehrerer Kandidierender einfacher, die erforderliche Anzahl an zu streichenden Personen als \enquote{Gruppe} von unten her zu streichen, bis genug Kandidierende entfernt wurden.
 
 Widerspiegeln die Listenplätze die Präferenz der Partei, ist der Listenrangeffekt nicht zwingend problematisch (und aus Sicht der Partei gegebenenfalls sogar erwünscht). Für die Wählenden ist es jedoch nicht immer ersichtlich, ob die Reihenfolge der Kandidierenden wirklich eine Präferenz der Partei darstellt. Zahlreiche Parteien führen bei den Grossratswahlen beispielsweise die amtierenden Grossrät:innen auf den niedrigsten Listenrängen auf, was jedoch nicht zwingend impliziert, dass auch die restlichen Ränge einer Präferenz folgen.
 
-Wenn die Reihenfolge nicht die Präferenz der Partei widerspiegelt, ist der Listenrangeffekt in der Regel unerwünscht. Das Wahl- und Abstimmungsreglement der SP Basel-Stadt legt beispielsweise fest, dass bei Listenwahlen zuerst die Frauen und anschliessend die Männer auf der Liste aufzuführen sind, jeweils in alphabetischer Reihenfolge. Dies führt dazu, dass Kandidierende mit Nachnamen hinten im Alphabet bei einem allfälligen Listenrangeffekt systematisch benachteiligt werden. Dieselbe Person würde zudem bei *jeder* Wahl benachteiligt werden, da sie aufgrund ihres Nachnamens immer einen schlechten Listenplatz hätte.
+Wenn die Reihenfolge nicht die Präferenz der Partei widerspiegelt, ist der Listenrangeffekt in der Regel unerwünscht. Das Wahl- und Abstimmungsreglement der SP Basel-Stadt legt beispielsweise unter anderem fest, dass bei Listenwahlen die Kandidierenden in alphabetischer Reihenfolge aufzuführen sind. Dies führt dazu, dass Kandidierende mit Nachnamen hinten im Alphabet bei einem allfälligen Listenrangeffekt systematisch benachteiligt werden. Dieselbe Person würde zudem bei *jeder* Wahl benachteiligt werden, da sie aufgrund ihres Nachnamens immer einen schlechten Listenplatz hätte.
 
 Für die Analysen in diesem Bericht untersuche ich die Daten der Grossratswahlen von Basel-Stadt der Jahre 2024, 2020, 2016, 2012 und 2008. Ich konzentriere mich dabei auf den Effekt des Listenrangs auf den Rang, den eine kandidierende Person in ihrem Wahlkreis auf ihrer Liste bei der Wahl erreicht hat (kurz \enquote{Wahlergebnisrang}). Wenn die gefundene Effektstärke 0 beträgt, hat der Listenrang keinen Einfluss auf den Wahlerfolg. Liegt die Effektstärke über 0, führt ein höherer Listenrang -- bei sonst gleichen Bedingungen -- im Durchschnitt zu einem schlechteren Wahlergebnisrang. Eine Effektstärke von 1 bedeutet, dass ein Platz weiter unten auf der Liste genau einen Rang schlechter im Wahlergebnis bedeutet. In diesem Bericht bezeichne ich eine Effektstärke ab 0.25 als hoch und ab 0.5 als sehr hoch.
 
@@ -158,19 +158,27 @@ Zusammenfassend finde ich in meinen Analysen Folgendes:
 
 -   Bei fast allen Parteien **finde ich einen Listenrangeffekt**. Der Effekt ist am stärksten ausgeprägt bei der GLP, SP, SVP und der BastA! (in dieser Reihenfolge). Einzig bei der LDP gibt es keine Hinweise darauf, dass der Listenrang relevant für den Wahlerfolg ist.
 
--   Über alle Wahljahre und -kreise hinweg verliert bei der SP ein:e Kandidat:in pro Listenplatz weiter unten -- bei sonst gleichen Bedingungen -- im Durchschnitt **`r margins_sp["list_place"]`** **Wahlergebnisränge**.
+-   Über alle Wahljahre und -kreise hinweg gewinnt bei der SP ein:e Kandidat:in pro \enquote{besseren} Listenplatz -- bei sonst gleichen Bedingungen -- im Durchschnitt **`r margins_sp["list_place"]`** **Wahlergebnisränge**. Im Umkehrschluss *verliert* ein:e Kandidat:in pro \enquote{schlechteren} Listenplatz `r margins_sp["list_place"]` Wahlergebnisränge.
 
 -   Der Listenrangeffekt hat **über die Jahre stark zugenommen**. Während ich bei den Wahlen 2008 noch keinen Effekt finden kann, finde ich (nicht signifikante) Effekte bei den Wahlen 2012 (Effektstärke: `r margins_sp_years["2012"]`) und 2016 (Effektstärke: `r margins_sp_years["2016"]`). Bei der Grossratswahl von 2020 sowie 2024 finde ich statistisch signifikante und hohe Listenrangeffekte (**Effektstärke:** **`r margins_sp_years["2020"]` bzw. `r margins_sp_years["2024"]`**).
 
--   Innerhalb der SP gibt es **deutliche Unterschiede des Effekts über die Wahlkreise**. Am stärksten ist der Listenrangeffekt in Riehen (**Effektstärke:** **`r margins_sp_kreis["Riehen"]`**) und Grossbasel Ost (**Effektstärke:** **`r margins_sp_kreis["Grossbasel Ost"]`**), gefolgt vom Kleinbasel (**Effektstärke:** **`r margins_sp_kreis["Kleinbasel"]`**). Der Listenrangeffekt in Riehen ist zwar gross, aber nicht statistisch signifikant, vermutlich aufgrund der kleinen Stichprobengrösse (Riehen ist mit deutlich weniger Sitzen im Grossen Rat vertreten). In Grossbasel West kann ich keinen eindeutigen Effekt finden. Die Richtung und Stärke des Effekts verändert sich in Grossbasel West von 2008 bis 2024 beachtlich.
+-   Innerhalb der SP gibt es **deutliche Unterschiede des Effekts über die Wahlkreise**. Am stärksten ist der Listenrangeffekt in Grossbasel Ost (**Effektstärke:** **`r margins_sp_kreis["Grossbasel Ost"]`**) und dem Kleinbasel (**Effektstärke:** **`r margins_sp_kreis["Kleinbasel"]`**). Der Listenrangeffekt in Riehen ist zwar sehr hoch (**Effektstärke:** **`r margins_sp_kreis["Riehen"]`**), aber nicht statistisch signifikant, vermutlich aufgrund der kleinen Stichprobengrösse (Riehen ist mit deutlich weniger Sitzen im Grossen Rat vertreten). In Grossbasel West kann ich keinen eindeutigen Effekt finden. Die Richtung und Stärke des Effekts verändert sich in Grossbasel West von 2008 bis 2024 beachtlich.
 
--   In Bezug auf die Geschlechter stelle ich fest, dass Frauen zwar die besseren Wahlergebnisse erzielen, diese aber statistisch gesehen durch ihre besseren Listenplätze \enquote{erklärt} werden können: Wird auf den Listenrang kontrolliert, **kann ich keinen statistisch signifikanter Geschlechtereffekt mehr feststellen**.
+-   Der Listenrangeffekt ist **für Frauen und Männer ähnlich stark ausgeprägt**. Für Frauen und Männer spielt es für den Wahlerfolg insofern gleichermassen eine Rolle, auf einem \enquote{guten} Listenplatz zu sein.
 
 -   Werden nur die veränderten Wahlzettel betrachtet, so zeigt sich, dass der Listenrangeffekt **stärker ausgeprägt ist bei den Stimmen von veränderten Wahlzetteln der SP-Liste** im Vergleich zu den Stimmen von veränderten Wahlzetteln der anderen Listen (Panaschierstimmen). Anders ausgedrückt: Das Kumulieren und Streichen auf der SP-Liste führt zu einem stärkeren Listenrangeffekt als das Panaschieren von SP-Kandidierenden.
 
 -   **Amtierende Grossrät:innen** schneiden deutlich besser ab als neue Kandidierende. Keinen statistisch signifikanten Effekt konnte ich hingegen für das **Alter** finden. Ebenso konnte ich keinen statistisch signifikanten Effekt finden, ob eine kandidierende Person auf der Liste **unter oder über einer amtierenden kandidierenden Person** aufgeführt ist.
 
-# Daten
+Basierend auf den Ergebnissen sehe ich folgende Handlungsempfehlungen:
+
+-   Aus Sicht der Frauenförderung ist es ein effektives Instrument, die Frauen bei Listenwahlen zuerst aufzuführen. Die SP Basel-Stadt legt diese Regelung bereits jetzt schon in ihrem Wahl- und Abstimmungsreglement fest. **Um weiterhin eine aktive Gleichstellungspolitik zu betreiben, ist diese Regelung beizubehalten**.
+
+-   Problematisch kann hingegen **eine alphabetische Auflistung der Kandidierenden** sein. Diese Regelung ist aktuell ebenfalls im Wahl- und Abstimmungsreglement der SP Basel-Stadt festgelet. Dadurch werden Personen mit Namen hinten im Alphabet systematisch benachteiligt. Es empfiehlt sich zu prüfen, ob eine alternative Listenvergabe zielführender ist (beispielsweise das Auslosen der Listenplätze).
+
+Der Rest dieses Berichts ist wie folgt aufgebaut. In Kapitel 2 beschreibe ich die Daten, die ich für die Analysen verwende. In Kapitel 3 beschreibe ich das statistische Modell, mit dem ich den Einfluss des Listenrangs auf den Wahlerfolg untersuche. In Kapitel 4 und 5 zeige ich die Ergebnisse, erst jene für die SP und anschliessend jene für die weiteren Parteien.
+
+# 2. Daten
 
 Ich analysiere die Daten der Grossratswahlen in Basel-Stadt der Jahre 2024, 2020 , 2016, 2012 und 2008. Für die Jahre 2024 und 2020 kann ich hierfür auf das Datenportal \enquote{Open Government Data} (OGD) zurückgreifen, über welches die Daten bereits aufbereitet und in hoher Qualität verfügbar sind. Für die Jahre 2016, 2012 und 2008 habe ich die Daten aus den PDFs der Wahlresultate und -protokolle erfasst. Da in diesen PDFs die Amtsinhaberschaft nicht erkennbar ist, habe ich zusätzlich die Datenbank der Ratsmitgliedschaften aus dem OGD verwendet, um die amtierenden Grossrät:innen zum Zeitpunkt der jeweiligen Wahl zu identifizieren.
 
@@ -188,15 +196,19 @@ Der Wahlergebnisrang und der Stimmenanteil eine:r Kandidat:in sind zwar hoch mit
 
 ## Deskriptive Analyse
 
-Die unteren Abbildungen zeigen den Zusammenhang zwischen dem Listenrang (X-Achse) und dem Wahlergebnisrang (Y-Achse) für die SP, jeweils separat für die Wahlkreise Kleinbasel, Grossbasel Ost, Grossbasel West und Riehen. Jeder Punkt ist eine kandidierende Person in dem jeweiligen Wahlkreis und -jahr. Je weiter rechts eine Person auf der X-Achse liegt, desto höher ist ihr Listenrang; je weiter oben ein Punkt auf der Y-Achse liegt, desto niedriger ist der Wahlergebnisrang, d.h. desto besser ist das Wahlergebnis dieser Person.
+Abbildungen 1 und 2 zeigen den Zusammenhang zwischen dem Listenrang (X-Achse, d.h. von links nach rechts) und dem Wahlergebnisrang (Y-Achse, d.h. von unten nach oben) für die SP, jeweils separat für die Wahlkreise Kleinbasel, Grossbasel Ost, Grossbasel West und Riehen. Jeder Punkt ist eine kandidierende Person in dem jeweiligen Wahlkreis und -jahr. Die Abbildungen sind wie folgt zu lesen:
 
-Frauen (blau) und Männer (grün) sind farblich hervorgehoben. Dabei zeigt sich die eingangs erwähnte Regelung der SP Basel-Stadt, dass zuerst die Frauen und anschliessend die Männer auf der Liste aufzuführen sind. Ebenfalls hervorgehoben sind die amtierenden Grossrät:innen (Dreiecke) und die neuen Kandidierenden (Kreise). Die amtierenden Grossrät:innen weisen über alle Wahlkreise und Jahre die deutlich besseren Wahlergebnisse aus. Dieser Effekt ist wohlbekannt, da er bei jeder Grossratswahl so offensichtlich und stark ausgeprägt ist.
+-   Je weiter links ein Punkt liegt, desto niedriger ist der Listenrang dieser Person, d.h. desto weiter oben befindet sie sich auf der Liste. Die Person am weitesten links hat beispielsweise mit Listenrang 1 den niedrigsten Listenrang und befindet sich somit auf der Liste zuoberst.
+
+-   Je weiter oben ein Punkt liegt, desto niedriger ist der Wahlergebnisrang dieser Person, d.h. desto besser ist ihr Wahlergebnis. Die Person am weitesten oben in der Abbildung ist die Person mit dem besten Wahlergebnis (Wahlergebnisrang 1).
+
+Frauen (blau) und Männer (grün) sind farblich hervorgehoben. Dabei zeigt sich die Regelung der SP, dass zuerst die Frauen und anschliessend die Männer auf der Liste aufgeführt werden. Ebenfalls hervorgehoben sind die amtierenden Grossrät:innen (Dreiecke) und die neuen Kandidierenden (Kreise). Die amtierenden Grossrät:innen weisen über alle Wahlkreise und Jahre die deutlich besseren Wahlergebnisse aus. Dieser Effekt ist wohlbekannt, da er bei jeder Grossratswahl so offensichtlich und stark ausgeprägt ist.
 
 Ein (nicht zwingend kausaler) Listenrangeffekt zeigt sich in den Abbildungen dadurch, dass das Wahlergebnis im Durchschnitt schlechter ausfällt, je weiter rechts eine Person liegt. Die blauen Regressionslinien visualisiert diesen Zusammenhang. Eine Regressionslinie wird in jedem Wahlkreis und -jahr so durch die Punktewolke gezogen, dass sie die Summe der (quadrierten) vertikalen Abstände zu den Punkten minimiert. In jedem Wahlkreis und -jahr sind jeweils zwei Regressionslinien eingezeichnet, je einmal für die amtierenden Grossrät:innen (gestrichelte Linie) und die neuen Kandidierenden (durchgezogene Linie).
 
-Beim Betrachten der Abbildungen und insbesondere der Regressionslinien lässt sich in mehreren Wahlkreisen ein Zusammenhang zwischen dem Listenrang und dem Wahlergebnisrang erkennen. Ebenso zeigt sich, dass dieser Zusammenhang über die Jahre zugenommen hat und deutliche Unterschiede zwischen den Wahlkreisen bestehen. Besonders stark ist der Effekt in den Jahren 2024 und 2020. 2008 war der Zusammenhang in den meisten Wahlkreisen hingegen noch weniger stark ausgeprägt (in Grossbasel West ist der Effekt teilweise sogar gegenteilig).
+Beim Betrachten der Abbildungen und insbesondere der Regressionslinien lässt sich in mehreren Wahlkreisen ein Zusammenhang zwischen dem Listenrang und dem Wahlergebnisrang erkennen. Grundsätzlich gilt: Je steiler die Regressionslinie, desto stärker der Zusammenhang. Es zeigt sich, dass der Zusammenhang über die Jahre zugenommen hat und deutliche Unterschiede zwischen den Wahlkreisen bestehen. Besonders stark ist der Zusammenhang in den Jahren 2024 und 2020. 2008 war der Zusammenhang in den meisten Wahlkreisen hingegen noch weniger stark ausgeprägt (in Grossbasel West ist der Effekt teilweise sogar gegenteilig).
 
-Aus diesem Zusammenhang kann jedoch noch kein kausaler Listenrangeffekt ableitet werden, da es noch weitere Effekte geben kann, die das Ergebnis verzerren. Wenn es beispielsweise noch zusätzlich einen Geschlechtereffekt gibt, ist die Regressionslinie (die den Listenrangeffekt widerspiegelt) dadurch zu \enquote{steil}, weil die Linie bei den niedrigen Listenrängen durch die guten Wahlergebnisse der Frauen nach oben \enquote{gezerrt} wird. Mit einem statistischen Modell können diese weiteren Effekte \enquote{herausgerechnet} werden. Die von mir verwendeten Modelle werden in den kommenden Kapiteln beschrieben.
+Aus diesem Zusammenhang kann jedoch noch kein kausaler Listenrangeffekt ableitet werden, da es noch weitere Effekte geben kann, die das Ergebnis verzerren. Wenn es beispielsweise noch zusätzlich einen Geschlechtereffekt gibt, ist die Regressionslinie (die den Listenrangeffekt widerspiegelt) dadurch zu \enquote{steil}, weil die Linie bei den niedrigen Listenrängen durch die guten Wahlergebnisse der Frauen nach oben \enquote{gezerrt} wird. Mit einem statistischen Modell können diese weiteren Effekte \enquote{herausgerechnet} werden. Das von mir verwendete Modell wird in Kapitel 3 beschrieben.
 
 Im Anhang zeige ich die Abbildung der Jahre 2024 und 2020 für die restlichen Parteien bzw. Listen. Bei den anderen Parteien zeigt sich ein noch deutlicherer Listenrangeffekt, insbesondere bei der GLP, der SVP und der BastA!.
 
@@ -218,7 +230,7 @@ for(i in c("Kleinbasel", "Grossbasel Ost")) {
     scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
                        labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
     scale_linetype_manual(values = c("TRUE" = 2, "FALSE" = 1),
-                          labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+                          labels = c("TRUE" = "Amtierend", "FALSE" = "Nicht amtierend")) +
     scale_x_continuous(breaks = seq(1, 34, 4), limits = c(1, 35)) +
     scale_y_reverse(breaks = seq(1, 34, 8), limits = c(35, 1)) +
     facet_wrap(~ year, ncol = 1) +
@@ -262,7 +274,7 @@ for(i in c("Grossbasel West", "Riehen")) {
     scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
                        labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
     scale_linetype_manual(values = c("TRUE" = 2, "FALSE" = 1),
-                          labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+                          labels = c("TRUE" = "Amtierend", "FALSE" = "Nicht amtierend")) +
     scale_x_continuous(breaks = seq(1, 34, 4), limits = c(1, 35)) +
     scale_y_reverse(breaks = seq(1, 34, 8), limits = c(35, 1)) +
     facet_wrap(~ year, ncol = 1) +
@@ -288,7 +300,7 @@ plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 2, align = "v")
 plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
-# Statistisches Modell
+# 3. Statistisches Modell
 
 Ich untersuche den Effekt des Listenrangs auf den Wahlergebnisrang bzw. den Stimmenanteil mittels einer multivariaten Regressionsanalyse. Konkret schätze ich Varianten des folgenden linearen Modells:
 
@@ -320,7 +332,7 @@ Ziel der Analyse ist es, $\hat{\beta}_4$ (der geschätzte Wert von $\beta_4$) *k
 
 Für die kausale Interpretation von $\hat{\beta}_4$ hilft es, dass bei der SP und anderen Parteien innerhalb der Geschlechter die Kandidat:innen alphabetisch auf der Liste aufgeführt werden. Wird auf das Geschlecht und den Bisherigen-Status kontrolliert, ist es durch die alphabetische Vergabe unwahrscheinlich, dass der Listenrang mit weiteren Variablen korreliert ist, die einen Effekt auf $y_{it}$ haben. Denn der Listenrang widerspiegelt in diesem Fall weder die Präferenz der Partei noch die Eignung oder Bekanntheit der Kandidierenden.
 
-# Ergebnisse für die SP
+# 4. Ergebnisse für die SP
 
 ## Basismodell
 
@@ -576,7 +588,7 @@ margins(model) %>%
            footnote_as_chunk = TRUE)
 ```
 
-# Ergebnisse für weitere Parteien
+# 5. Ergebnisse für weitere Parteien
 
 Für die Wahljahre 2024 und 2020 untersuche ich zusätzlich den Listenrangeffekt für die BastA!, FDP, GLP, GRÜNE, Grünes Bündnis, LDP, Die Mitte, SP und SVP. Ich verwende erneut das Basismodell und nehme zusätzlich eine Variable für die Partei der kandidierenden Person ($Partei_{it}$) sowie Interaktionen aus der Partei mit dem Bisherigen-Status ($Partei \times Bisher_{it}$), dem Geschlecht ($Partei \times Geschlecht_{it}$) und dem Listenrang ($Partei \times Rang_{it}$) auf.
 
@@ -621,7 +633,7 @@ margins(model,
 
 \newpage
 
-# Anhang
+# 6. Anhang
 
 ## Stimmenanteil
 
@@ -643,7 +655,7 @@ for(i in c("Kleinbasel", "Grossbasel Ost")) {
     scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
                        labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
     scale_linetype_manual(values = c("TRUE" = 2, "FALSE" = 1),
-                          labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+                          labels = c("TRUE" = "Amtierend", "FALSE" = "Nicht amtierend")) +
     facet_wrap(~ year, ncol = 1, scales = "free") +
     labs(title = i, x = "Listenrang", y = "Stimmenanteil") +
     theme_minimal() +
@@ -685,7 +697,7 @@ for(i in c("Grossbasel West", "Riehen")) {
     scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
                        labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
     scale_linetype_manual(values = c("TRUE" = 2, "FALSE" = 1),
-                          labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+                          labels = c("TRUE" = "Amtierend", "FALSE" = "Nicht amtierend")) +
     facet_wrap(~ year, ncol = 1, scales = "free") +
     labs(title = i, x = "Listenrang", y = "Stimmenanteil") +
     theme_minimal() +
