@@ -366,7 +366,7 @@ margins(model) %>%
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Marginale Effekte", booktabs = TRUE, linesep = "") %>% 
-  kable_styling(latex_options = c("hold_position"),
+  kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "4.75cm") %>%
   column_spec(2, width = "4.25cm") %>%
@@ -398,7 +398,7 @@ margins(model,
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte des Listenrangs nach Wahljahren", booktabs = TRUE, linesep = "") %>% 
-  kable_styling(latex_options = c("hold_position"),
+  kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
   column_spec(2, width = "4.25cm") %>%
@@ -428,7 +428,7 @@ margins(model,
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte des Listenrangs nach Wahlkreisen", booktabs = TRUE, linesep = "") %>% 
-  kable_styling(latex_options = c("hold_position"),
+  kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
   column_spec(2, width = "4.25cm") %>%
@@ -461,7 +461,7 @@ margins(model,
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte des Listenrangs nach Geschlecht", booktabs = TRUE, linesep = "") %>% 
-  kable_styling(latex_options = c("hold_position"),
+  kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
   column_spec(2, width = "4.25cm") %>%
@@ -494,7 +494,7 @@ margins(model_sp_ownothers, variables = "list_place",
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte des Listenrangs nach Wahlkreisen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
-  kable_styling(latex_options = c("hold_position"),
+  kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
   column_spec(2, width = "4.25cm") %>%
@@ -502,7 +502,9 @@ margins(model_sp_ownothers, variables = "list_place",
   footnote(general = "*** p < 0.01, ** p < 0.05, * p < 0.1.",
            general_title = "Hinweis:", 
            footnote_as_chunk = TRUE)
+```
 
+```{r tab_6, echo=FALSE, message=TRUE, warning=FALSE}
 margins(model_sp_own, variables = "list_place", 
         at = list(kreis = model_sp_own$xlevels$kreis)) %>% 
   tidy() %>% 
@@ -515,7 +517,7 @@ margins(model_sp_own, variables = "list_place",
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte des Listenrangs der SP-Stimmen nach Wahlkreisen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
-  kable_styling(latex_options = c("hold_position"),
+  kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
   column_spec(2, width = "4.25cm") %>%
@@ -523,7 +525,9 @@ margins(model_sp_own, variables = "list_place",
   footnote(general = "*** p < 0.01, ** p < 0.05, * p < 0.1.",
            general_title = "Hinweis:", 
            footnote_as_chunk = TRUE)
+```
 
+```{r tab_7, echo=FALSE, message=TRUE, warning=FALSE}
 margins(model_sp_others, variables = "list_place", 
         at = list(kreis = model_sp_others$xlevels$kreis)) %>% 
   tidy() %>% 
@@ -536,7 +540,7 @@ margins(model_sp_others, variables = "list_place",
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte des Listenrangs der Panaschierstimmen nach Wahlkreisen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
-  kable_styling(latex_options = c("hold_position"),
+  kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
   column_spec(2, width = "4.25cm") %>%
@@ -552,7 +556,7 @@ Ich untersuche, ob auch weitere Variablen eine Effekt auf den Wahlerfolg haben. 
 
 Die Ergebnisse in der Tabelle unten zeigen, dass weder das Alter noch die Nähe zu einer amtierenden Person einen statistisch signifikanten Effekt auf den Wahlergebnisrang haben. Ich finde insofern keine eindeutigen Hinweise darauf, dass jüngere oder ältere Kandidierende bessere Wahlergebnisse haben. Ebenso finde ich keine Hinweise darauf, dass es für den Wahlerfolg eine Rolle spielt, ob sich ein:e neue:r Kandidat:in auf dem Wahlzettel in der unmittelbaren Nähe einer amtierenden Person befindet.
 
-```{r tab_6, echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab_8, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_sp_weitere
 
 margins(model) %>%
@@ -578,7 +582,7 @@ margins(model) %>%
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte weiterer erklärender Variablen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
-  kable_styling(latex_options = c("hold_position"),
+  kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "4.75cm") %>%
   column_spec(2, width = "4.25cm") %>%
@@ -596,7 +600,7 @@ Die Ergebnisse in der Tabelle unten zeigen, dass der Listenrangeffekt bei fast a
 
 Der Effekt für die SP ist in dieser Tabelle grösser als im Basismodell (siehe Tabelle 1), weil ausschliesslich die Wahljahre 2024 und 2020 berücksichtigt werden. Wie ich in Tabelle 2 gezeigt habe, ist in diesen beiden Jahren der Listenrangeffekt besonders ausgeprägt.
 
-```{r tab_8, echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab_9, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_all
 
 margins(model, 
@@ -621,7 +625,7 @@ margins(model,
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekt nach Parteien", booktabs = TRUE, linesep = "") %>% 
-  kable_styling(latex_options = c("hold_position"),
+  kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
   column_spec(2, width = "4.25cm") %>%
@@ -1011,7 +1015,7 @@ model %>%
   select(`Variable`, `Koeffizient`, `Standardfehler`,
          `p-Wert`, `Signifikanz`) %>% 
   kable("latex", digits = 3, caption = "Regressionsergebnisse") %>%
-  kable_styling(latex_options = c("striped", "hold_position"))
+  kable_styling(latex_options = c("striped", "HOLD_position"))
 ```
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
