@@ -233,27 +233,6 @@ Ich untersuche den Einfluss des Listenrangs auf zwei Zielgrössen: Erstens den R
 
 Der Wahlergebnisrang und der Stimmenanteil eine:r Kandidat:in sind zwar hoch miteinander korreliert, dennoch kann der Einfluss des Listenrangs auf diese beiden Zielgrössen unterschiedlich sein. Welche Zielgrösse \enquote{korrekt} ist, hängt von der Perspektive ab. Der Effekt des Listenrangs auf den Stimmenanteil kann beispielsweise gering sein. Wenn die Anzahl Stimmen für die Kandidierenden jedoch nahe beieinander liegen, kann dies für die Wahrscheinlichkeit, gewählt zu werden, dennoch relevant sein. Da ich mich in dieser Analyse vorrangig für den Einfluss des Listenrangs auf die Wahlwahrscheinlichkeit interessiere, konzentriere ich mich auf den Wahlergebnisrang. Die Ergebnisse für den Stimmenanteil zeige ich im Anhang.
 
-## Listenplatz-Regelungen
-
-| Partei / Liste | Bisherige zuerst (innerhalb von) | Nach Geschlecht | Spitzenkandidierende | Nach Alphabet (innerhalb von) |
-|---------------|---------------|---------------|---------------|---------------|
-| SP             | Nein                             | Ja              | Nein                 | Ja (Geschlecht)               |
-| Grünes Bündnis | Ja                               | Ja              | Nein                 | Ja (Bisherige, Geschlecht)    |
-| BastA!         | Ja                               | Ja              | Nein                 | Ja (Bisherige, Geschlecht)    |
-| FDP (2020)     | Ja (Geschlecht)                  | Ja              | Nein                 | Ja (Bisherige, Geschlecht)    |
-| GLP            | Ja                               | Nein\*          | Ja/Nein              | Nein                          |
-| Die Mitte      | Ja                               | Nein            | Ja                   | Ja (Bisherige)                |
-| SVP            | Ja                               | Nein            | Nein                 | Ja (Bisherige)\*\*            |
-| GRÜNE          | Ja                               | Nein            | Nein                 | Ja (Bisherige)                |
-| LDP            | Ja                               | Nein            | Nein                 | Ja (Bisherige)                |
-| FDP (2024)     | Ja                               | Nein            | Nein                 | Ja (Bisherige)                |
-
-: Listenplatz-Regelungen der Parteien
-
-\*Bei der GLP alterniert das Geschlecht.
-
-\*\*Bei der SVP wird der Wahlzettel von oben nach unten alphabetisch sortiert, nicht der Listenrang.
-
 ## Deskriptive Analyse
 
 Abbildungen 1 und 2 zeigen den Zusammenhang zwischen dem Listenrang (X-Achse, d.h. von links nach rechts) und dem Wahlergebnisrang (Y-Achse, d.h. von unten nach oben) für die SP, jeweils separat für die Wahlkreise Kleinbasel, Grossbasel Ost, Grossbasel West und Riehen. Jeder Punkt ist eine kandidierende Person in dem jeweiligen Wahlkreis und -jahr. Die Abbildungen sind wie folgt zu lesen:
@@ -539,7 +518,7 @@ Ich untersuche, ob sich der Listenrangeffekt der SP-Stimmen von jenem der Panasc
 
 Ich nehmen wiederum die Interaktion $Rang \times Wahlkreis_{it}$ in das Basismodell auf, um Unterschiede über die Wahlkreise abbilden zu können. Ich schätze anschliessend das Modell separat mit $Rang_{it}$, $Rang_{it}^{SP}$ bzw. $Rang_{it}^{-SP}$ als abhängige Variable. Ich verwende dabei ausschliesslich Daten der Wahljahre 2024 und 2020, da ich nur für diese beiden Jahren zwischen SP- und Panaschierstimmen unterscheiden kann.
 
-Die drei Tabellen unten zeigen die Resultate für $Rang_{it}$ (Tabelle 6), $Rang_{it}^{SP}$ (Tabelle 7) und $Rang_{it}^{-SP}$ (Tabelle 8). Die Ergebnisse für $Rang_{it}$ und $Rang_{it}^{SP}$ sind relativ ähnlich. Interessant ist jedoch, dass ich in zwei Wahlkreisen auch für $Rang_{it}^{-SP}$ statistisch signifikante -- und vor allem hohe -- Effekte finde (Grossbasel West: `r margins_sp_others["Grossbasel West"]`, Kleinbasel: `r margins_sp_others["Kleinbasel"]`). Dies deutet darauf hin, dass Wähler:innen selbst beim Panaschieren -- bei sonst gleichen Bedingungen -- Kandidat:innen mit niedrigem Listenrang bevorzugen.
+Die drei Tabellen unten zeigen die Resultate für $Rang_{it}$ (Tabelle 5), $Rang_{it}^{SP}$ (Tabelle 6) und $Rang_{it}^{-SP}$ (Tabelle 7). Die Ergebnisse für $Rang_{it}$ und $Rang_{it}^{SP}$ sind relativ ähnlich. Interessant ist jedoch, dass ich in zwei Wahlkreisen auch für $Rang_{it}^{-SP}$ statistisch signifikante -- und vor allem hohe -- Effekte finde (Grossbasel West: `r margins_sp_others["Grossbasel West"]`, Kleinbasel: `r margins_sp_others["Kleinbasel"]`). Dies deutet darauf hin, dass Wähler:innen selbst beim Panaschieren -- bei sonst gleichen Bedingungen -- Kandidat:innen mit niedrigem Listenrang bevorzugen.
 
 ```{r tab_5, echo=FALSE, message=TRUE, warning=FALSE}
 margins(model_sp_ownothers, variables = "list_place", 
@@ -658,7 +637,7 @@ Für die Wahljahre 2024 und 2020 untersuche ich zusätzlich den Listenrangeffekt
 
 Die Ergebnisse in der Tabelle unten zeigen, dass der Listenrangeffekt bei fast allen Parteien vorkommt. Einzig bei der LDP finde ich keine statistisch signifikanten Effekte. Der Effekt ist am grössten bei der GLP (Effektstärke: `r margins_model_all["GLP"]`), der SP (Effektstärke: `r margins_model_all["SP"]`), der SVP (Effektstärke: `r margins_model_all["SVP"]`) und der BastA! (Effektstärke: `r margins_model_all["BastA"]`). Der Listenrangeffekt des Grünen Bündnisses -- das als Liste nur in den Daten von 2020 vorkommt -- ist vermutlich ebenfalls stark durch die BastA! beeinflusst.
 
-Der Effekt für die SP ist in dieser Tabelle grösser als im Basismodell (siehe Tabelle 1), weil ausschliesslich die Wahljahre 2024 und 2020 berücksichtigt werden. Wie ich in Tabelle 3 gezeigt habe, ist in diesen beiden Jahren der Listenrangeffekt besonders ausgeprägt.
+Der Effekt für die SP ist in dieser Tabelle grösser als im Basismodell (siehe Tabelle 1), weil ausschliesslich die Wahljahre 2024 und 2020 berücksichtigt werden. Wie ich in Tabelle 2 gezeigt habe, ist in diesen beiden Jahren der Listenrangeffekt besonders ausgeprägt.
 
 ```{r tab_9, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_all
@@ -694,6 +673,29 @@ margins(model,
            general_title = "Hinweis:", 
            footnote_as_chunk = TRUE)
 ```
+
+# 6. Handlungsempfehlungen
+
+## Listenplatz-Regelungen
+
+| Partei / Liste | Bisherige zuerst (innerhalb von) | Nach Geschlecht | Spitzenkandidierende | Nach Alphabet (innerhalb von) |
+|---------------|---------------|---------------|---------------|---------------|
+| SP             | Nein                             | Ja              | Nein                 | Ja (Geschlecht)               |
+| Grünes Bündnis | Ja                               | Ja              | Nein                 | Ja (Bisherige, Geschlecht)    |
+| BastA!         | Ja                               | Ja              | Nein                 | Ja (Bisherige, Geschlecht)    |
+| FDP (2020)     | Ja (Geschlecht)                  | Ja              | Nein                 | Ja (Bisherige, Geschlecht)    |
+| GLP            | Ja                               | Nein\*          | Ja/Nein              | Nein                          |
+| Die Mitte      | Ja                               | Nein            | Ja                   | Ja (Bisherige)                |
+| SVP            | Ja                               | Nein            | Nein                 | Ja (Bisherige)\*\*            |
+| GRÜNE          | Ja                               | Nein            | Nein                 | Ja (Bisherige)                |
+| LDP            | Ja                               | Nein            | Nein                 | Ja (Bisherige)                |
+| FDP (2024)     | Ja                               | Nein            | Nein                 | Ja (Bisherige)                |
+
+: Listenplatz-Regelungen der Parteien
+
+\*Bei der GLP alterniert das Geschlecht.
+
+\*\*Bei der SVP wird der Wahlzettel von oben nach unten alphabetisch sortiert, nicht der Listenrang.
 
 \newpage
 
