@@ -125,6 +125,8 @@ data_final_2024_all <- data_2024 %>%
          above_real = replace(above_real, is.na(above_real), FALSE),
          either = below | above,
          either_real = below_real | above_real,
+         name = paste(name, firstname),
+         gender = replace(gender, name == "Urrejola Balçak Magdalena", "F"), # Fehler in Rohdaten (Pronomen: sie)
          year = "2024")
 
 data_final_2024 <- data_final_2024_all %>% 
@@ -250,6 +252,7 @@ data_final_2020_all <- data_2020 %>%
          either = below | above,
          either_real = below_real | above_real,
          party = replace(party, party == "CVP", "Mitte"),
+         name = paste(name, firstname),
          year = "2020")
 
 data_final_2020 <- data_final_2020_all %>% 
@@ -373,7 +376,6 @@ data_final_2008 <- data_2008 %>%
          year = "2008")
 
 data_final <- rbind(data_final_2024 %>% 
-                      mutate(name = paste(name, firstname)) %>% 
                       select(kreis, list_place, list_place_scale, name, gender, 
                              incumbent, votes, elected, votes_kreis_party, 
                              list_total, share, share_scale, below, above, 
@@ -381,7 +383,6 @@ data_final <- rbind(data_final_2024 %>%
                              first_two_gender, last_three_gender, 
                              first_three_gender, rank, place_last, year),
                     data_final_2020 %>% 
-                    mutate(name = paste(name, firstname)) %>% 
                       select(kreis, list_place, list_place_scale, name, gender, 
                              incumbent, votes, elected, votes_kreis_party, 
                              list_total, share, share_scale, below, above, 

@@ -1,5 +1,5 @@
 # Der Listenrangeffekt bei den Grossratswahlen in Basel-Stadt
 
-Work in Progress -- aktuelleste Version [hier](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen.
+Work in Progress -- aktuellste Version [hier](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen.
 
 In diesem Bericht untersuche ich den Einfluss des Listenrangs auf den Wahlerfolg bei den Grossratswahlen 2008 bis 2024 in Basel-Stadt. Meine Analysen zeigen, dass ein niedrigerer Listenrang (= weiter oben auf der Liste) zu einem besseren Wahlergebnis führt. Der Effekt tritt besonders bei der GLP, SP, SVP und der BastA! auf und variiert je nach Wahljahr und -kreis. Bei der SP stelle ich einen deutlichen Anstieg des Listenrangeffekts in den Wahljahren 2020 und 2024 fest. Die Ergebnisse zeigen, dass es aus Sicht der Frauenförderung ein effektives Instrument ist, die Frauen bei Listenwahlen zuerst aufzuführen. Für eine aktive Gleichstellungspolitik ist diese Trennung nach Geschlecht sinnvoll und sollte in der SP beibehalten werden. Hingegen kann es problematisch sein, Kandidierende alphabetisch aufzulisten.
