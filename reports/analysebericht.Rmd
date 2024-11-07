@@ -13,7 +13,7 @@ header-includes:
   - \floatsetup[table]{capposition=top}
   - \floatsetup[figure]{capposition=top}
 title: "Der Listenrangeffekt bei den Grossratswahlen in Basel-Stadt: Analysebericht"
-subtitle: "Work in Progress (Version 0.1.2) -- aktuellste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
+subtitle: "Work in Progress (Version 0.1.3) -- aktuellste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
 thanks: "Der Code und die Daten der Analysen sind auf Github abgelegt ([[Link]{.ul}](https://github.com/marcstoeckli/grossratswahlen_bs)). Ich freue mich über Kommentare und Anregungen via kontakt@stoecklieconomics.ch. Einen herzlichen Dank für ihr Feedback gehen an Tamina Graber, Edibe Gölgeli, Michela Seggiani und Salome Bessenich."
 author: "Marc Stöckli"
 abstract: "In diesem Bericht untersuche ich den Einfluss des Listenrangs auf den Wahlerfolg bei den Grossratswahlen 2008 bis 2024 in Basel-Stadt. Meine Analysen zeigen, dass ein niedrigerer Listenrang (= weiter oben auf der Liste) zu einem besseren Wahlergebnis führt. Der Effekt tritt besonders bei der GLP, SP, SVP und der BastA! auf und variiert je nach Wahljahr und -kreis. Bei der SP stelle ich einen deutlichen Anstieg des Listenrangeffekts in den Wahljahren 2020 und 2024 fest. Die Ergebnisse zeigen, dass es aus Sicht der Frauenförderung ein effektives Instrument ist, die Frauen bei Listenwahlen zuerst aufzuführen. Für eine aktive Gleichstellungspolitik ist diese Trennung nach Geschlecht sinnvoll und sollte in der SP beibehalten werden. Hingegen kann es problematisch sein, Kandidierende alphabetisch aufzulisten."
@@ -189,7 +189,7 @@ Wenn die Reihenfolge nicht die Präferenz der Partei widerspiegelt, ist der List
 
 Für die Analysen in diesem Bericht untersuche ich die Daten der Grossratswahlen von Basel-Stadt der Jahre 2024, 2020, 2016, 2012 und 2008. Ich konzentriere mich dabei auf den Effekt des Listenrangs auf den Rang, den eine kandidierende Person in ihrem Wahlkreis auf ihrer Liste bei der Wahl erreicht hat (kurz \enquote{Wahlergebnisrang}). Wenn die gefundene Effektstärke 0 beträgt, hat der Listenrang keinen Einfluss auf den Wahlerfolg. Liegt die Effektstärke über 0, führt ein höherer Listenrang -- bei sonst gleichen Bedingungen -- im Durchschnitt zu einem schlechteren Wahlergebnisrang. Eine Effektstärke von 1 bedeutet, dass ein Platz weiter unten auf der Liste genau einen Rang schlechter im Wahlergebnis bedeutet. In diesem Bericht bezeichne ich eine Effektstärke ab 0.25 als hoch und ab 0.5 als sehr hoch.
 
-Ich zeige Ergebnisse für alle Listen/Parteien, beschränke mich für vertiefte Analysen aber auf die SP. Als Erweiterung untersuche ich zusätzlich den Effekt des Listenrangs auf den Anteil der Stimmen einer kandidierenden Person an den gesamten Stimmen für ihrer Liste in ihrem Wahlkreis (kurz \enquote{Stimmenanteil}).
+Ich zeige Ergebnisse für alle Listen/Parteien, beschränke mich für vertiefte Analysen aber auf die SP. Als Erweiterung untersuche ich zusätzlich den Effekt des Listenrangs auf den Anteil der Stimmen einer kandidierenden Person an den gesamten Stimmen für ihrer Liste in ihrem Wahlkreis (kurz \enquote{Stimmenanteil}). Im Anhang beschreibe ich zudem die Regelungen der Parteien, anhand derer die Listenplätze vergeben werden.
 
 Methodisch verwende ich multivariate Regressionsanalysen. Dies ermöglicht es mir, den Effekt des Listenrangs von anderen Effekten -- dem Geschlecht, dem Alter, dem Bisherigen-Status, etc. -- zu unterscheiden. Ziel ist es, den *kausalen* Effekt des Listenrangs auf den Wahlerfolg zu finden.
 
@@ -674,34 +674,11 @@ margins(model,
            footnote_as_chunk = TRUE)
 ```
 
-# 6. Handlungsempfehlungen
-
-## Listenplatz-Regelungen
-
-| Partei / Liste | Bisherige zuerst (innerhalb von) | Nach Geschlecht | Spitzenkandidierende | Nach Alphabet (innerhalb von) |
-|---------------|---------------|---------------|---------------|---------------|
-| SP             | Nein                             | Ja              | Nein                 | Ja (Geschlecht)               |
-| Grünes Bündnis | Ja                               | Ja              | Nein                 | Ja (Bisherige, Geschlecht)    |
-| BastA!         | Ja                               | Ja              | Nein                 | Ja (Bisherige, Geschlecht)    |
-| FDP (2020)     | Ja (Geschlecht)                  | Ja              | Nein                 | Ja (Bisherige, Geschlecht)    |
-| GLP            | Ja                               | Nein\*          | Ja/Nein              | Nein                          |
-| Die Mitte      | Ja                               | Nein            | Ja                   | Ja (Bisherige)                |
-| SVP            | Ja                               | Nein            | Nein                 | Ja (Bisherige)\*\*            |
-| GRÜNE          | Ja                               | Nein            | Nein                 | Ja (Bisherige)                |
-| LDP            | Ja                               | Nein            | Nein                 | Ja (Bisherige)                |
-| FDP (2024)     | Ja                               | Nein            | Nein                 | Ja (Bisherige)                |
-
-: Listenplatz-Regelungen der Parteien
-
-\*Bei der GLP alterniert das Geschlecht.
-
-\*\*Bei der SVP wird der Wahlzettel von oben nach unten alphabetisch sortiert, nicht der Listenrang.
-
 \newpage
 
 # 6. Anhang
 
-## Stimmenanteil
+## Deskriptive Analyse für den Stimmenanteil
 
 ```{r fig_3, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plots <- list()
@@ -787,7 +764,7 @@ plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 2, align = "v")
 plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
-## Andere Parteien
+## Deskriptive Analyse für andere Parteien
 
 ```{r fig_5, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plot_gb <- partyplot(party_name = "GB", 
@@ -845,6 +822,32 @@ partyplot(party_name = "SVP",
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
+
+## Listenplatz-Regelungen
+
+Bei den Grossratswahlen hat fast jede Partei bzw. Liste ihre eigene Regelung, wie die Listenplätze vergeben werden. In Tabelle 10 zeige ich die Regelungen für die Parteien in den Wahljahren 2024 und 2020 (für die SP zudem jene der Jahre 2016, 2012 und 2008). Die Spalte \enquote{Bisherige zuerst} gibt an, ob bei einer Partei die amtierenden Grossrät:innen an erster Stelle stehen, \enquote{Frauen zuerst} ob Frauen zuerst aufgelistet werden und \enquote{Alphabetisch} ob die Liste alphabetisch sortiert ist. Die Angaben in der Klammer geben an, innerhalb welcher Untergruppe die entsprechende Regelung zur Anwendung kommt. Die FDP hat 2020 beispielsweise die Frauen zuerst aufgelistet, dabei innerhalb der Frauen und Männer jeweils die amtierenden Grossrät:innen zuerst. Innerhalb dieser Gruppen -- amtierende Frauen, amtierende Männer, nicht-amtierende Frauen, nicht-amtierende Männer -- wurden die Kandidierenden schliesslich alphabetisch sortiert.
+
+Tabelle 10 zeigt, dass die SP die einzige Partei ist, bei der die amtierenden Grossrät:innen nicht an erster Stelle stehen. Ebenso zeigt sich, dass ausser bei der SP im Jahr 2008 sowie der GLP die Listen bei allen Parteien in irgendeiner Form alphabetisch sortiert sind.[^2][^3] Auffällig ist, dass nicht alle linken Parteien die Frauen zuerst auflisten (die GRÜNEN weichen davon ab) und dass es mit der FDP im Jahr 2020 auch eine bürgerliche Partei gab, die die Frauen zuerst aufgelistet hat. Die GLP reiht in mehreren Wahlkreisen die Frauen und Männer zudem abwechselnd.
+
+[^2]: Bei der SVP ist der *Wahlzettel* von oben nach unten alphabetisch sortiert, nicht der Listenrang per se. In anderen Worten, bei beispielsweise 35 Listenplätzen in einem Wahlkreis werden die Listenplätze 1 bis 17 separat von den Listenplätzen 18 bis 35 alphabetisch sortiert.
+
+[^3]: Die Mitte listet zwar die amtierenden Grossrät:innen zuerst auf und sortiert anschliessend alphabetisch, weicht von dieser Regelung jedoch teilweise ab, insofern dass sie nach den amtierenden Grossrät:innen erst ihre Spitzenkandidierenden auflistet.
+
+| Partei / Liste   | Bisherige zuerst (innerhalb von) | Frauen zuerst | Alphabetisch (innerhalb von)         |
+|----------------|----------------|-------------|----------------------------|
+| SP (2008)        | Nein                             | Ja            | Nein                                 |
+| SP (2012 - 2024) | Nein                             | Ja            | Ja (Geschlecht)                      |
+| Grünes Bündnis   | Ja                               | Ja            | Ja (Amtsinhaberschaft \> Geschlecht) |
+| BastA!           | Ja                               | Ja            | Ja (Amtsinhaberschaft \> Geschlecht) |
+| FDP (2020)       | Ja (Geschlecht)                  | Ja            | Ja (Amtsinhaberschaft \> Geschlecht) |
+| GLP              | Ja                               | Nein          | Nein                                 |
+| Die Mitte        | Ja                               | Nein          | Ja (Amtsinhaberschaft)               |
+| SVP              | Ja                               | Nein          | Ja (Amtsinhaberschaft)               |
+| GRÜNE            | Ja                               | Nein          | Ja (Amtsinhaberschaft)               |
+| LDP              | Ja                               | Nein          | Ja (Amtsinhaberschaft)               |
+| FDP (2024)       | Ja                               | Nein          | Ja (Amtsinhaberschaft)               |
+
+: Listenplatz-Regelungen der Parteien
 
 ```{r eval=FALSE, include=FALSE}
 model <- model_sp_years
@@ -1029,5 +1032,41 @@ data_final %>%
   geom_point(aes(x = list_place, y = share_min, col = gender)) +
   geom_smooth(aes(x = list_place, y = share_min), method = "lm", se = FALSE) +
   facet_wrap(~ kreis, scales = "free_y") +
+  theme_minimal()
+```
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+# Kontrafaktischer Wahlergebnisrang
+model <- model_sp_kreis
+
+rank_resid <- residuals(model)
+rank_pred <- predict(model, newdata = data_final %>% 
+                       mutate(list_place = 1))
+
+intercepts <- data_final %>%
+  group_by(year, kreis) %>%
+  summarize(elected_sum = sum(as.numeric(elected)) + 0.5, 
+            .groups = "drop")
+
+data_final %>% 
+  mutate(rank_pred = rank_pred + rank_resid) %>%
+  arrange(year, kreis, rank_pred) %>% 
+  group_by(year, kreis) %>% 
+  mutate(rank_c = rank(rank_pred)) %>%
+  ungroup() %>% 
+  select(year, kreis, name, gender, rank, rank_c, elected) %>% 
+  pivot_longer(cols = c(rank, rank_c),
+               names_to = "type",
+               values_to = "rank") %>% 
+  left_join(intercepts, by = c("year", "kreis")) %>% 
+  filter(year == "2024") %>% 
+  ggplot() +
+  geom_point(aes(x = type, y = rank, group = name, 
+                 col = elected)) +
+  geom_line(aes(x = type, y = rank, group = name,
+                col = elected)) +
+  geom_hline(aes(yintercept = elected_sum), col = "red") +
+  scale_y_reverse() +
+  facet_wrap(~ kreis) +
   theme_minimal()
 ```
