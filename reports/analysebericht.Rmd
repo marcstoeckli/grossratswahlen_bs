@@ -201,7 +201,7 @@ Zusammenfassend finde ich in meinen Analysen Folgendes:
 
 -   Der Listenrangeffekt hat **über die Jahre stark zugenommen**. Während ich bei den Wahlen 2008 noch keinen Effekt finden kann, finde ich (nicht signifikante) Effekte bei den Wahlen 2012 (Effektstärke: `r margins_sp_years["2012"]`) und 2016 (Effektstärke: `r margins_sp_years["2016"]`). Bei der Grossratswahl von 2020 sowie 2024 finde ich statistisch signifikante und hohe Listenrangeffekte (**Effektstärke:** **`r margins_sp_years["2020"]` bzw. `r margins_sp_years["2024"]`**).
 
--   Innerhalb der SP gibt es **deutliche Unterschiede des Effekts über die Wahlkreise**. Am stärksten ist der Listenrangeffekt in Grossbasel Ost (**Effektstärke:** **`r margins_sp_kreis["Grossbasel Ost"]`**) und dem Kleinbasel (**Effektstärke:** **`r margins_sp_kreis["Kleinbasel"]`**). Der Listenrangeffekt in Riehen ist zwar sehr hoch (**Effektstärke:** **`r margins_sp_kreis["Riehen"]`**), aber nicht statistisch signifikant, vermutlich aufgrund der kleinen Stichprobengrösse (Riehen ist mit deutlich weniger Sitzen im Grossen Rat vertreten). In Grossbasel West kann ich keinen eindeutigen Effekt finden. Die Richtung und Stärke des Effekts verändert sich in Grossbasel West von 2008 bis 2024 beachtlich.
+-   Innerhalb der SP gibt es **deutliche Unterschiede des Effekts über die Wahlkreise**. Am stärksten ist der Listenrangeffekt in Grossbasel Ost (**Effektstärke:** **`r margins_sp_kreis["Grossbasel Ost"]`**) und dem Kleinbasel (**Effektstärke:** **`r margins_sp_kreis["Kleinbasel"]`**). Der Listenrangeffekt in Riehen ist zwar sehr hoch (**Effektstärke:** **`r margins_sp_kreis["Riehen"]`**), aber nicht statistisch signifikant, vermutlich aufgrund der kleinen Stichprobengrösse (Riehen ist mit deutlich weniger Sitzen im Grossen Rat vertreten). In Grossbasel West kann ich keinen eindeutigen Effekt finden, da sich die Richtung und Stärke des Effekts von 2008 bis 2024 beachtlich verändert. Bei dein Wahlen von 2020 und 2024 zeichnet sich grundsätzlich aber auch in Grossbasel West ein Listenrangeffekt ab.
 
 -   Der Listenrangeffekt ist **für Frauen und Männer ähnlich stark ausgeprägt**. Für Frauen und Männer spielt es für den Wahlerfolg insofern gleichermassen eine Rolle, auf einem \enquote{guten} Listenplatz zu sein.
 
@@ -1037,18 +1037,21 @@ data_final %>%
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 # Kontrafaktischer Wahlergebnisrang
-model <- model_sp_kreis
+model <- lm("rank ~ kreis*incumbent + year + kreis*gender + kreis*list_place", data = data_final %>% filter(year %in% c("2024", "2020")))
 
 rank_resid <- residuals(model)
 rank_pred <- predict(model, newdata = data_final %>% 
+                       filter(year %in% c("2024", "2020")) %>% 
                        mutate(list_place = 1))
 
 intercepts <- data_final %>%
+  filter(year %in% c("2024", "2020")) %>% 
   group_by(year, kreis) %>%
   summarize(elected_sum = sum(as.numeric(elected)) + 0.5, 
             .groups = "drop")
 
 data_final %>% 
+  filter(year %in% c("2024", "2020")) %>% 
   mutate(rank_pred = rank_pred + rank_resid) %>%
   arrange(year, kreis, rank_pred) %>% 
   group_by(year, kreis) %>% 
