@@ -89,7 +89,8 @@ data_final_2024_all <- data_2024 %>%
   rowwise() %>% 
   mutate(votes_by_others = sum(across(starts_with("votes_by_party")), na.rm = TRUE) - votes_by_own) %>%
   group_by(kreis) %>% 
-  mutate(votes_from_SP = sum(votes_by_party_SP) - sum(votes_by_party_SP[party == "SP"])) %>% 
+  mutate(votes_to_others = sum(votes_by_party_SP) - sum(votes_by_party_SP[party == "SP"]),
+         votes_to_others = replace(votes_to_others, party != "SP", NA)) %>%  
   group_by(kreis, party) %>% 
   mutate(share_others = votes_by_others/votes_kreis_candidate,
          share_own = votes_by_own/votes_kreis_candidate,
@@ -432,6 +433,7 @@ data_final_all <- rbind(data_final_2024_all %>%
                           select(kreis, party, list_place, list_place_scale, 
                                  name, gender, age, incumbent, votes,
                                  elected, votes_kreis_candidate, list_total, share,
+                                 votes_by_own, votes_by_others,
                                  share_scale, below, above, either, last_four, 
                                  first_four, last_two_gender, first_two_gender, 
                                  last_three_gender, first_three_gender,
@@ -440,6 +442,7 @@ data_final_all <- rbind(data_final_2024_all %>%
                           select(kreis, party, list_place, list_place_scale, 
                                  name, gender, age, incumbent, votes,
                                  elected, votes_kreis_candidate, list_total, share,
+                                 votes_by_own, votes_by_others,
                                  share_scale, below, above, either, last_four, 
                                  first_four, last_two_gender, first_two_gender, 
                                  last_three_gender, first_three_gender,

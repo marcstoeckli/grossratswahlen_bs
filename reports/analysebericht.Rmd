@@ -13,7 +13,7 @@ header-includes:
   - \floatsetup[table]{capposition=top}
   - \floatsetup[figure]{capposition=top}
 title: "Der Listenrangeffekt bei den Grossratswahlen in Basel-Stadt: Analysebericht"
-subtitle: "Work in Progress (Version 0.1.3) -- aktuellste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
+subtitle: "Work in Progress (Version 0.1.4) -- aktuellste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
 thanks: "Der Code und die Daten der Analysen sind auf Github abgelegt ([[Link]{.ul}](https://github.com/marcstoeckli/grossratswahlen_bs)). Ich freue mich über Kommentare und Anregungen via kontakt@stoecklieconomics.ch. Einen herzlichen Dank für ihr Feedback gehen an Tamina Graber, Edibe Gölgeli, Michela Seggiani und Salome Bessenich."
 author: "Marc Stöckli"
 abstract: "In diesem Bericht untersuche ich den Einfluss des Listenrangs auf den Wahlerfolg bei den Grossratswahlen 2008 bis 2024 in Basel-Stadt. Meine Analysen zeigen, dass ein niedrigerer Listenrang (= weiter oben auf der Liste) zu einem besseren Wahlergebnis führt. Der Effekt tritt besonders bei der GLP, SP, SVP und der BastA! auf und variiert je nach Wahljahr und -kreis. Bei der SP stelle ich einen deutlichen Anstieg des Listenrangeffekts in den Wahljahren 2020 und 2024 fest. Die Ergebnisse zeigen, dass es aus Sicht der Frauenförderung ein effektives Instrument ist, die Frauen bei Listenwahlen zuerst aufzuführen. Für eine aktive Gleichstellungspolitik ist diese Trennung nach Geschlecht sinnvoll und sollte in der SP beibehalten werden. Hingegen kann es problematisch sein, Kandidierende alphabetisch aufzulisten."
@@ -57,11 +57,11 @@ partyplot <- function(party_name, party_title, party_ncol,
     mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
            year = factor(year, levels = seq(2024, 2020, by = -2))) %>% 
     filter(party == party_name) %>% 
-    mutate(rank_pred = predict(lm(party_model, 
+    mutate(outcome_pred = predict(lm(party_model, 
                                   data = .))) %>%
     ggplot(aes(x = list_place, y = rank)) +
     geom_point(aes(col = gender, shape = incumbent)) +
-    geom_line(aes(x = list_place, y = rank_pred, linetype = incumbent), 
+    geom_line(aes(x = list_place, y = outcome_pred, linetype = incumbent), 
               col = "blue", 
               alpha = 0.5) +
     scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
@@ -205,7 +205,7 @@ Zusammenfassend finde ich in meinen Analysen Folgendes:
 
 -   Der Listenrangeffekt ist **für Frauen und Männer ähnlich stark ausgeprägt**. Für Frauen und Männer spielt es für den Wahlerfolg insofern gleichermassen eine Rolle, auf einem \enquote{guten} Listenplatz zu sein.
 
--   Werden nur die veränderten Wahlzettel betrachtet, so zeigt sich, dass der Listenrangeffekt **stärker ausgeprägt ist bei den Stimmen von veränderten Wahlzetteln der SP-Liste** im Vergleich zu den Stimmen von veränderten Wahlzetteln der anderen Listen (Panaschierstimmen). Anders ausgedrückt: Das Kumulieren und Streichen auf der SP-Liste führt zu einem stärkeren Listenrangeffekt als das Panaschieren von SP-Kandidierenden.
+-   Werden nur die veränderten Wahlzettel betrachtet, so zeigt sich, dass der Listenrangeffekt **leicht stärker ausgeprägt ist bei den Stimmen von veränderten Wahlzetteln der SP-Liste** im Vergleich zu den Stimmen von anderen Listen (Panaschierstimmen). Anders ausgedrückt: Das Kumulieren und Streichen auf der SP-Liste führt zu einem leicht stärkeren Listenrangeffekt als das Panaschieren von SP-Kandidierenden. In Bezug auf die Anzahl der Panaschierstimmen zeigt sich zudem, dass der Listenrang einen höheren Effekt bei den amtierenden Grossrät:innen im Vergleich zu den neuen Kandidierenden hat.
 
 -   **Amtierende Grossrät:innen** schneiden deutlich besser ab als neue Kandidierende. Keinen statistisch signifikanten Effekt konnte ich hingegen für das **Alter** finden. Ebenso konnte ich keinen statistisch signifikanten Effekt finden, ob eine kandidierende Person auf der Liste **unter oder über einer amtierenden kandidierenden Person** aufgeführt ist.
 
@@ -251,7 +251,7 @@ Aus diesem Zusammenhang kann jedoch noch kein kausaler Listenrangeffekt ableitet
 
 Im Anhang zeige ich die Abbildung der Jahre 2024 und 2020 für die restlichen Parteien bzw. Listen. Bei den anderen Parteien zeigt sich ein noch deutlicherer Listenrangeffekt, insbesondere bei der GLP, der SVP und der BastA!.
 
-```{r fig_1, fig.cap="Listen- und Wahlergebnisrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig_1, fig.cap="Listen- und Wahlergebnisrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
 plots <- list()
 for(i in c("Kleinbasel", "Grossbasel Ost")) {
   plot <- data_final %>% 
@@ -295,7 +295,7 @@ plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 2, align = "v")
 plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
-```{r fig_2, fig.cap="Listen- und Wahlergebnisrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig_2, fig.cap="Listen- und Wahlergebnisrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
 plots <- list()
 for(i in c("Grossbasel West", "Riehen")) {
   plot <- data_final %>% 
@@ -520,6 +520,12 @@ Ich nehmen wiederum die Interaktion $Rang \times Wahlkreis_{it}$ in das Basismod
 
 Die drei Tabellen unten zeigen die Resultate für $Rang_{it}$ (Tabelle 5), $Rang_{it}^{SP}$ (Tabelle 6) und $Rang_{it}^{-SP}$ (Tabelle 7). Die Ergebnisse für $Rang_{it}$ und $Rang_{it}^{SP}$ sind relativ ähnlich. Interessant ist jedoch, dass ich in zwei Wahlkreisen auch für $Rang_{it}^{-SP}$ statistisch signifikante -- und vor allem hohe -- Effekte finde (Grossbasel West: `r margins_sp_others["Grossbasel West"]`, Kleinbasel: `r margins_sp_others["Kleinbasel"]`). Dies deutet darauf hin, dass Wähler:innen selbst beim Panaschieren -- bei sonst gleichen Bedingungen -- Kandidat:innen mit niedrigem Listenrang bevorzugen.
 
+Eine visuelle Betrachtung der Daten bestätigt diese Resultate. Abbildungen 3 und 4 zeigen den Listenrang auf der X-Achse und die Anzahl SP-Stimmen (Abbildung 3) bzw. Panaschierstimmen (Abbildung 4) auf der Y-Achse.[^2] Bei den Panaschierstimmen fällt auf, dass der Listenrangeffekt auf die Anzahl Stimmen (approximiert durch die Regressionslinie) bei den Amtierenden deutlich stärker ausgeprägt ist als bei den Neuen. Bei den neuen Kandidierenden ist die Regressionslinie deutlich flacher, doch reichen schon kleine Unterschiede in der Anzahl der Stimmen aus, um einen Effekt auf den Wahlergebnis*rang* zu haben (um einen besseren Wahlergebnisrang als eine andere kandidierende Person zu erreichen genügt schon eine Stimme mehr).[^3] Auffällig ist zudem, wie viel mehr Panaschierstimmen die amtierenden gegenüber den neuen Kandidierenden erhalten.
+
+[^2]: Die Achsenabschnitte der X- und Y-Achse variieren in den Abbildungen je nach Wahlkreis und -jahr, da die Anzahl der Sitze im Grossen Rat pro Wahlkreis unterschiedlich ist und die Stimmenzahl für die SP zwischen den Jahren variiert.
+
+[^3]: Die entsprechenden Abbildungen mit dem SP- bzw. Panaschierstimmenrang auf der Y-Achse befindet sich im Anhang.
+
 ```{r tab_5, echo=FALSE, message=TRUE, warning=FALSE}
 margins(model_sp_ownothers, variables = "list_place", 
         at = list(kreis = model_sp_ownothers$xlevels$kreis)) %>% 
@@ -587,6 +593,74 @@ margins(model_sp_others, variables = "list_place",
   footnote(general = "*** p < 0.01, ** p < 0.05, * p < 0.1.",
            general_title = "Hinweis:", 
            footnote_as_chunk = TRUE)
+```
+
+```{r fig_3, fig.cap="Listenrang und SP-Stimmen", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
+data_final_all %>% 
+  filter(party == "SP") %>% 
+  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+         year = factor(year, levels = c(2024, 2020))) %>% 
+  mutate(votes_by_others_pred = predict(lm(votes_by_own ~ kreis*incumbent*year*list_place, 
+                                data = .))) %>%
+  ggplot(aes(x = list_place, y = votes_by_own)) +
+  geom_point(aes(col = gender, shape = incumbent)) +
+  geom_line(aes(x = list_place, y = votes_by_others_pred, linetype = incumbent), 
+            col = "blue", alpha = 0.5) +
+  scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
+                     labels = c("M" = "M", "F" = "F")) +
+  scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
+                     labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+  scale_linetype_manual(values = c("TRUE" = 4, "FALSE" = 1),
+                        labels = c("TRUE" = "Amtierend", "FALSE" = "Nicht amtierend")) +
+  facet_wrap(~ kreis + year, ncol = 2, scale = "free") +
+  labs(x = "Listenrang", y = "SP-Stimmen") +
+  theme_minimal() +
+  guides(color = guide_legend(title = "Geschlecht"),
+         shape = guide_legend(title = "Amtierend"),
+         linetype = guide_legend(title = "Regressionslinie")) +
+  theme(legend.position = "bottom",
+        legend.direction = "vertical",
+        legend.box = "horizontal",
+        legend.background = element_blank(),
+        legend.title = element_text(size = 10, face = "bold"),
+        legend.text = element_text(size = 9),
+        legend.key.size = unit(0.5, "lines"),
+        legend.margin = margin(t = 2, r = 2, b = 2, l = 2),
+        plot.title = element_text(size = 10))
+```
+
+```{r fig_4, fig.cap="Listenrang und Panaschierstimmen", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
+data_final_all %>% 
+  filter(party == "SP") %>% 
+  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+         year = factor(year, levels = c(2024, 2020))) %>% 
+  mutate(votes_by_others_pred = predict(lm(votes_by_others ~ kreis*incumbent*year*list_place, 
+                                data = .))) %>%
+  ggplot(aes(x = list_place, y = votes_by_others)) +
+  geom_point(aes(col = gender, shape = incumbent)) +
+  geom_line(aes(x = list_place, y = votes_by_others_pred, linetype = incumbent), 
+            col = "blue", alpha = 0.5) +
+  scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
+                     labels = c("M" = "M", "F" = "F")) +
+  scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
+                     labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+  scale_linetype_manual(values = c("TRUE" = 4, "FALSE" = 1),
+                        labels = c("TRUE" = "Amtierend", "FALSE" = "Nicht amtierend")) +
+  facet_wrap(~ kreis + year, ncol = 2, scale = "free") +
+  labs(x = "Listenrang", y = "Panaschierstimmen") +
+  theme_minimal() +
+  guides(color = guide_legend(title = "Geschlecht"),
+         shape = guide_legend(title = "Amtierend"),
+         linetype = guide_legend(title = "Regressionslinie")) +
+  theme(legend.position = "bottom",
+        legend.direction = "vertical",
+        legend.box = "horizontal",
+        legend.background = element_blank(),
+        legend.title = element_text(size = 10, face = "bold"),
+        legend.text = element_text(size = 9),
+        legend.key.size = unit(0.5, "lines"),
+        legend.margin = margin(t = 2, r = 2, b = 2, l = 2),
+        plot.title = element_text(size = 10))
 ```
 
 ## Weitere erklärende Variablen
@@ -678,9 +752,83 @@ margins(model,
 
 # 6. Anhang
 
+## Deskriptive Analyse für SP- und Panaschierstimmen
+
+```{r fig_5, fig.cap="Listenrang und SP-Stimmenrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+data_final_all %>% 
+  filter(party == "SP") %>% 
+  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+         year = factor(year, levels = c(2024, 2020))) %>% 
+  mutate(rank_own_pred = predict(lm(rank_own ~ kreis*incumbent*year*list_place, 
+                                    data = .))) %>%
+  ggplot(aes(x = list_place, y = rank_own)) +
+  geom_point(aes(col = gender, shape = incumbent)) +
+  geom_line(aes(x = list_place, y = rank_own_pred, linetype = incumbent), 
+            col = "blue", alpha = 0.5) +
+  scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
+                     labels = c("M" = "M", "F" = "F")) +
+  scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
+                     labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+  scale_linetype_manual(values = c("TRUE" = 4, "FALSE" = 1),
+                        labels = c("TRUE" = "Amtierend", "FALSE" = "Nicht amtierend")) +
+  scale_x_continuous(breaks = seq(1, 34, 4), limits = c(1, 35)) +
+  scale_y_reverse(breaks = seq(1, 34, 8), limits = c(35, 1)) +
+  facet_wrap(~ kreis + year, ncol = 2, scale = "free") +
+  labs(x = "Listenrang", y = "SP-Stimmenrang") +
+  theme_minimal() +
+  guides(color = guide_legend(title = "Geschlecht"),
+         shape = guide_legend(title = "Amtierend"),
+         linetype = guide_legend(title = "Regressionslinie")) +
+  theme(legend.position = "bottom",
+        legend.direction = "vertical",
+        legend.box = "horizontal",
+        legend.background = element_blank(),
+        legend.title = element_text(size = 10, face = "bold"),
+        legend.text = element_text(size = 9),
+        legend.key.size = unit(0.5, "lines"),
+        legend.margin = margin(t = 2, r = 2, b = 2, l = 2),
+        plot.title = element_text(size = 10))
+```
+
+```{r fig_6, fig.cap="Listenrang und Panaschierstimmenrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+data_final_all %>% 
+  filter(party == "SP") %>% 
+  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+         year = factor(year, levels = c(2024, 2020))) %>% 
+  mutate(rank_others_pred = predict(lm(rank_others ~ kreis*incumbent*year*list_place, 
+                                       data = .))) %>%
+  ggplot(aes(x = list_place, y = rank_others)) +
+  geom_point(aes(col = gender, shape = incumbent)) +
+  geom_line(aes(x = list_place, y = rank_others_pred, linetype = incumbent), 
+            col = "blue", alpha = 0.5) +
+  scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
+                     labels = c("M" = "M", "F" = "F")) +
+  scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
+                     labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+  scale_linetype_manual(values = c("TRUE" = 4, "FALSE" = 1),
+                        labels = c("TRUE" = "Amtierend", "FALSE" = "Nicht amtierend")) +
+  scale_x_continuous(breaks = seq(1, 34, 4), limits = c(1, 35)) +
+  scale_y_reverse(breaks = seq(1, 34, 8), limits = c(35, 1)) +
+  facet_wrap(~ kreis + year, ncol = 2, scale = "free") +
+  labs(x = "Listenrang", y = "Panaschierstimmenrang") +
+  theme_minimal() +
+  guides(color = guide_legend(title = "Geschlecht"),
+         shape = guide_legend(title = "Amtierend"),
+         linetype = guide_legend(title = "Regressionslinie")) +
+  theme(legend.position = "bottom",
+        legend.direction = "vertical",
+        legend.box = "horizontal",
+        legend.background = element_blank(),
+        legend.title = element_text(size = 10, face = "bold"),
+        legend.text = element_text(size = 9),
+        legend.key.size = unit(0.5, "lines"),
+        legend.margin = margin(t = 2, r = 2, b = 2, l = 2),
+        plot.title = element_text(size = 10))
+```
+
 ## Deskriptive Analyse für den Stimmenanteil
 
-```{r fig_3, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig_7, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plots <- list()
 for(i in c("Kleinbasel", "Grossbasel Ost")) {
   plot <- data_final %>% 
@@ -722,7 +870,7 @@ plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 2, align = "v")
 plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
-```{r fig_4, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig_8, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plots <- list()
 for(i in c("Grossbasel West", "Riehen")) {
   plot <- data_final %>% 
@@ -766,7 +914,7 @@ plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 
 ## Deskriptive Analyse für andere Parteien
 
-```{r fig_5, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig_9, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plot_gb <- partyplot(party_name = "GB", 
                      party_title = "Grünes Bündnis", 
                      party_ncol = 1,
@@ -788,35 +936,35 @@ plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 3, align = "v")
 plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
-```{r fig_6, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig_10, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "GLP", 
           party_title = "GLP", 
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
 
-```{r fig_7, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig_11, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "FDP", 
           party_title = "FDP", 
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
 
-```{r fig_8, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig_12, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "LDP", 
           party_title = "LDP", 
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
 
-```{r fig_9, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig_13, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "Mitte", 
           party_title = "Die Mitte", 
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
 
-```{r fig_10, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig_14, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "SVP", 
           party_title = "SVP", 
           party_ncol = 2, 
@@ -827,25 +975,25 @@ partyplot(party_name = "SVP",
 
 Bei den Grossratswahlen hat fast jede Partei bzw. Liste ihre eigene Regelung, wie die Listenplätze vergeben werden. In Tabelle 10 zeige ich die Regelungen für die Parteien in den Wahljahren 2024 und 2020 (für die SP zudem jene der Jahre 2016, 2012 und 2008). Die Spalte \enquote{Bisherige zuerst} gibt an, ob bei einer Partei die amtierenden Grossrät:innen an erster Stelle stehen, \enquote{Frauen zuerst} ob Frauen zuerst aufgelistet werden und \enquote{Alphabetisch} ob die Liste alphabetisch sortiert ist. Die Angaben in der Klammer geben an, innerhalb welcher Untergruppe die entsprechende Regelung zur Anwendung kommt. Die FDP hat 2020 beispielsweise die Frauen zuerst aufgelistet, dabei innerhalb der Frauen und Männer jeweils die amtierenden Grossrät:innen zuerst. Innerhalb dieser Gruppen -- amtierende Frauen, amtierende Männer, nicht-amtierende Frauen, nicht-amtierende Männer -- wurden die Kandidierenden schliesslich alphabetisch sortiert.
 
-Tabelle 10 zeigt, dass die SP die einzige Partei ist, bei der die amtierenden Grossrät:innen nicht an erster Stelle stehen. Ebenso zeigt sich, dass ausser bei der SP im Jahr 2008 sowie der GLP die Listen bei allen Parteien in irgendeiner Form alphabetisch sortiert sind.[^2][^3] Auffällig ist, dass nicht alle linken Parteien die Frauen zuerst auflisten (die GRÜNEN weichen davon ab) und dass es mit der FDP im Jahr 2020 auch eine bürgerliche Partei gab, die die Frauen zuerst aufgelistet hat. Die GLP reiht in mehreren Wahlkreisen die Frauen und Männer zudem abwechselnd.
+Tabelle 10 zeigt, dass die SP die einzige Partei ist, bei der die amtierenden Grossrät:innen nicht an erster Stelle stehen. Ebenso zeigt sich, dass ausser bei der SP im Jahr 2008 sowie der GLP die Listen bei allen Parteien in irgendeiner Form alphabetisch sortiert sind.[^4][^5] Auffällig ist, dass nicht alle linken Parteien die Frauen zuerst auflisten (die GRÜNEN weichen davon ab) und dass es mit der FDP im Jahr 2020 auch eine bürgerliche Partei gab, die die Frauen zuerst aufgelistet hat. Die GLP reiht in mehreren Wahlkreisen die Frauen und Männer zudem abwechselnd.
 
-[^2]: Bei der SVP ist der *Wahlzettel* von oben nach unten alphabetisch sortiert, nicht der Listenrang per se. In anderen Worten, bei beispielsweise 35 Listenplätzen in einem Wahlkreis werden die Listenplätze 1 bis 17 separat von den Listenplätzen 18 bis 35 alphabetisch sortiert.
+[^4]: Bei der SVP ist der *Wahlzettel* von oben nach unten alphabetisch sortiert, nicht der Listenrang per se. In anderen Worten, bei beispielsweise 35 Listenplätzen in einem Wahlkreis werden die Listenplätze 1 bis 17 separat von den Listenplätzen 18 bis 35 alphabetisch sortiert.
 
-[^3]: Die Mitte listet zwar die amtierenden Grossrät:innen zuerst auf und sortiert anschliessend alphabetisch, weicht von dieser Regelung jedoch teilweise ab, insofern dass sie nach den amtierenden Grossrät:innen erst ihre Spitzenkandidierenden auflistet.
+[^5]: Die Mitte listet zwar die amtierenden Grossrät:innen zuerst auf und sortiert anschliessend alphabetisch, weicht von dieser Regelung jedoch teilweise ab, insofern dass sie nach den amtierenden Grossrät:innen erst ihre Spitzenkandidierenden auflistet.
 
-| Partei / Liste   | Bisherige zuerst (innerhalb von) | Frauen zuerst | Alphabetisch (innerhalb von)         |
-|------------------|----------------------------------|---------------|--------------------------------------|
-| SP (2008)        | Nein                             | Ja            | Nein                                 |
-| SP (2012 - 2024) | Nein                             | Ja            | Ja (Geschlecht)                      |
-| Grünes Bündnis   | Ja                               | Ja            | Ja (Amtsinhaberschaft \> Geschlecht) |
-| BastA!           | Ja                               | Ja            | Ja (Amtsinhaberschaft \> Geschlecht) |
-| FDP (2020)       | Ja (Geschlecht)                  | Ja            | Ja (Amtsinhaberschaft \> Geschlecht) |
-| GLP              | Ja                               | Nein          | Nein                                 |
-| Die Mitte        | Ja                               | Nein          | Ja (Amtsinhaberschaft)               |
-| SVP              | Ja                               | Nein          | Ja (Amtsinhaberschaft)               |
-| GRÜNE            | Ja                               | Nein          | Ja (Amtsinhaberschaft)               |
-| LDP              | Ja                               | Nein          | Ja (Amtsinhaberschaft)               |
-| FDP (2024)       | Ja                               | Nein          | Ja (Amtsinhaberschaft)               |
+| Partei / Liste   | Bisherige zuerst (innerhalb von) | Frauen zuerst | Alphabetisch (innerhalb von)       |
+|---------------|------------------|-------------|---------------------------|
+| SP (2008)        | Nein                             | Ja            | Nein                               |
+| SP (2012 - 2024) | Nein                             | Ja            | Ja (Geschlecht)                    |
+| Grünes Bündnis   | Ja                               | Ja            | Ja (Amtsinhaberschaft, Geschlecht) |
+| BastA!           | Ja                               | Ja            | Ja (Amtsinhaberschaft, Geschlecht) |
+| FDP (2020)       | Ja (Geschlecht)                  | Ja            | Ja (Amtsinhaberschaft, Geschlecht) |
+| GLP              | Ja                               | Nein          | Nein                               |
+| Die Mitte        | Ja                               | Nein          | Ja (Amtsinhaberschaft)             |
+| SVP              | Ja                               | Nein          | Ja (Amtsinhaberschaft)             |
+| GRÜNE            | Ja                               | Nein          | Ja (Amtsinhaberschaft)             |
+| LDP              | Ja                               | Nein          | Ja (Amtsinhaberschaft)             |
+| FDP (2024)       | Ja                               | Nein          | Ja (Amtsinhaberschaft)             |
 
 : Listenplatz-Regelungen der Parteien
 
@@ -1072,4 +1220,19 @@ data_final %>%
   scale_y_reverse() +
   facet_wrap(~ kreis) +
   theme_minimal()
+```
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+# Aufschlüsselung der SP- und Panaschierstimmen
+data_final_2024_all %>% 
+  select(party, kreis, seats, ballot_kreis_list_changed, votes_to_others,
+         starts_with("votes_by_"), ballot_kreis_list_extra_changed) %>% 
+  filter(party == "SP") %>% 
+  group_by(kreis) %>%  
+  summarise(seats = mean(seats),
+            ballot_kreis_list_changed = mean(ballot_kreis_list_changed),
+            ballot_kreis_list_extra_changed = mean(ballot_kreis_list_extra_changed),
+            votes_to_others = mean(votes_to_others),
+            votes_by_own = sum(votes_by_own),
+            votes_by_others = sum(votes_by_others))
 ```
