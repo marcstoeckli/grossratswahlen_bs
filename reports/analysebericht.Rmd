@@ -834,7 +834,7 @@ Tabelle 10 zeigt, dass die SP die einzige Partei ist, bei der die amtierenden Gr
 [^3]: Die Mitte listet zwar die amtierenden Grossrät:innen zuerst auf und sortiert anschliessend alphabetisch, weicht von dieser Regelung jedoch teilweise ab, insofern dass sie nach den amtierenden Grossrät:innen erst ihre Spitzenkandidierenden auflistet.
 
 | Partei / Liste   | Bisherige zuerst (innerhalb von) | Frauen zuerst | Alphabetisch (innerhalb von)         |
-|----------------|----------------|-------------|----------------------------|
+|------------------|----------------------------------|---------------|--------------------------------------|
 | SP (2008)        | Nein                             | Ja            | Nein                                 |
 | SP (2012 - 2024) | Nein                             | Ja            | Ja (Geschlecht)                      |
 | Grünes Bündnis   | Ja                               | Ja            | Ja (Amtsinhaberschaft \> Geschlecht) |
