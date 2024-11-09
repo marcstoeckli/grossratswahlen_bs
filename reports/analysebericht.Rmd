@@ -16,7 +16,7 @@ header-includes:
   - \floatsetup[table]{capposition=top}
   - \floatsetup[figure]{capposition=top}
 title: "Der Listenrangeffekt bei den Grossratswahlen in Basel-Stadt: Analysebericht"
-subtitle: "Work in Progress (Version 0.1.4) -- aktuellste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
+subtitle: "Work in Progress (Version 0.1.5) -- aktuellste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
 thanks: "Der Code und die Daten der Analysen sind auf Github abgelegt ([[Link]{.ul}](https://github.com/marcstoeckli/grossratswahlen_bs)). Ich freue mich über Kommentare und Anregungen via kontakt@stoecklieconomics.ch. Einen herzlichen Dank für ihr Feedback gehen an Tamina Graber, Edibe Gölgeli, Michela Seggiani und Salome Bessenich."
 author: "Marc Stöckli"
 abstract: "In diesem Bericht untersuche ich den Einfluss des Listenrangs auf den Wahlerfolg bei den Grossratswahlen 2008 bis 2024 in Basel-Stadt. Meine Analysen zeigen, dass ein niedrigerer Listenrang (= weiter oben auf der Liste) zu einem besseren Wahlergebnis führt. Der Effekt tritt besonders bei der GLP, SP, SVP und der BastA! auf und variiert je nach Wahljahr und -kreis. Bei der SP stelle ich einen deutlichen Anstieg des Listenrangeffekts in den Wahljahren 2020 und 2024 fest. Die Ergebnisse zeigen, dass es aus Sicht der Frauenförderung ein effektives Instrument ist, die Frauen bei Listenwahlen zuerst aufzuführen. Für eine aktive Gleichstellungspolitik ist diese Trennung nach Geschlecht sinnvoll und sollte in der SP beibehalten werden. Hingegen kann es problematisch sein, Kandidierende alphabetisch aufzulisten."
@@ -217,7 +217,7 @@ Basierend auf den Ergebnissen sehe ich folgende Handlungsempfehlungen:
 
 -   Aus Sicht der Frauenförderung ist es ein effektives Instrument, die Frauen bei Listenwahlen zuerst aufzuführen. Die SP Basel-Stadt legt diese Regelung bereits jetzt schon in ihrem Wahl- und Abstimmungsreglement fest. **Um weiterhin eine aktive Gleichstellungspolitik zu betreiben, ist diese Regelung beizubehalten**.
 
--   Problematisch kann hingegen **eine alphabetische Auflistung der Kandidierenden** sein. Diese Regelung ist aktuell ebenfalls im Wahl- und Abstimmungsreglement der SP Basel-Stadt festgelet. Dadurch werden Personen mit Namen hinten im Alphabet systematisch benachteiligt. Es empfiehlt sich zu prüfen, ob eine alternative Listenvergabe zielführender ist (beispielsweise das Auslosen der Listenplätze).
+-   Problematisch kann hingegen **eine alphabetische Auflistung der Kandidierenden** sein. Diese Regelung ist aktuell ebenfalls im Wahl- und Abstimmungsreglement der SP Basel-Stadt festgelegt. Dadurch werden Personen mit Namen hinten im Alphabet systematisch benachteiligt. Es empfiehlt sich zu prüfen, ob eine alternative Listenvergabe zielführender ist (beispielsweise das Auslosen der Listenplätze).
 
 Der Rest dieses Berichts ist wie folgt aufgebaut. In Kapitel \ref{sec_data} beschreibe ich die Daten, die ich für die Analysen verwende. In Kapitel \ref{sec_model} beschreibe ich das statistische Modell, mit dem ich den Einfluss des Listenrangs auf den Wahlerfolg untersuche. In Kapitel \ref{sec_results} und \ref{sec_results_other} zeige ich die Ergebnisse, erst jene für die SP und anschliessend jene für die weiteren Parteien.
 
@@ -524,7 +524,7 @@ Ich nehmen wiederum die Interaktion $Rang \times Wahlkreis_{it}$ in das Basismod
 
 Die drei Tabellen unten zeigen die Resultate für $Rang_{it}$ (Tabelle \ref{tab:tab5}), $Rang_{it}^{SP}$ (Tabelle \ref{tab:tab6}) und $Rang_{it}^{-SP}$ (Tabelle \ref{tab:tab7}). Die Ergebnisse für $Rang_{it}$ und $Rang_{it}^{SP}$ sind relativ ähnlich. Interessant ist jedoch, dass ich in zwei Wahlkreisen auch für $Rang_{it}^{-SP}$ statistisch signifikante -- und vor allem hohe -- Effekte finde (Grossbasel West: `r margins_sp_others["Grossbasel West"]`, Kleinbasel: `r margins_sp_others["Kleinbasel"]`). Dies deutet darauf hin, dass Wähler:innen selbst beim Panaschieren -- bei sonst gleichen Bedingungen -- Kandidat:innen mit niedrigem Listenrang bevorzugen.
 
-Eine visuelle Betrachtung der Daten bestätigt diese Resultate. Abbildungen \ref{fig:fig3} und \ref{fig:fig4} zeigen den Listenrang auf der X-Achse und die Anzahl SP-Stimmen (Abbildung \ref{fig:fig3}) bzw. Panaschierstimmen (Abbildung \ref{fig:fig4}) auf der Y-Achse.[^2] Bei den Panaschierstimmen fällt auf, dass der Listenrangeffekt auf die Anzahl Stimmen (approximiert durch die Regressionslinie) bei den Amtierenden deutlich stärker ausgeprägt ist als bei den Neuen. Bei den neuen Kandidierenden ist die Regressionslinie deutlich flacher, doch reichen schon kleine Unterschiede in der Anzahl der Stimmen aus, um einen Effekt auf den Wahlergebnis*rang* zu haben (um einen besseren Wahlergebnisrang als eine andere kandidierende Person zu erreichen genügt schon eine Stimme mehr).[^3] Auffällig ist zudem, wie viel mehr Panaschierstimmen die amtierenden gegenüber den neuen Kandidierenden erhalten.
+Eine visuelle Betrachtung der Daten bestätigt diese Resultate. Abbildungen \ref{fig:fig3} und \ref{fig:fig4} zeigen den Listenrang auf der X-Achse und die Anzahl SP-Stimmen (Abbildung \ref{fig:fig3}) bzw. Panaschierstimmen (Abbildung \ref{fig:fig4}) auf der Y-Achse.[^2] Bei den Panaschierstimmen fällt auf, dass der Listenrangeffekt auf die Anzahl Stimmen (approximiert durch die Regressionslinie) bei den Amtierenden deutlich stärker ausgeprägt ist als bei den Neuen. Bei den neuen Kandidierenden ist die Regressionslinie deutlich flacher, doch reichen schon kleine Unterschiede in der Anzahl der Stimmen aus, um einen Effekt auf den Wahlergebnis*rang* zu haben.[^3] Denn um einen besseren Wahlergebnisrang als eine andere kandidierende Person zu erreichen, genügt schon eine einzelne Stimme mehr (es kommt regelmässig vor, dass ein:e Kandidat:in mit einem Vorsprung von nur wenigen Stimmen gewählt wird bzw. nachrückt).
 
 [^2]: Die Achsenabschnitte der X- und Y-Achse variieren in den Abbildungen je nach Wahlkreis und -jahr, da die Anzahl der Sitze im Grossen Rat pro Wahlkreis unterschiedlich ist und die Stimmenzahl für die SP zwischen den Jahren variiert.
 
@@ -1276,4 +1276,133 @@ data_final_2024_all %>%
             votes_to_others = mean(votes_to_others),
             votes_by_own = sum(votes_by_own),
             votes_by_others = sum(votes_by_others))
+```
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+# Panaschierstimmen Parteiebene
+data_final_2024_all %>% 
+  filter(party == "SP") %>% 
+  select(kreis, list_place, name, votes_by_others, starts_with("votes_by_party")) %>% 
+  select(-votes_by_party_SP) %>% 
+  group_by(kreis) %>% 
+  summarise_at(vars(starts_with("votes_by")), ~ sum(., na.rm = TRUE)) %>% 
+  mutate_at(vars(starts_with("votes_by_party")), ~ ./votes_by_others) %>% 
+  pivot_longer(starts_with("votes_by_party"),
+               names_prefix = "votes_by_party_",
+               names_to = "party",
+               values_to = "votes_share") %>% 
+  arrange(kreis, desc(votes_share)) %>% 
+  mutate(party = factor(party, levels = unique(party))) %>%
+  ggplot() +
+  geom_col(aes(x = party, y = votes_share)) +
+  facet_wrap(~ kreis)
+
+# Stimmen von den anderen Parteien
+data_final_2024_all %>% 
+  filter(party == "SP") %>% 
+  select(kreis, list_place, name, votes_by_others, starts_with("votes_by_party")) %>% 
+  select(-votes_by_party_SP) %>% 
+  pivot_longer(starts_with("votes_by_party"),
+               names_prefix = "votes_by_party_",
+               names_to = "party",
+               values_to = "votes_share") %>%
+  arrange(kreis, votes_by_others, votes_share) %>% 
+  mutate(kreis = factor(kreis, levels = unique(kreis)),
+         name = factor(name, levels = unique(name)),
+         party = factor(party, levels = unique(party))) %>% 
+  filter(kreis == "Kleinbasel") %>% 
+  ggplot() +
+  geom_col(aes(x = votes_share, y = name, fill = party))
+
+# Stimmen von den Grünen
+data_final_2024_all %>% 
+  filter(party == "SP") %>% 
+  select(kreis, list_place, name, votes_by_party_Gruene) %>% 
+  arrange(kreis, votes_by_party_Gruene) %>% 
+  mutate(name = factor(name, levels = unique(name))) %>% 
+  filter(kreis == "Kleinbasel") %>% 
+  ggplot() +
+  geom_col(aes(x = votes_by_party_Gruene, y = name)) +
+  facet_wrap(~ kreis)
+
+# Stimmen von der BastA!
+data_final_2024_all %>% 
+  filter(party == "SP") %>% 
+  select(kreis, list_place, name, votes_by_party_BastA) %>% 
+  arrange(kreis, votes_by_party_BastA) %>% 
+  mutate(name = factor(name, levels = unique(name))) %>% 
+  filter(kreis == "Kleinbasel") %>% 
+  ggplot() +
+  geom_col(aes(x = votes_by_party_BastA, y = name)) +
+  facet_wrap(~ kreis)
+
+# Stimmenanteile von den anderen Parteien
+data_final_2024_all %>% 
+  filter(party == "SP") %>% 
+  select(kreis, list_place, name, votes_by_others, starts_with("votes_by_party")) %>% 
+  mutate(votes_by_others_alt = votes_by_others-votes_by_party_ohne) %>% 
+  select(-votes_by_party_SP, -votes_by_party_ohne) %>% 
+  mutate_at(vars(starts_with("votes_by_party")), ~ ./votes_by_others_alt) %>%
+  arrange(kreis, votes_by_party_Gruene) %>% 
+  pivot_longer(starts_with("votes_by_party"),
+               names_prefix = "votes_by_party_",
+               names_to = "party",
+               values_to = "votes_share") %>%
+  filter(kreis == "Kleinbasel") %>%
+  mutate(name = factor(name, levels = unique(name)),
+         party = factor(party, levels = c("FDP", "LDP", "SVP", "EVP", "EDU",
+                                          "PdA", "VA", "PBkW", "FSSK", "KUSS",
+                                          "Mitte", "GLP", "BastA", "Gruene"))) %>%
+  ggplot() +
+  geom_col(aes(x = votes_share, y = name, fill = party))
+```
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+# Cutoff-Stellen
+data_cutoff <- data_final_2024_all %>% 
+  select(party, kreis, seats, ballot_kreis_list_changed, votes_to_others,
+         starts_with("votes_by_"), ballot_kreis_list_extra_changed) %>% 
+  filter(party == "SP") %>% 
+  group_by(kreis) %>%  
+  summarise(seats = mean(seats),
+            ballot_kreis_list_changed = mean(ballot_kreis_list_changed),
+            ballot_kreis_list_extra_changed = mean(ballot_kreis_list_extra_changed),
+            votes_to_others = mean(votes_to_others),
+            votes_by_own = sum(votes_by_own),
+            votes_by_others = sum(votes_by_others)) %>% 
+  mutate(cutoff = round(votes_by_own/seats)) %>% 
+  select(kreis, cutoff)
+
+data_final_2024_all %>% 
+  filter(party == "SP") %>% 
+  select(kreis, list_place, name, incumbent, votes_by_own) %>% 
+  left_join(data_cutoff, by = "kreis") %>%
+  arrange(kreis, votes_by_own) %>% 
+  mutate(name = factor(name, levels = unique(name))) %>% 
+  filter(kreis == "Kleinbasel") %>% 
+  ggplot() +
+  geom_col(aes(x = votes_by_own, y = name, fill = incumbent)) +
+  geom_vline(aes(xintercept = cutoff), col = "red")
+
+data_final_2024_all %>% 
+  filter(party == "SP") %>% 
+  select(kreis, list_place, name, gender, incumbent, votes_by_own) %>% 
+  left_join(data_cutoff, by = "kreis") %>%
+  arrange(kreis, votes_by_own) %>% 
+  mutate(name = factor(name, levels = unique(name))) %>% 
+  ggplot() + 
+  geom_point(aes(x = list_place, y = votes_by_own, col = gender, shape = incumbent)) +
+  geom_hline(aes(yintercept = cutoff), col = "red") +
+  facet_wrap(~ kreis)
+
+data_final_2024_all %>% 
+  filter(party == "SP") %>% 
+  select(kreis, list_place, name, gender, incumbent, votes_by_own) %>% 
+  left_join(data_cutoff, by = "kreis") %>%
+  mutate(dist = votes_by_own - cutoff) %>% 
+  arrange(kreis, desc(list_place)) %>% 
+  mutate(name = factor(name, levels = unique(name))) %>% 
+  filter(kreis == "Grossbasel West") %>% 
+  ggplot() + 
+  geom_col(aes(x = dist, y = name, fill = incumbent))
 ```
