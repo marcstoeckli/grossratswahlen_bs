@@ -1,9 +1,12 @@
 ---
 output: 
-  pdf_document:
+  bookdown::pdf_document2:
     keep_tex: false
     fig_caption: true
     latex_engine: pdflatex
+    toc: false
+    toc_depth: 2
+    number_sections: true
 quot-lang: de-CH
 header-includes:
   - \usepackage[T1]{fontenc}
@@ -30,6 +33,7 @@ library(margins)
 library(kableExtra)
 library(gridExtra)
 library(cowplot)
+library(bookdown)
 load("../data/processed/data_final.RData")
 load("../data/processed/data_final_all.RData")
 
@@ -177,7 +181,7 @@ model_sp_kreis_share <- lm("share_scale ~ kreis*incumbent + year + kreis*gender 
    data = data_final)
 ```
 
-# 1. Einführung
+# Einführung {#sec_intro}
 
 In diesem Bericht untersuche ich den Einfluss der Reihenfolge, in der die Kandidierenden bei den Grossratswahlen in Basel-Stadt auf der Liste aufgeführt werden -- der Listenrang -- auf den Wahlerfolg. Ich untersuche, ob ein niedrigerer Listenrang (d.h. als Kandidat:in weiter oben auf der Liste aufgeführt zu sein) zu mehr Stimmen im Vergleich zu den anderen Kandidierenden auf derselben Liste im gleichen Wahlkreis führt. Oder äquivalent: Ob ein *höherer* Listenrang (d.h. weiter *unten* auf der Liste) zu *weniger* Stimmen führt. Ein solcher \enquote{Listenrangeffekt} erscheint plausibel, da anzunehmen ist, dass Wählende beim Kumulieren oder Panaschieren \enquote{von unten her} streichen. Kandidierende auf den unteren Listenplätzen werden dadurch mechanisch öfter gestrichen als jene weiter oben.
 
@@ -215,9 +219,9 @@ Basierend auf den Ergebnissen sehe ich folgende Handlungsempfehlungen:
 
 -   Problematisch kann hingegen **eine alphabetische Auflistung der Kandidierenden** sein. Diese Regelung ist aktuell ebenfalls im Wahl- und Abstimmungsreglement der SP Basel-Stadt festgelet. Dadurch werden Personen mit Namen hinten im Alphabet systematisch benachteiligt. Es empfiehlt sich zu prüfen, ob eine alternative Listenvergabe zielführender ist (beispielsweise das Auslosen der Listenplätze).
 
-Der Rest dieses Berichts ist wie folgt aufgebaut. In Kapitel 2 beschreibe ich die Daten, die ich für die Analysen verwende. In Kapitel 3 beschreibe ich das statistische Modell, mit dem ich den Einfluss des Listenrangs auf den Wahlerfolg untersuche. In Kapitel 4 und 5 zeige ich die Ergebnisse, erst jene für die SP und anschliessend jene für die weiteren Parteien.
+Der Rest dieses Berichts ist wie folgt aufgebaut. In Kapitel \ref{sec_data} beschreibe ich die Daten, die ich für die Analysen verwende. In Kapitel \ref{sec_model} beschreibe ich das statistische Modell, mit dem ich den Einfluss des Listenrangs auf den Wahlerfolg untersuche. In Kapitel \ref{sec_results} und \ref{sec_results_other} zeige ich die Ergebnisse, erst jene für die SP und anschliessend jene für die weiteren Parteien.
 
-# 2. Daten
+# Daten {#sec_data}
 
 Ich analysiere die Daten der Grossratswahlen in Basel-Stadt der Jahre 2024, 2020 , 2016, 2012 und 2008. Für die Jahre 2024 und 2020 kann ich hierfür auf das Datenportal \enquote{Open Government Data} (OGD) zurückgreifen, über welches die Daten bereits aufbereitet und in hoher Qualität verfügbar sind. Für die Jahre 2016, 2012 und 2008 habe ich die Daten aus den PDFs der Wahlresultate und -protokolle erfasst. Da in diesen PDFs die Amtsinhaberschaft nicht erkennbar ist, habe ich zusätzlich die Datenbank der Ratsmitgliedschaften aus dem OGD verwendet, um die amtierenden Grossrät:innen zum Zeitpunkt der jeweiligen Wahl zu identifizieren.
 
@@ -235,7 +239,7 @@ Der Wahlergebnisrang und der Stimmenanteil eine:r Kandidat:in sind zwar hoch mit
 
 ## Deskriptive Analyse
 
-Abbildungen 1 und 2 zeigen den Zusammenhang zwischen dem Listenrang (X-Achse, d.h. von links nach rechts) und dem Wahlergebnisrang (Y-Achse, d.h. von unten nach oben) für die SP, jeweils separat für die Wahlkreise Kleinbasel, Grossbasel Ost, Grossbasel West und Riehen. Jeder Punkt ist eine kandidierende Person in dem jeweiligen Wahlkreis und -jahr. Die Abbildungen sind wie folgt zu lesen:
+Abbildungen \ref{fig:fig1} und \ref{fig:fig2} zeigen den Zusammenhang zwischen dem Listenrang (X-Achse, d.h. von links nach rechts) und dem Wahlergebnisrang (Y-Achse, d.h. von unten nach oben) für die SP, jeweils separat für die Wahlkreise Kleinbasel, Grossbasel Ost, Grossbasel West und Riehen. Jeder Punkt ist eine kandidierende Person in dem jeweiligen Wahlkreis und -jahr. Die Abbildungen sind wie folgt zu lesen:
 
 -   Je weiter links ein Punkt liegt, desto niedriger ist der Listenrang dieser Person, d.h. desto weiter oben befindet sie sich auf der Liste. Die Person am weitesten links hat beispielsweise mit Listenrang 1 den niedrigsten Listenrang und befindet sich somit auf der Liste zuoberst.
 
@@ -249,9 +253,9 @@ Beim Betrachten der Abbildungen und insbesondere der Regressionslinien lässt si
 
 Aus diesem Zusammenhang kann jedoch noch kein kausaler Listenrangeffekt ableitet werden, da es noch weitere Effekte geben kann, die das Ergebnis verzerren. Wenn es beispielsweise noch zusätzlich einen Geschlechtereffekt gibt, ist die Regressionslinie (die den Listenrangeffekt widerspiegelt) dadurch zu \enquote{steil}, weil die Linie bei den niedrigen Listenrängen durch die guten Wahlergebnisse der Frauen nach oben \enquote{gezerrt} wird. Mit einem statistischen Modell können diese weiteren Effekte \enquote{herausgerechnet} werden. Das von mir verwendete Modell wird in Kapitel 3 beschrieben.
 
-Im Anhang zeige ich die Abbildung der Jahre 2024 und 2020 für die restlichen Parteien bzw. Listen. Bei den anderen Parteien zeigt sich ein noch deutlicherer Listenrangeffekt, insbesondere bei der GLP, der SVP und der BastA!.
+Im Anhang zeige ich die Abbildung der Jahre 2024 und 2020 für die restlichen Parteien bzw. Listen (Abbildung \ref{fig:fig9} bis \ref{fig:fig14}). Bei den anderen Parteien zeigt sich ein noch deutlicherer Listenrangeffekt, insbesondere bei der GLP, der SVP und der BastA!.
 
-```{r fig_1, fig.cap="Listen- und Wahlergebnisrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
+```{r fig1, fig.cap="Listen- und Wahlergebnisrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
 plots <- list()
 for(i in c("Kleinbasel", "Grossbasel Ost")) {
   plot <- data_final %>% 
@@ -295,7 +299,7 @@ plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 2, align = "v")
 plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
-```{r fig_2, fig.cap="Listen- und Wahlergebnisrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
+```{r fig2, fig.cap="Listen- und Wahlergebnisrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
 plots <- list()
 for(i in c("Grossbasel West", "Riehen")) {
   plot <- data_final %>% 
@@ -339,7 +343,7 @@ plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 2, align = "v")
 plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
-# 3. Statistisches Modell
+# Statistisches Modell {#sec_model}
 
 Ich untersuche den Effekt des Listenrangs auf den Wahlergebnisrang bzw. den Stimmenanteil mittels einer multivariaten Regressionsanalyse. Konkret schätze ich Varianten des folgenden linearen Modells:
 
@@ -371,15 +375,15 @@ Ziel der Analyse ist es, $\hat{\beta}_4$ (der geschätzte Wert von $\beta_4$) *k
 
 Für die kausale Interpretation von $\hat{\beta}_4$ hilft es, dass bei der SP und anderen Parteien innerhalb der Geschlechter die Kandidat:innen alphabetisch auf der Liste aufgeführt werden. Wird auf das Geschlecht und den Bisherigen-Status kontrolliert, ist es durch die alphabetische Vergabe unwahrscheinlich, dass der Listenrang mit weiteren Variablen korreliert ist, die einen Effekt auf $y_{it}$ haben. Denn der Listenrang widerspiegelt in diesem Fall weder die Präferenz der Partei noch die Eignung oder Bekanntheit der Kandidierenden.
 
-# 4. Ergebnisse für die SP
+# Ergebnisse für die SP {#sec_results}
 
 ## Basismodell
 
 Im Basismodell nehme ich als zusätzliche Kontrollvariablen $\boldsymbol{X}$ die Interaktionen aus Geschlecht und Wahlkreis ($Geschlecht \times Wahlkreis_{it}$) sowie aus Bisherigen-Status und Wahlkreis ($Bisher \times Wahlkreis_{it}$) auf. Diese Interaktionen erlauben es mir, Unterschiede im Geschlechtereffekt bzw. dem Effekt der Amtsinhaberschaft über die Wahlkreise abzubilden.
 
-Die Tabelle unten zeigt die geschätzten marginalen Listenrangeffekte. Ich finde einen signifikanten Effekt des Listenrangs: Im Durchschnitt verliert ein:e Kandidierende:r pro Listenplatz weiter unten `r margins_sp["list_place"]` Wahlergebnisränge. Weiter finde ich einen signifikanten Effekt der Amtsinhaberschaft. Amtierende Grossrät:innen haben im Durchschnitt einen `r abs(margins_sp["incumbent"])` tieferen Wahlergebnisrang. Keinen Effekt kann ich hingegen für das Geschlecht finden. Dies deutet darauf hin, dass der Unterschied im Wahlerfolg zwischen Frauen und Männern durch die Unterschiede in den Listenrängen erklärt werden kann.
+Tabelle \ref{tab:tab1} unten zeigt die geschätzten marginalen Listenrangeffekte. Ich finde einen signifikanten Effekt des Listenrangs: Im Durchschnitt verliert ein:e Kandidierende:r pro Listenplatz weiter unten `r margins_sp["list_place"]` Wahlergebnisränge. Weiter finde ich einen signifikanten Effekt der Amtsinhaberschaft. Amtierende Grossrät:innen haben im Durchschnitt einen `r abs(margins_sp["incumbent"])` tieferen Wahlergebnisrang. Keinen Effekt kann ich hingegen für das Geschlecht finden. Dies deutet darauf hin, dass der Unterschied im Wahlerfolg zwischen Frauen und Männern durch die Unterschiede in den Listenrängen erklärt werden kann.
 
-```{r tab_1, echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab1, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_sp
 
 margins(model) %>%
@@ -417,9 +421,9 @@ margins(model) %>%
 
 ## Heterogenität über die Wahljahre
 
-Um zu untersuchen, ob sich der Effekt über die Jahre verändert hat, verwende ich das Basismodell und nehme zusätzlich eine Interaktion aus dem Listenrang und dem Wahljahr ($Rang \times Jahr_{it}$) auf. Dadurch kann ich für jedes Wahljahr einen separaten marginalen Effekt schätzen. Die Ergebnisse in der Tabelle unten zeigen, dass in den Jahren 2008, 2012 und 2016 der Effekt noch nicht statistisch signifikant war. 2020 und 2024 finde ich jedoch hohe Listenrangeffekte (Effektstärke `r margins_sp_years["2020"]` bzw. `r margins_sp_years["2024"]`).
+Um zu untersuchen, ob sich der Effekt über die Jahre verändert hat, verwende ich das Basismodell und nehme zusätzlich eine Interaktion aus dem Listenrang und dem Wahljahr ($Rang \times Jahr_{it}$) auf. Dadurch kann ich für jedes Wahljahr einen separaten marginalen Effekt schätzen. Die Ergebnisse in Tabelle \ref{tab:tab2} zeigen, dass in den Jahren 2008, 2012 und 2016 der Effekt noch nicht statistisch signifikant war. 2020 und 2024 finde ich jedoch hohe Listenrangeffekte (Effektstärke `r margins_sp_years["2020"]` bzw. `r margins_sp_years["2024"]`).
 
-```{r tab_2, echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab2, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_sp_years
 
 margins(model, 
@@ -449,9 +453,9 @@ margins(model,
 
 ## Heterogenität über die Wahlkreise
 
-Analog untersuche ich, ob sich der Effekt über die Wahlkreise unterscheidet. Hierfür verwende ich das Basismodell und nehme zusätzlich eine Interaktion aus dem Listenrang und dem Wahlkreis ($Rang \times Wahlkreis_{it}$) auf. Die Ergebnisse zeigen, dass es deutliche Unterschiede gibt: Während ich in Grossbasel Ost und dem Kleinbasel statistisch signifikante Effekte finde (Effektstärke: `r margins_sp_kreis["Grossbasel Ost"]` bzw. `r margins_sp_kreis["Kleinbasel"]`), deutet das Ergebnis in Grossbasel West (Effektstärke: `r margins_sp_kreis["Grossbasel West"]`) auf keinen Listenplatzeffekt hin. Der Effekt ist in Riehen zwar am grössten (Effektstärke: `r margins_sp_kreis["Riehen"]`) jedoch nicht statistisch signifikant. Dies liegt vermutlich daran, dass Riehen deutlich weniger Sitze im Grossen Rat hat und die Stichprobengrösse entsprechend kleiner ausfällt (die statistische Signifikanz ist stark durch die Stichprobengrösse beeinflusst).
+Analog untersuche ich, ob sich der Effekt über die Wahlkreise unterscheidet. Hierfür verwende ich das Basismodell und nehme zusätzlich eine Interaktion aus dem Listenrang und dem Wahlkreis ($Rang \times Wahlkreis_{it}$) auf. Die Ergebnisse in Tabelle \ref{tab:tab3}, dass es deutliche Unterschiede gibt: Während ich in Grossbasel Ost und dem Kleinbasel statistisch signifikante Effekte finde (Effektstärke: `r margins_sp_kreis["Grossbasel Ost"]` bzw. `r margins_sp_kreis["Kleinbasel"]`), deutet das Ergebnis in Grossbasel West (Effektstärke: `r margins_sp_kreis["Grossbasel West"]`) auf keinen Listenplatzeffekt hin. Der Effekt ist in Riehen zwar am grössten (Effektstärke: `r margins_sp_kreis["Riehen"]`) jedoch nicht statistisch signifikant. Dies liegt vermutlich daran, dass Riehen deutlich weniger Sitze im Grossen Rat hat und die Stichprobengrösse entsprechend kleiner ausfällt (die statistische Signifikanz ist stark durch die Stichprobengrösse beeinflusst).
 
-```{r tab_3, echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab3, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_sp_kreis
 
 margins(model, 
@@ -481,9 +485,9 @@ margins(model,
 
 Weiter untersuche ich, ob der Listenrangeffekt unterschiedlich stark für Frauen und Männer ausgeprägt ist. Wiederum verwende ich hierfür das Basismodell und nehme zusätzlich Interaktionen aus dem Geschlecht, Wahlkreis und Listenplatz ($Geschlecht \times Rang \times Wahlkreis_{it}$), Geschlecht und Rang ($Geschlecht \times Rang_{it}$) sowie Rang und Wahlkreis ($Rang \times Wahlkreis_{it}$) auf. Diese umfangreichen Interaktionen erlauben es mir, Unterschiede im Effekt über jede Kombination aus Geschlecht und Wahlkreis abzubilden (Frauen im Kleinbasel vs. Männer im Kleinbasel, Frauen in Riehen vs. Männer in Riehen, etc.). Anders ausgedrückt bedeuten diese Interaktionen, dass ich im Modell annehme, dass es i.) in jedem Wahlkreis einen unterschiedlichen Effekt gibt, i.) Frauen und Männer unterschiedliche Effekte haben und iii.) der unterschiedliche Effekt von Frauen und Männern in jedem Wahlkreis unterschiedlich ist.
 
-Ich finde sowohl für Frauen als auch Männer einen statistisch signifikanten Listenrangeffekt (Effektstärke `r margins_sp_gender["F"]` bzw. `r margins_sp_gender["M"]`). Der Effekt ist für Frauen und Männer äusserst ähnlich. Innerhalb der Frauen sowie innerhalb der Männer spielt es für den Wahlerfolg insofern gleichermassen eine Rolle, auf einem \enquote{guten} Listenplatz zu sein.
+Ich finde sowohl für Frauen als auch Männer einen statistisch signifikanten Listenrangeffekt (Effektstärke `r margins_sp_gender["F"]` bzw. `r margins_sp_gender["M"]`), siehe Tabelle \ref{tab:tab4}. Der Effekt ist für Frauen und Männer äusserst ähnlich. Innerhalb der Frauen sowie innerhalb der Männer spielt es für den Wahlerfolg insofern gleichermassen eine Rolle, auf einem \enquote{guten} Listenplatz zu sein.
 
-```{r tab_4, echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab4, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_sp_gender
 
 margins(model, 
@@ -518,15 +522,15 @@ Ich untersuche, ob sich der Listenrangeffekt der SP-Stimmen von jenem der Panasc
 
 Ich nehmen wiederum die Interaktion $Rang \times Wahlkreis_{it}$ in das Basismodell auf, um Unterschiede über die Wahlkreise abbilden zu können. Ich schätze anschliessend das Modell separat mit $Rang_{it}$, $Rang_{it}^{SP}$ bzw. $Rang_{it}^{-SP}$ als abhängige Variable. Ich verwende dabei ausschliesslich Daten der Wahljahre 2024 und 2020, da ich nur für diese beiden Jahren zwischen SP- und Panaschierstimmen unterscheiden kann.
 
-Die drei Tabellen unten zeigen die Resultate für $Rang_{it}$ (Tabelle 5), $Rang_{it}^{SP}$ (Tabelle 6) und $Rang_{it}^{-SP}$ (Tabelle 7). Die Ergebnisse für $Rang_{it}$ und $Rang_{it}^{SP}$ sind relativ ähnlich. Interessant ist jedoch, dass ich in zwei Wahlkreisen auch für $Rang_{it}^{-SP}$ statistisch signifikante -- und vor allem hohe -- Effekte finde (Grossbasel West: `r margins_sp_others["Grossbasel West"]`, Kleinbasel: `r margins_sp_others["Kleinbasel"]`). Dies deutet darauf hin, dass Wähler:innen selbst beim Panaschieren -- bei sonst gleichen Bedingungen -- Kandidat:innen mit niedrigem Listenrang bevorzugen.
+Die drei Tabellen unten zeigen die Resultate für $Rang_{it}$ (Tabelle \ref{tab:tab5}), $Rang_{it}^{SP}$ (Tabelle \ref{tab:tab6}) und $Rang_{it}^{-SP}$ (Tabelle \ref{tab:tab7}). Die Ergebnisse für $Rang_{it}$ und $Rang_{it}^{SP}$ sind relativ ähnlich. Interessant ist jedoch, dass ich in zwei Wahlkreisen auch für $Rang_{it}^{-SP}$ statistisch signifikante -- und vor allem hohe -- Effekte finde (Grossbasel West: `r margins_sp_others["Grossbasel West"]`, Kleinbasel: `r margins_sp_others["Kleinbasel"]`). Dies deutet darauf hin, dass Wähler:innen selbst beim Panaschieren -- bei sonst gleichen Bedingungen -- Kandidat:innen mit niedrigem Listenrang bevorzugen.
 
-Eine visuelle Betrachtung der Daten bestätigt diese Resultate. Abbildungen 3 und 4 zeigen den Listenrang auf der X-Achse und die Anzahl SP-Stimmen (Abbildung 3) bzw. Panaschierstimmen (Abbildung 4) auf der Y-Achse.[^2] Bei den Panaschierstimmen fällt auf, dass der Listenrangeffekt auf die Anzahl Stimmen (approximiert durch die Regressionslinie) bei den Amtierenden deutlich stärker ausgeprägt ist als bei den Neuen. Bei den neuen Kandidierenden ist die Regressionslinie deutlich flacher, doch reichen schon kleine Unterschiede in der Anzahl der Stimmen aus, um einen Effekt auf den Wahlergebnis*rang* zu haben (um einen besseren Wahlergebnisrang als eine andere kandidierende Person zu erreichen genügt schon eine Stimme mehr).[^3] Auffällig ist zudem, wie viel mehr Panaschierstimmen die amtierenden gegenüber den neuen Kandidierenden erhalten.
+Eine visuelle Betrachtung der Daten bestätigt diese Resultate. Abbildungen \ref{fig:fig3} und \ref{fig:fig4} zeigen den Listenrang auf der X-Achse und die Anzahl SP-Stimmen (Abbildung \ref{fig:fig3}) bzw. Panaschierstimmen (Abbildung \ref{fig:fig4}) auf der Y-Achse.[^2] Bei den Panaschierstimmen fällt auf, dass der Listenrangeffekt auf die Anzahl Stimmen (approximiert durch die Regressionslinie) bei den Amtierenden deutlich stärker ausgeprägt ist als bei den Neuen. Bei den neuen Kandidierenden ist die Regressionslinie deutlich flacher, doch reichen schon kleine Unterschiede in der Anzahl der Stimmen aus, um einen Effekt auf den Wahlergebnis*rang* zu haben (um einen besseren Wahlergebnisrang als eine andere kandidierende Person zu erreichen genügt schon eine Stimme mehr).[^3] Auffällig ist zudem, wie viel mehr Panaschierstimmen die amtierenden gegenüber den neuen Kandidierenden erhalten.
 
 [^2]: Die Achsenabschnitte der X- und Y-Achse variieren in den Abbildungen je nach Wahlkreis und -jahr, da die Anzahl der Sitze im Grossen Rat pro Wahlkreis unterschiedlich ist und die Stimmenzahl für die SP zwischen den Jahren variiert.
 
-[^3]: Die entsprechenden Abbildungen mit dem SP- bzw. Panaschierstimmenrang auf der Y-Achse befindet sich im Anhang.
+[^3]: Die entsprechenden Abbildungen mit dem SP- bzw. Panaschierstimmenrang auf der Y-Achse befindet sich im Anhang (Abbildungen \ref{fig:fig5} und \ref{fig:fig6}).
 
-```{r tab_5, echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab5, echo=FALSE, message=TRUE, warning=FALSE}
 margins(model_sp_ownothers, variables = "list_place", 
         at = list(kreis = model_sp_ownothers$xlevels$kreis)) %>% 
   tidy() %>% 
@@ -549,7 +553,7 @@ margins(model_sp_ownothers, variables = "list_place",
            footnote_as_chunk = TRUE)
 ```
 
-```{r tab_6, echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab6, echo=FALSE, message=TRUE, warning=FALSE}
 margins(model_sp_own, variables = "list_place", 
         at = list(kreis = model_sp_own$xlevels$kreis)) %>% 
   tidy() %>% 
@@ -572,7 +576,7 @@ margins(model_sp_own, variables = "list_place",
            footnote_as_chunk = TRUE)
 ```
 
-```{r tab_7, echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab7, echo=FALSE, message=TRUE, warning=FALSE}
 margins(model_sp_others, variables = "list_place", 
         at = list(kreis = model_sp_others$xlevels$kreis)) %>% 
   tidy() %>% 
@@ -595,7 +599,7 @@ margins(model_sp_others, variables = "list_place",
            footnote_as_chunk = TRUE)
 ```
 
-```{r fig_3, fig.cap="Listenrang und SP-Stimmen", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
+```{r fig3, fig.cap="Listenrang und SP-Stimmen", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
 data_final_all %>% 
   filter(party == "SP") %>% 
   mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
@@ -629,7 +633,7 @@ data_final_all %>%
         plot.title = element_text(size = 10))
 ```
 
-```{r fig_4, fig.cap="Listenrang und Panaschierstimmen", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
+```{r fig4, fig.cap="Listenrang und Panaschierstimmen", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
 data_final_all %>% 
   filter(party == "SP") %>% 
   mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
@@ -667,9 +671,9 @@ data_final_all %>%
 
 Ich untersuche, ob auch weitere Variablen eine Effekt auf den Wahlerfolg haben. Ich verwende das Basismodell und nehme zusätzlich das Alter der kandidierenden Person auf sowie je eine Dummy-Variable, die angibt, ob ein:e neue:r Kandidat:in einen Listenplatz oberhalb oder unterhalb einer amtierenden kandidierenden Person hat. Mit dem Alter untersuche ich, ob das Alter einen Einfluss auf den Wahlerfolg hat. Mit den beiden Dummy-Variablen untersuche ich, ob es eine Rolle spielt, ob sich ein:e neue:r Kandidat:in auf dem Wahlzettel in unmittelbarer Nähe einer amtierenden Person befindet (und dadurch häufiger gestrichen wird, wenn die amtierende Person kumuliert wird).
 
-Die Ergebnisse in der Tabelle unten zeigen, dass weder das Alter noch die Nähe zu einer amtierenden Person einen statistisch signifikanten Effekt auf den Wahlergebnisrang haben. Ich finde insofern keine eindeutigen Hinweise darauf, dass jüngere oder ältere Kandidierende bessere Wahlergebnisse haben. Ebenso finde ich keine Hinweise darauf, dass es für den Wahlerfolg eine Rolle spielt, ob sich ein:e neue:r Kandidat:in auf dem Wahlzettel in der unmittelbaren Nähe einer amtierenden Person befindet.
+Die Ergebnisse in Tabelle \ref{tab:tab8} zeigen, dass weder das Alter noch die Nähe zu einer amtierenden Person einen statistisch signifikanten Effekt auf den Wahlergebnisrang haben. Ich finde insofern keine eindeutigen Hinweise darauf, dass jüngere oder ältere Kandidierende bessere Wahlergebnisse haben. Ebenso finde ich keine Hinweise darauf, dass es für den Wahlerfolg eine Rolle spielt, ob sich ein:e neue:r Kandidat:in auf dem Wahlzettel in der unmittelbaren Nähe einer amtierenden Person befindet.
 
-```{r tab_8, echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab8, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_sp_weitere
 
 margins(model) %>%
@@ -705,15 +709,15 @@ margins(model) %>%
            footnote_as_chunk = TRUE)
 ```
 
-# 5. Ergebnisse für weitere Parteien
+# Ergebnisse für weitere Parteien {#sec_results_other}
 
 Für die Wahljahre 2024 und 2020 untersuche ich zusätzlich den Listenrangeffekt für die BastA!, FDP, GLP, GRÜNE, Grünes Bündnis, LDP, Die Mitte, SP und SVP. Ich verwende erneut das Basismodell und nehme zusätzlich eine Variable für die Partei der kandidierenden Person ($Partei_{it}$) sowie Interaktionen aus der Partei mit dem Bisherigen-Status ($Partei \times Bisher_{it}$), dem Geschlecht ($Partei \times Geschlecht_{it}$) und dem Listenrang ($Partei \times Rang_{it}$) auf.
 
-Die Ergebnisse in der Tabelle unten zeigen, dass der Listenrangeffekt bei fast allen Parteien vorkommt. Einzig bei der LDP finde ich keine statistisch signifikanten Effekte. Der Effekt ist am grössten bei der GLP (Effektstärke: `r margins_model_all["GLP"]`), der SP (Effektstärke: `r margins_model_all["SP"]`), der SVP (Effektstärke: `r margins_model_all["SVP"]`) und der BastA! (Effektstärke: `r margins_model_all["BastA"]`). Der Listenrangeffekt des Grünen Bündnisses -- das als Liste nur in den Daten von 2020 vorkommt -- ist vermutlich ebenfalls stark durch die BastA! beeinflusst.
+Die Ergebnisse in Tabelle \ref{tab:tab9} zeigen, dass der Listenrangeffekt bei fast allen Parteien vorkommt. Einzig bei der LDP finde ich keine statistisch signifikanten Effekte. Der Effekt ist am grössten bei der GLP (Effektstärke: `r margins_model_all["GLP"]`), der SP (Effektstärke: `r margins_model_all["SP"]`), der SVP (Effektstärke: `r margins_model_all["SVP"]`) und der BastA! (Effektstärke: `r margins_model_all["BastA"]`). Der Listenrangeffekt des Grünen Bündnisses -- das als Liste nur in den Daten von 2020 vorkommt -- ist vermutlich ebenfalls stark durch die BastA! beeinflusst.
 
-Der Effekt für die SP ist in dieser Tabelle grösser als im Basismodell (siehe Tabelle 1), weil ausschliesslich die Wahljahre 2024 und 2020 berücksichtigt werden. Wie ich in Tabelle 2 gezeigt habe, ist in diesen beiden Jahren der Listenrangeffekt besonders ausgeprägt.
+Der Effekt für die SP ist in dieser Tabelle grösser als im Basismodell (siehe Tabelle \ref{tab:tab1}), weil ausschliesslich die Wahljahre 2024 und 2020 berücksichtigt werden. Wie ich in Tabelle \ref{tab:tab2} gezeigt habe, ist in diesen beiden Jahren der Listenrangeffekt besonders ausgeprägt.
 
-```{r tab_9, echo=FALSE, message=TRUE, warning=FALSE}
+```{r tab9, echo=FALSE, message=TRUE, warning=FALSE}
 model <- model_all
 
 margins(model, 
@@ -750,11 +754,11 @@ margins(model,
 
 \newpage
 
-# 6. Anhang
+# Anhang {#sec_appendix}
 
 ## Deskriptive Analyse für SP- und Panaschierstimmen
 
-```{r fig_5, fig.cap="Listenrang und SP-Stimmenrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig5, fig.cap="Listenrang und SP-Stimmenrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 data_final_all %>% 
   filter(party == "SP") %>% 
   mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
@@ -790,7 +794,7 @@ data_final_all %>%
         plot.title = element_text(size = 10))
 ```
 
-```{r fig_6, fig.cap="Listenrang und Panaschierstimmenrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig6, fig.cap="Listenrang und Panaschierstimmenrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 data_final_all %>% 
   filter(party == "SP") %>% 
   mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
@@ -828,7 +832,7 @@ data_final_all %>%
 
 ## Deskriptive Analyse für den Stimmenanteil
 
-```{r fig_7, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig7, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plots <- list()
 for(i in c("Kleinbasel", "Grossbasel Ost")) {
   plot <- data_final %>% 
@@ -870,7 +874,7 @@ plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 2, align = "v")
 plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
-```{r fig_8, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig8, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plots <- list()
 for(i in c("Grossbasel West", "Riehen")) {
   plot <- data_final %>% 
@@ -914,7 +918,7 @@ plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 
 ## Deskriptive Analyse für andere Parteien
 
-```{r fig_9, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig9, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plot_gb <- partyplot(party_name = "GB", 
                      party_title = "Grünes Bündnis", 
                      party_ncol = 1,
@@ -936,35 +940,35 @@ plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 3, align = "v")
 plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
-```{r fig_10, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig10, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "GLP", 
           party_title = "GLP", 
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
 
-```{r fig_11, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig11, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "FDP", 
           party_title = "FDP", 
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
 
-```{r fig_12, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig12, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "LDP", 
           party_title = "LDP", 
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
 
-```{r fig_13, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig13, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "Mitte", 
           party_title = "Die Mitte", 
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
 
-```{r fig_14, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig14, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "SVP", 
           party_title = "SVP", 
           party_ncol = 2, 
@@ -973,29 +977,66 @@ partyplot(party_name = "SVP",
 
 ## Listenplatz-Regelungen
 
-Bei den Grossratswahlen hat fast jede Partei bzw. Liste ihre eigene Regelung, wie die Listenplätze vergeben werden. In Tabelle 10 zeige ich die Regelungen für die Parteien in den Wahljahren 2024 und 2020 (für die SP zudem jene der Jahre 2016, 2012 und 2008). Die Spalte \enquote{Bisherige zuerst} gibt an, ob bei einer Partei die amtierenden Grossrät:innen an erster Stelle stehen, \enquote{Frauen zuerst} ob Frauen zuerst aufgelistet werden und \enquote{Alphabetisch} ob die Liste alphabetisch sortiert ist. Die Angaben in der Klammer geben an, innerhalb welcher Untergruppe die entsprechende Regelung zur Anwendung kommt. Die FDP hat 2020 beispielsweise die Frauen zuerst aufgelistet, dabei innerhalb der Frauen und Männer jeweils die amtierenden Grossrät:innen zuerst. Innerhalb dieser Gruppen -- amtierende Frauen, amtierende Männer, nicht-amtierende Frauen, nicht-amtierende Männer -- wurden die Kandidierenden schliesslich alphabetisch sortiert.
+Bei den Grossratswahlen hat fast jede Partei bzw. Liste ihre eigene Regelung, wie die Listenplätze vergeben werden. In Tabelle \ref{tab:tab10} zeige ich die Regelungen für die Parteien in den Wahljahren 2024 und 2020 (für die SP zudem jene der Jahre 2016, 2012 und 2008). Die Spalte \enquote{Bisherige zuerst} gibt an, ob bei einer Partei die amtierenden Grossrät:innen an erster Stelle stehen, \enquote{Frauen zuerst} ob Frauen zuerst aufgelistet werden und \enquote{Alphabetisch} ob die Liste alphabetisch sortiert ist. Die Angaben in der Klammer geben an, innerhalb welcher Untergruppe die entsprechende Regelung zur Anwendung kommt. Die FDP hat 2020 beispielsweise die Frauen zuerst aufgelistet, dabei innerhalb der Frauen und Männer jeweils die amtierenden Grossrät:innen zuerst. Innerhalb dieser Gruppen -- amtierende Frauen, amtierende Männer, nicht-amtierende Frauen, nicht-amtierende Männer -- wurden die Kandidierenden schliesslich alphabetisch sortiert.
 
-Tabelle 10 zeigt, dass die SP die einzige Partei ist, bei der die amtierenden Grossrät:innen nicht an erster Stelle stehen. Ebenso zeigt sich, dass ausser bei der SP im Jahr 2008 sowie der GLP die Listen bei allen Parteien in irgendeiner Form alphabetisch sortiert sind.[^4][^5] Auffällig ist, dass nicht alle linken Parteien die Frauen zuerst auflisten (die GRÜNEN weichen davon ab) und dass es mit der FDP im Jahr 2020 auch eine bürgerliche Partei gab, die die Frauen zuerst aufgelistet hat. Die GLP reiht in mehreren Wahlkreisen die Frauen und Männer zudem abwechselnd.
+Tabelle \ref{tab:tab10} zeigt, dass die SP die einzige Partei ist, bei der die amtierenden Grossrät:innen nicht an erster Stelle stehen. Ebenso zeigt sich, dass ausser bei der SP im Jahr 2008 sowie der GLP die Listen bei allen Parteien in irgendeiner Form alphabetisch sortiert sind.[^4][^5] Auffällig ist, dass nicht alle linken Parteien die Frauen zuerst auflisten (die GRÜNEN weichen davon ab) und dass es mit der FDP im Jahr 2020 auch eine bürgerliche Partei gab, die die Frauen zuerst aufgelistet hat. Die GLP reiht in mehreren Wahlkreisen die Frauen und Männer zudem abwechselnd.
 
 [^4]: Bei der SVP ist der *Wahlzettel* von oben nach unten alphabetisch sortiert, nicht der Listenrang per se. In anderen Worten, bei beispielsweise 35 Listenplätzen in einem Wahlkreis werden die Listenplätze 1 bis 17 separat von den Listenplätzen 18 bis 35 alphabetisch sortiert.
 
 [^5]: Die Mitte listet zwar die amtierenden Grossrät:innen zuerst auf und sortiert anschliessend alphabetisch, weicht von dieser Regelung jedoch teilweise ab, insofern dass sie nach den amtierenden Grossrät:innen erst ihre Spitzenkandidierenden auflistet.
 
-| Partei / Liste   | Bisherige zuerst (innerhalb von) | Frauen zuerst | Alphabetisch (innerhalb von)       |
-|---------------|------------------|-------------|---------------------------|
-| SP (2008)        | Nein                             | Ja            | Nein                               |
-| SP (2012 - 2024) | Nein                             | Ja            | Ja (Geschlecht)                    |
-| Grünes Bündnis   | Ja                               | Ja            | Ja (Amtsinhaberschaft, Geschlecht) |
-| BastA!           | Ja                               | Ja            | Ja (Amtsinhaberschaft, Geschlecht) |
-| FDP (2020)       | Ja (Geschlecht)                  | Ja            | Ja (Amtsinhaberschaft, Geschlecht) |
-| GLP              | Ja                               | Nein          | Nein                               |
-| Die Mitte        | Ja                               | Nein          | Ja (Amtsinhaberschaft)             |
-| SVP              | Ja                               | Nein          | Ja (Amtsinhaberschaft)             |
-| GRÜNE            | Ja                               | Nein          | Ja (Amtsinhaberschaft)             |
-| LDP              | Ja                               | Nein          | Ja (Amtsinhaberschaft)             |
-| FDP (2024)       | Ja                               | Nein          | Ja (Amtsinhaberschaft)             |
-
-: Listenplatz-Regelungen der Parteien
+```{r tab10, echo=FALSE, message=TRUE, warning=FALSE}
+tibble("Partei / Liste" = c("SP (2008)", 
+                            "SP (2012-2024)",
+                            "Grünes Bündnis",
+                            "BastA!",
+                            "FDP (2020)",
+                            "GLP",
+                            "Die Mitte",
+                            "SVP",
+                            "GRÜNE",
+                            "LDP",
+                            "FDP (2024)"),
+       "Bisherige zuerst (innerhalb von)" = c("Nein", 
+                                              "Nein", 
+                                              "Ja",
+                                              "Ja",
+                                              "Ja (Geschlecht)",
+                                              "Ja",
+                                              "Ja",
+                                              "Ja",
+                                              "Ja",
+                                              "Ja",
+                                              "Ja"),
+       "Frauen zuerst" = c("Ja", 
+                           "Ja", 
+                           "Ja",
+                           "Ja",
+                           "Ja",
+                           "Nein",
+                           "Nein",
+                           "Nein",
+                           "Nein",
+                           "Nein",
+                           "Nein"),
+       "Alphabetisch (innerhalb von)" = c("Nein", 
+                                          "Ja (Geschlecht)", 
+                                          "Ja (Amtsinhaberschaft > Geschlecht)",
+                                          "Ja (Amtsinhaberschaft > Geschlecht)",
+                                          "Ja (Amtsinhaberschaft > Geschlecht)",
+                                          "Nein",
+                                          "Ja (Amtsinhaberschaft)",
+                                          "Ja (Amtsinhaberschaft)",
+                                          "Ja (Amtsinhaberschaft)",
+                                          "Ja (Amtsinhaberschaft)",
+                                          "Ja (Amtsinhaberschaft)")) %>% 
+  kbl("latex", caption = "Listenplatz-Regelungen der Parteien", booktabs = TRUE, linesep = "") %>% 
+  kable_styling(latex_options = c("HOLD_position"),
+              full_width = TRUE) %>%
+  #column_spec(1, width = "4.75cm") %>%
+  #column_spec(2, width = "4.25cm") %>%
+  column_spec(4, width = "6cm")
+```
 
 ```{r eval=FALSE, include=FALSE}
 model <- model_sp_years
