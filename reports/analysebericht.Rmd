@@ -253,7 +253,7 @@ Beim Betrachten der Abbildungen und insbesondere der Regressionslinien lässt si
 
 Aus diesem Zusammenhang kann jedoch noch kein kausaler Listenrangeffekt ableitet werden, da es noch weitere Effekte geben kann, die das Ergebnis verzerren. Wenn es beispielsweise noch zusätzlich einen Geschlechtereffekt gibt, ist die Regressionslinie (die den Listenrangeffekt widerspiegelt) dadurch zu \enquote{steil}, weil die Linie bei den niedrigen Listenrängen durch die guten Wahlergebnisse der Frauen nach oben \enquote{gezerrt} wird. Mit einem statistischen Modell können diese weiteren Effekte \enquote{herausgerechnet} werden. Das von mir verwendete Modell wird in Kapitel 3 beschrieben.
 
-Im Anhang zeige ich die Abbildung der Jahre 2024 und 2020 für die restlichen Parteien bzw. Listen (Abbildung \ref{fig:fig9} bis \ref{fig:fig14}). Bei den anderen Parteien zeigt sich ein noch deutlicherer Listenrangeffekt, insbesondere bei der GLP, der SVP und der BastA!.
+Im Anhang zeige ich die Abbildung der Jahre 2024 und 2020 für die restlichen Parteien bzw. Listen (Abbildung \ref{fig:fig10} bis \ref{fig:fig15}). Bei den anderen Parteien zeigt sich ein noch deutlicherer Listenrangeffekt, insbesondere bei der GLP, der SVP und der BastA!.
 
 ```{r fig1, fig.cap="Listen- und Wahlergebnisrang", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
 plots <- list()
@@ -599,6 +599,10 @@ margins(model_sp_others, variables = "list_place",
            footnote_as_chunk = TRUE)
 ```
 
+Im Anhang Abbildung \ref{fig:fig7} untersuche ich die Stimmen der veränderten SP-Wahlzettel noch vertiefter. Mit den verfügbaren Daten ist es zwar nicht möglich herauszufinden, wie häufig ein:e Kandidat:in kumuliert oder gestrichen wurde. Es ist jedoch möglich herauszufinden, ob ein:e Kandidat:in *insgesamt* mehr Stimmen durch Kumulationen erhalten als dass er oder sie durch Streichungen verloren hat. Hierfür zeichne ich in Abbildung \ref{fig:fig7} die Anzahl der veränderten SP-Wahlzettel als rote, horizontale Linie ein. Wäre ein veränderter Wahlzettel *nicht* verändert worden, würden alle Kandidierenden genau eine Stimme pro Wahlzettel erhalten. Das bedeutet, dass wenn ein:e Kandidat:in exakt so viele Stimmen durch Kumulationen gewonnen wie er oder sie durch Streichungen verloren hat, er oder sie exakt auf der roten Linie liegt. Kandidierende über der roten Linie wurden daher insgesamt häufiger kumuliert als gestrichen, Kandidierende darunter häufiger gestrichen als kumuliert.
+
+Mit einer Ausnahme in Riehen 2020 sind es ausschliesslich amtierende Grossrät:innen, die mehr kumuliert als gestrichen wurden. Auffallend ist jedoch, dass bei Weitem nicht in allen Wahlkreisen *alle* amtierenden Grossrät:innen mehr kumuliert als gestrichen wurden.
+
 ```{r fig3, fig.cap="Listenrang und SP-Stimmen", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8.5, fig.align='center', fig.pos='H'}
 data_final_all %>% 
   filter(party == "SP") %>% 
@@ -830,9 +834,40 @@ data_final_all %>%
         plot.title = element_text(size = 10))
 ```
 
+```{r fig7, fig.cap="Listenrang und SP-Stimmen", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+data_final_all %>% 
+  filter(party == "SP") %>% 
+  mutate(incumbent = factor(incumbent, levels = c(TRUE, FALSE)),
+         year = factor(year, levels = c(2024, 2020))) %>% 
+  ggplot(aes(x = list_place, y = votes_by_own)) +
+  geom_point(aes(col = gender, shape = incumbent)) +
+  geom_hline(aes(yintercept = ballot_kreis_list_changed), col = "red") +
+  scale_color_manual(values = c("M" = "#72cb8c", "F" = "#66a3c2"),
+                     labels = c("M" = "M", "F" = "F")) +
+  scale_shape_manual(values = c("TRUE" = 17, "FALSE" = 16),
+                     labels = c("TRUE" = "Ja", "FALSE" = "Nein")) +
+  scale_linetype_manual(values = c("TRUE" = 4, "FALSE" = 1),
+                        labels = c("TRUE" = "Amtierend", "FALSE" = "Nicht amtierend")) +
+  facet_wrap(~ kreis + year, ncol = 2, scale = "free") +
+  labs(x = "Listenrang", y = "SP-Stimmen") +
+  theme_minimal() +
+  guides(color = guide_legend(title = "Geschlecht"),
+         shape = guide_legend(title = "Amtierend"),
+         linetype = guide_legend(title = "Regressionslinie")) +
+  theme(legend.position = "bottom",
+        legend.direction = "vertical",
+        legend.box = "horizontal",
+        legend.background = element_blank(),
+        legend.title = element_text(size = 10, face = "bold"),
+        legend.text = element_text(size = 9),
+        legend.key.size = unit(0.5, "lines"),
+        legend.margin = margin(t = 2, r = 2, b = 2, l = 2),
+        plot.title = element_text(size = 10))
+```
+
 ## Deskriptive Analyse für den Stimmenanteil
 
-```{r fig7, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig8, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plots <- list()
 for(i in c("Kleinbasel", "Grossbasel Ost")) {
   plot <- data_final %>% 
@@ -874,7 +909,7 @@ plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 2, align = "v")
 plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
-```{r fig8, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig9, fig.cap="Listenrang und Stimmenanteil", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plots <- list()
 for(i in c("Grossbasel West", "Riehen")) {
   plot <- data_final %>% 
@@ -918,7 +953,7 @@ plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 
 ## Deskriptive Analyse für andere Parteien
 
-```{r fig9, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig10, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 plot_gb <- partyplot(party_name = "GB", 
                      party_title = "Grünes Bündnis", 
                      party_ncol = 1,
@@ -940,35 +975,35 @@ plot_final <- plot_grid(plotlist = plot_nolegend, ncol = 3, align = "v")
 plot_grid(plot_final, get_legend(plots[[1]]), ncol = 1, rel_heights = c(1, 0.1))
 ```
 
-```{r fig10, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig11, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "GLP", 
           party_title = "GLP", 
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
 
-```{r fig11, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig12, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "FDP", 
           party_title = "FDP", 
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
 
-```{r fig12, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig13, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "LDP", 
           party_title = "LDP", 
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
 
-```{r fig13, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig14, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "Mitte", 
           party_title = "Die Mitte", 
           party_ncol = 2, 
           party_model = "rank ~ incumbent*year*kreis*list_place")
 ```
 
-```{r fig14, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
+```{r fig15, fig.cap="Listen- und Wahlergebnisrang -- Andere Parteien", echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=8, fig.align='center', fig.pos='H'}
 partyplot(party_name = "SVP", 
           party_title = "SVP", 
           party_ncol = 2, 

@@ -146,9 +146,15 @@ data_final_2024 <- data_final_2024_all %>%
   filter(party == "SP")
 
 data_final_2020_all <- data_2020 %>% 
-  select(Wahlkreisbezeichnung, `Anzahl Sitze Wahlkreis`, 
-         Listennummer, Parteikurzbezeichnung, Wahlzettel,
+  select(`Wahlkreisbezeichnung`, 
+         `Anzahl Sitze Wahlkreis`, 
+         `Listennummer`, 
+         `Parteikurzbezeichnung`, 
          `Anzahl Sitze Liste`,
+         `Unveränderte Wahlzettel Liste`,
+         `Veränderte Wahlzettel Liste`,
+         `Zusatzstimmen unveränderte Wahlzettel`,
+         `Zusatzstimmen veränderte Wahlzettel`,
          `Kandidatenstimmen unveränderte Wahlzettel`,
          `Kandidatenstimmen veränderte Wahlzettel`,
          `00 Ohne`, `01 FDP`, `02 PP`, `03 LDP`, `04 EVP`, `05 SP`, 
@@ -160,10 +166,15 @@ data_final_2020_all <- data_2020 %>%
          `Alter am Jahresende 2020`, Bisher, Gewählt,
          `Stimmen unveränderte Wahlzettel`, `Stimmen veränderte Wahlzettel`,
          `Stimmen Total`, Rangfolge) %>% 
-  rename(list = Listennummer,
+  rename(kreis = Wahlkreisbezeichnung,
+         seats = `Anzahl Sitze Wahlkreis`,
+         list = Listennummer,
          party = Parteikurzbezeichnung,
          seats_list = `Anzahl Sitze Liste`,
-         kreis = Wahlkreisbezeichnung,
+         ballot_kreis_list_unchanged = `Unveränderte Wahlzettel Liste`,
+         ballot_kreis_list_changed = `Veränderte Wahlzettel Liste`,
+         ballot_kreis_list_extra_unchanged = `Zusatzstimmen unveränderte Wahlzettel`,
+         ballot_kreis_list_extra_changed = `Zusatzstimmen veränderte Wahlzettel`,
          votes_kreis_candidate_unchanged = `Kandidatenstimmen unveränderte Wahlzettel`,
          votes_kreis_candidate_changed = `Kandidatenstimmen veränderte Wahlzettel`,
          votes_by_party_ohne = `00 Ohne`, 
@@ -186,7 +197,6 @@ data_final_2020_all <- data_2020 %>%
          firstname = Vorname,
          age = `Alter am Jahresende 2020`,
          gender = Geschlecht,
-         ballot = Wahlzettel,
          candidate_id = `Kandidaten-Nr`,
          incumbent = Bisher,
          elected = `Gewählt`,
@@ -430,7 +440,8 @@ data_final <- rbind(data_final_2024 %>%
   ungroup()
 
 data_final_all <- rbind(data_final_2024_all %>% 
-                          select(kreis, party, list_place, list_place_scale, 
+                          select(kreis, seats, party, ballot_kreis_list_changed,
+                                 list_place, list_place_scale, 
                                  name, gender, age, incumbent, votes,
                                  elected, votes_kreis_candidate, list_total, share,
                                  votes_by_own, votes_by_others,
@@ -439,7 +450,8 @@ data_final_all <- rbind(data_final_2024_all %>%
                                  last_three_gender, first_three_gender,
                                  rank, rank_own, rank_others, place_last, year),
                         data_final_2020_all %>% 
-                          select(kreis, party, list_place, list_place_scale, 
+                          select(kreis, seats, party, ballot_kreis_list_changed,
+                                 list_place, list_place_scale, 
                                  name, gender, age, incumbent, votes,
                                  elected, votes_kreis_candidate, list_total, share,
                                  votes_by_own, votes_by_others,
