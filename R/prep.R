@@ -448,7 +448,8 @@ data_final_all <- rbind(data_final_2024_all %>%
                                  share_scale, below, above, either, last_four, 
                                  first_four, last_two_gender, first_two_gender, 
                                  last_three_gender, first_three_gender,
-                                 rank, rank_own, rank_others, place_last, year),
+                                 rank, rank_own, rank_others, 
+                                 share_own_scale, share_others_scale, place_last, year),
                         data_final_2020_all %>% 
                           select(kreis, seats, party, ballot_kreis_list_changed,
                                  list_place, list_place_scale, 
@@ -458,7 +459,9 @@ data_final_all <- rbind(data_final_2024_all %>%
                                  share_scale, below, above, either, last_four, 
                                  first_four, last_two_gender, first_two_gender, 
                                  last_three_gender, first_three_gender,
-                                 rank, rank_own, rank_others, place_last, year))
+                                 rank, rank_own, rank_others, 
+                                 share_own_scale, share_others_scale,
+                                 place_last, year))
 
 save(data_final, file = "./data/processed/data_final.Rdata")
 save(data_final_all, file = "./data/processed/data_final_all.Rdata")

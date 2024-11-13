@@ -16,7 +16,7 @@ header-includes:
   - \floatsetup[table]{capposition=top}
   - \floatsetup[figure]{capposition=top}
 title: "Der Listenrangeffekt bei den Grossratswahlen in Basel-Stadt: Analysebericht"
-subtitle: "Work in Progress (Version 0.1.7) -- aktuellste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
+subtitle: "Work in Progress (Version 0.1.8) -- aktuellste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
 thanks: "Der Code und die Daten der Analysen sind auf Github abgelegt ([[Link]{.ul}](https://github.com/marcstoeckli/grossratswahlen_bs)). Ich freue mich über Kommentare und Anregungen via kontakt@stoecklieconomics.ch. Einen herzlichen Dank für ihr Feedback gehen an Tamina Graber, Edibe Gölgeli, Michela Seggiani und Salome Bessenich."
 author: "Marc Stöckli"
 abstract: "In diesem Bericht untersuche ich den Einfluss des Listenrangs auf den Wahlerfolg bei den Grossratswahlen 2008 bis 2024 in Basel-Stadt. Meine Analysen zeigen, dass ein niedrigerer Listenrang (= weiter oben auf der Liste) zu einem besseren Wahlergebnis führt. Der Effekt tritt besonders bei der GLP, SP, SVP und der BastA! auf und variiert je nach Wahljahr und -kreis. Bei der SP stelle ich einen deutlichen Anstieg des Listenrangeffekts in den Wahljahren 2020 und 2024 fest. Die Ergebnisse zeigen, dass es aus Sicht der Frauenförderung ein effektives Instrument ist, die Frauen bei Listenwahlen zuerst aufzuführen. Für eine aktive Gleichstellungspolitik ist diese Trennung nach Geschlecht sinnvoll und sollte in der SP beibehalten werden. Hingegen kann es problematisch sein, Kandidierende alphabetisch aufzulisten."
@@ -101,6 +101,8 @@ partyplot <- function(party_name, party_title, party_ncol,
 ## Alle Parteien
 model_all <- lm("rank ~ party*incumbent + year + kreis + party*gender + party*list_place", data = data_final_all)
 
+model_all_share <- lm("share_scale ~ party*incumbent + year + kreis + party*gender + party*list_place", data = data_final_all)
+
 margins_model_all <- margins(model_all, 
                               variables = "list_place", 
                               at = list(party = model_all$xlevels$party)) %>% 
@@ -113,6 +115,9 @@ margins_model_all <- margins(model_all,
 model_sp <- lm("rank ~ kreis*incumbent + year + kreis*gender + list_place", 
    data = data_final)
 
+model_sp_share <- lm("share_scale ~ kreis*incumbent + year + kreis*gender + list_place", 
+   data = data_final)
+
 margins_sp <- margins(model_sp) %>% 
   summary() %>% 
   select(AME) %>% 
@@ -121,6 +126,9 @@ margins_sp <- margins(model_sp) %>%
 
 ## SP nach Wahljahre
 model_sp_years <- lm("rank ~ kreis*incumbent + kreis*gender + year*list_place", 
+   data = data_final)
+
+model_sp_years_share <- lm("share_scale ~ kreis*incumbent + kreis*gender + year*list_place", 
    data = data_final)
 
 margins_sp_years <- margins(model_sp_years, variables = "list_place", 
@@ -133,6 +141,8 @@ margins_sp_years <- margins(model_sp_years, variables = "list_place",
 ## SP nach Wahlkreis (Basismodell)
 model_sp_kreis <- lm("rank ~ kreis*incumbent + year + kreis*gender + kreis*list_place", data = data_final)
 
+model_sp_kreis_share <- lm("share_scale ~ kreis*incumbent + year + kreis*gender + kreis*list_place", data = data_final)
+
 margins_sp_kreis <- margins(model_sp_kreis, variables = "list_place", 
         at = list(kreis = model_sp_kreis$xlevels$kreis)) %>% 
   summary() %>% 
@@ -142,6 +152,8 @@ margins_sp_kreis <- margins(model_sp_kreis, variables = "list_place",
 
 ## SP nach Geschlecht
 model_sp_gender <- lm("rank ~ kreis*incumbent + year + gender*kreis*list_place", data = data_final)
+
+model_sp_gender_share <- lm("share_scale ~ kreis*incumbent + year + gender*kreis*list_place", data = data_final)
 
 margins_sp_gender <- margins(model_sp_gender, 
         variables = "list_place", 
@@ -154,9 +166,15 @@ margins_sp_gender <- margins(model_sp_gender,
 ## SP nach veränderten Wahlzettel
 model_sp_ownothers <- lm("rank ~ kreis*incumbent + year + kreis*gender + kreis*list_place", data = subset(data_final_all, party == "SP"))
 
+model_sp_ownothers_share <- lm("share_scale ~ kreis*incumbent + year + kreis*gender + kreis*list_place", data = subset(data_final_all, party == "SP"))
+
 model_sp_own <- lm("rank_own ~ kreis*incumbent + year + kreis*gender + kreis*list_place", data = subset(data_final_all, party == "SP"))
 
+model_sp_own_share <- lm("share_own_scale ~ kreis*incumbent + year + kreis*gender + kreis*list_place", data = subset(data_final_all, party == "SP"))
+
 model_sp_others <- lm("rank_others ~ kreis*incumbent + year + kreis*gender + kreis*list_place", data = subset(data_final_all, party == "SP"))
+
+model_sp_others_share <- lm("share_others_scale ~ kreis*incumbent + year + kreis*gender + kreis*list_place", data = subset(data_final_all, party == "SP"))
 
 margins_sp_others <- margins(model_sp_others, variables = "list_place", 
         at = list(kreis = model_sp_others$xlevels$kreis)) %>% 
@@ -169,6 +187,9 @@ margins_sp_others <- margins(model_sp_others, variables = "list_place",
 model_sp_weitere <- lm("rank ~ kreis*incumbent + year + kreis*gender + age + above + below + list_place", 
             data = data_final_all %>% filter(party == "SP"))
 
+model_sp_weitere_share <- lm("share_scale ~ kreis*incumbent + year + kreis*gender + age + above + below + list_place", 
+            data = data_final_all %>% filter(party == "SP"))
+
 # Anteil
 
 scale_factors <- data_final %>% 
@@ -176,9 +197,6 @@ scale_factors <- data_final %>%
   summarise(share_sd = sd(share),
             list_place_sd = sd(list_place)) %>% 
   mutate(scale_factor = share_sd/list_place_sd)
-
-model_sp_kreis_share <- lm("share_scale ~ kreis*incumbent + year + kreis*gender + kreis*list_place_scale", 
-   data = data_final)
 ```
 
 # Einführung {#sec_intro}
@@ -395,6 +413,7 @@ margins(model) %>%
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Marginale Effekte", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Wahlergebnisrang" = 4)) %>%
   kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "4.75cm") %>%
@@ -427,6 +446,7 @@ margins(model,
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte des Listenrangs nach Wahljahren", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Wahlergebnisrang" = 4)) %>%
   kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
@@ -457,6 +477,7 @@ margins(model,
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte des Listenrangs nach Wahlkreisen", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Wahlergebnisrang" = 4)) %>%
   kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
@@ -490,6 +511,7 @@ margins(model,
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte des Listenrangs nach Geschlecht", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Wahlergebnisrang" = 4)) %>%
   kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
@@ -529,6 +551,7 @@ margins(model_sp_ownothers, variables = "list_place",
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte des Listenrangs nach Wahlkreisen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Wahlergebnisrang" = 4)) %>%
   kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
@@ -552,6 +575,7 @@ margins(model_sp_own, variables = "list_place",
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte des Listenrangs der SP-Stimmen nach Wahlkreisen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Wahlergebnisrang" = 4)) %>%
   kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
@@ -575,6 +599,7 @@ margins(model_sp_others, variables = "list_place",
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte des Listenrangs der Panaschierstimmen nach Wahlkreisen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Wahlergebnisrang" = 4)) %>%
   kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
@@ -689,6 +714,7 @@ margins(model) %>%
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekte weiterer erklärender Variablen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Wahlergebnisrang" = 4)) %>%
   kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "4.75cm") %>%
@@ -732,6 +758,7 @@ margins(model,
          `p-Wert`, `Signifikanz`) %>% 
   kbl("latex", digits = 3, 
       caption = "Durchschnittliche marginale Effekt nach Parteien", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Wahlergebnisrang" = 4)) %>%
   kable_styling(latex_options = c("HOLD_position"),
                 full_width = FALSE) %>%
   column_spec(1, width = "3cm") %>%
@@ -1043,6 +1070,288 @@ tibble("Partei / Liste" = c("SP (2008)",
   #column_spec(1, width = "4.75cm") %>%
   #column_spec(2, width = "4.25cm") %>%
   column_spec(4, width = "6cm")
+```
+
+## Ergebnisse für die SP -- Stimmenanteil
+
+### Basismodell
+
+```{r tab11, echo=FALSE, message=TRUE, warning=FALSE}
+model <- model_sp_share
+
+margins(model) %>%
+  tidy() %>%
+  mutate(id = factor(term, levels = c("genderM", "incumbent", "kreisGrossbasel West", "kreisKleinbasel", "kreisRiehen", "year2024", "year2020", "year2016", "year2012", "list_place"))) %>% 
+  arrange(id) %>%
+  mutate(`Variable` = case_when(term == "genderM" ~ "Geschlecht = Mann",
+                                term == "incumbent" ~ "Bisher = Ja",
+                                term == "kreisGrossbasel West" ~ "Grossbasel West",
+                                term == "kreisKleinbasel" ~ "Kleinbasel",
+                                term == "kreisRiehen" ~ "Riehen",
+                                term == "list_place" ~ "Listenrang",
+                                term == "year2012" ~ "Jahr = 2012",
+                                term == "year2016" ~ "Jahr = 2016",
+                                term == "year2020" ~ "Jahr = 2020",
+                                term == "year2024" ~ "Jahr = 2024",
+                                TRUE ~ term),
+         `Marginaler Effekt` = estimate,
+         `Standardfehler` = `std.error`,
+         `p-Wert` = `p.value`,
+         `Signifikanz` = sapply(`p.value`, add_stars)) %>%
+  select(`Variable`, `Marginaler Effekt`, `Standardfehler`, 
+         `p-Wert`, `Signifikanz`) %>% 
+  kbl("latex", digits = 3, 
+      caption = "Marginale Effekte", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Stimmenanteil (standardisiert)" = 4)) %>% 
+  kable_styling(latex_options = c("HOLD_position"),
+                full_width = FALSE) %>%
+  column_spec(1, width = "4.75cm") %>%
+  column_spec(2, width = "4.25cm") %>%
+  column_spec(3:4, width = "1.5cm") %>%
+  footnote(general = "*** p < 0.01, ** p < 0.05, * p < 0.1.",
+           general_title = "Hinweis:", 
+           footnote_as_chunk = TRUE)
+```
+
+### Heterogenität über die Wahljahre
+
+```{r tab12, echo=FALSE, message=TRUE, warning=FALSE}
+model <- model_sp_years_share
+
+margins(model, 
+        variables = "list_place", 
+        at = list(year = model$xlevels$year)) %>% 
+  tidy() %>%
+  mutate(id = factor(`at.value`, levels = c("2024", "2020", "2016", "2012"))) %>% 
+  arrange(id) %>%
+  mutate(`Jahr` = `at.value`,
+         `Marginaler Effekt` = estimate,
+         `Standardfehler` = `std.error`,
+         `p-Wert` = `p.value`,
+         `Signifikanz` = sapply(`p.value`, add_stars)) %>%
+  select(`Jahr`, `Marginaler Effekt`, `Standardfehler`, 
+         `p-Wert`, `Signifikanz`) %>% 
+  kbl("latex", digits = 3, 
+      caption = "Durchschnittliche marginale Effekte des Listenrangs nach Wahljahren", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Stimmenanteil (standardisiert)" = 4)) %>% 
+  kable_styling(latex_options = c("HOLD_position"),
+                full_width = FALSE) %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "4.25cm") %>%
+  column_spec(3:4, width = "1.5cm") %>%
+  footnote(general = "*** p < 0.01, ** p < 0.05, * p < 0.1.",
+           general_title = "Hinweis:", 
+           footnote_as_chunk = TRUE)
+```
+
+### Heterogenität über die Wahlkreise
+
+```{r tab13, echo=FALSE, message=TRUE, warning=FALSE}
+model <- model_sp_kreis_share
+
+margins(model, 
+        variables = "list_place", 
+        at = list(kreis = model$xlevels$kreis)) %>% 
+  tidy() %>%
+  mutate(`Wahlkreis` = `at.value`,
+         `Marginaler Effekt` = estimate,
+         `Standardfehler` = `std.error`,
+         `p-Wert` = `p.value`,
+         `Signifikanz` = sapply(`p.value`, add_stars)) %>%
+  select(`Wahlkreis`, `Marginaler Effekt`, `Standardfehler`, 
+         `p-Wert`, `Signifikanz`) %>% 
+  kbl("latex", digits = 3, 
+      caption = "Durchschnittliche marginale Effekte des Listenrangs nach Wahlkreisen", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Stimmenanteil (standardisiert)" = 4)) %>%
+  kable_styling(latex_options = c("HOLD_position"),
+                full_width = FALSE) %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "4.25cm") %>%
+  column_spec(3:4, width = "1.5cm") %>%
+  footnote(general = "*** p < 0.01, ** p < 0.05, * p < 0.1.",
+           general_title = "Hinweis:", 
+           footnote_as_chunk = TRUE)
+```
+
+### Heterogenität über Frauen und Männer
+
+```{r tab14, echo=FALSE, message=TRUE, warning=FALSE}
+model <- model_sp_gender_share
+
+margins(model, 
+        variables = "list_place", 
+        at = list(gender = model$xlevels$gender)) %>% 
+  tidy() %>%
+  mutate(`Geschlecht` = case_when(`at.value` == "M" ~ "Mann",
+                                  `at.value` == "F" ~ "Frau"),
+         `Marginaler Effekt` = estimate,
+         `Standardfehler` = `std.error`,
+         `p-Wert` = `p.value`,
+         `Signifikanz` = sapply(`p.value`, add_stars)) %>%
+  select(`Geschlecht`, `Marginaler Effekt`, `Standardfehler`, 
+         `p-Wert`, `Signifikanz`) %>% 
+  kbl("latex", digits = 3, 
+      caption = "Durchschnittliche marginale Effekte des Listenrangs nach Geschlecht", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Stimmenanteil (standardisiert)" = 4)) %>%
+  kable_styling(latex_options = c("HOLD_position"),
+                full_width = FALSE) %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "4.25cm") %>%
+  column_spec(3:4, width = "1.5cm") %>%
+  footnote(general = "*** p < 0.01, ** p < 0.05, * p < 0.1.",
+           general_title = "Hinweis:", 
+           footnote_as_chunk = TRUE)
+```
+
+### Heterogenität über SP- und Panaschierstimmen
+
+```{r tab15, echo=FALSE, message=TRUE, warning=FALSE}
+margins(model_sp_ownothers_share, variables = "list_place", 
+        at = list(kreis = model_sp_ownothers_share$xlevels$kreis)) %>% 
+  tidy() %>% 
+  mutate(`Wahlkreis` = `at.value`,
+         `Marginaler Effekt` = estimate,
+         `Standardfehler` = `std.error`,
+         `p-Wert` = `p.value`,
+         `Signifikanz` = sapply(`p.value`, add_stars)) %>%
+  select(`Wahlkreis`, `Marginaler Effekt`, `Standardfehler`, 
+         `p-Wert`, `Signifikanz`) %>% 
+  kbl("latex", digits = 3, 
+      caption = "Durchschnittliche marginale Effekte des Listenrangs nach Wahlkreisen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Stimmenanteil (standardisiert)" = 4)) %>%
+  kable_styling(latex_options = c("HOLD_position"),
+                full_width = FALSE) %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "4.25cm") %>%
+  column_spec(3:4, width = "1.5cm") %>%
+  footnote(general = "*** p < 0.01, ** p < 0.05, * p < 0.1.",
+           general_title = "Hinweis:", 
+           footnote_as_chunk = TRUE)
+```
+
+```{r tab16, echo=FALSE, message=TRUE, warning=FALSE}
+margins(model_sp_own_share, variables = "list_place", 
+        at = list(kreis = model_sp_own_share$xlevels$kreis)) %>% 
+  tidy() %>% 
+  mutate(`Wahlkreis` = `at.value`,
+         `Marginaler Effekt` = estimate,
+         `Standardfehler` = `std.error`,
+         `p-Wert` = `p.value`,
+         `Signifikanz` = sapply(`p.value`, add_stars)) %>%
+  select(`Wahlkreis`, `Marginaler Effekt`, `Standardfehler`, 
+         `p-Wert`, `Signifikanz`) %>% 
+  kbl("latex", digits = 3, 
+      caption = "Durchschnittliche marginale Effekte des Listenrangs der SP-Stimmen nach Wahlkreisen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Stimmenanteil (standardisiert)" = 4)) %>%
+  kable_styling(latex_options = c("HOLD_position"),
+                full_width = FALSE) %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "4.25cm") %>%
+  column_spec(3:4, width = "1.5cm") %>%
+  footnote(general = "*** p < 0.01, ** p < 0.05, * p < 0.1.",
+           general_title = "Hinweis:", 
+           footnote_as_chunk = TRUE)
+```
+
+```{r tab17, echo=FALSE, message=TRUE, warning=FALSE}
+margins(model_sp_others_share, variables = "list_place", 
+        at = list(kreis = model_sp_others_share$xlevels$kreis)) %>% 
+  tidy() %>% 
+  mutate(`Wahlkreis` = `at.value`,
+         `Marginaler Effekt` = estimate,
+         `Standardfehler` = `std.error`,
+         `p-Wert` = `p.value`,
+         `Signifikanz` = sapply(`p.value`, add_stars)) %>%
+  select(`Wahlkreis`, `Marginaler Effekt`, `Standardfehler`, 
+         `p-Wert`, `Signifikanz`) %>% 
+  kbl("latex", digits = 3, 
+      caption = "Durchschnittliche marginale Effekte des Listenrangs der Panaschierstimmen nach Wahlkreisen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Stimmenanteil (standardisiert)" = 4)) %>%
+  kable_styling(latex_options = c("HOLD_position"),
+                full_width = FALSE) %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "4.25cm") %>%
+  column_spec(3:4, width = "1.5cm") %>%
+  footnote(general = "*** p < 0.01, ** p < 0.05, * p < 0.1.",
+           general_title = "Hinweis:", 
+           footnote_as_chunk = TRUE)
+```
+
+### Weitere erklärende Variablen
+
+```{r tab18, echo=FALSE, message=TRUE, warning=FALSE}
+model <- model_sp_weitere_share
+
+margins(model) %>%
+  tidy() %>%
+  mutate(id = factor(term, levels = c("genderM", "age", "incumbent", "above", "below", "kreisGrossbasel West", "kreisKleinbasel", "kreisRiehen", "year2024", "list_place"))) %>% 
+  arrange(id) %>% 
+  mutate(`Variable` = case_when(term == "genderM" ~ "Geschlecht = Mann",
+                                term == "incumbent" ~ "Bisher = Ja",
+                                term == "kreisGrossbasel West" ~ "Grossbasel West",
+                                term == "kreisKleinbasel" ~ "Kleinbasel",
+                                term == "kreisRiehen" ~ "Riehen",
+                                term == "list_place" ~ "Listenrang",
+                                term == "year2024" ~ "Jahr = 2024",
+                                term == "above" ~ "Oberhalb Bisher = Ja",
+                                term == "below" ~ "Unterhalb Bisher = Ja",
+                                term == "age" ~ "Alter",
+                                TRUE ~ term),
+         `Marginaler Effekt` = estimate,
+         `Standardfehler` = `std.error`,
+         `p-Wert` = `p.value`,
+         `Signifikanz` = sapply(`p.value`, add_stars)) %>%
+  select(`Variable`, `Marginaler Effekt`, `Standardfehler`, 
+         `p-Wert`, `Signifikanz`) %>% 
+  kbl("latex", digits = 3, 
+      caption = "Durchschnittliche marginale Effekte weiterer erklärender Variablen (Wahljahre 2024 und 2020)", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Stimmenanteil (standardisiert)" = 4)) %>%
+  kable_styling(latex_options = c("HOLD_position"),
+                full_width = FALSE) %>%
+  column_spec(1, width = "4.75cm") %>%
+  column_spec(2, width = "4.25cm") %>%
+  column_spec(3:4, width = "1.5cm") %>%
+  footnote(general = "*** p < 0.01, ** p < 0.05, * p < 0.1.",
+           general_title = "Hinweis:", 
+           footnote_as_chunk = TRUE)
+```
+
+### Ergebnisse für weitere Parteien
+
+```{r tab19, echo=FALSE, message=TRUE, warning=FALSE}
+model <- model_all_share
+
+margins(model, 
+        variables = "list_place", 
+        at = list(party = model$xlevels$party)) %>%
+  tidy() %>%
+  arrange(estimate) %>% 
+  mutate(`Wahlkreis` = case_when(`at.value` == "BastA" ~ "BastA!",
+                                 `at.value` == "FDP" ~ "FDP",
+                                 `at.value` == "GB" ~ "Grünes Bündnis",
+                                 `at.value` == "GLP" ~ "GLP",
+                                 `at.value` == "GRÜNE" ~ "GRÜNE",
+                                 `at.value` == "LDP" ~ "LDP",
+                                 `at.value` == "Mitte" ~ "Die Mitte",
+                                 `at.value` == "SP" ~ "SP",
+                                 `at.value` == "SVP" ~ "SVP"),
+         `Marginaler Effekt` = estimate,
+         `Standardfehler` = `std.error`,
+         `p-Wert` = `p.value`,
+         `Signifikanz` = sapply(`p.value`, add_stars)) %>%
+  select(`Wahlkreis`, `Marginaler Effekt`, `Standardfehler`, 
+         `p-Wert`, `Signifikanz`) %>% 
+  kbl("latex", digits = 3, 
+      caption = "Durchschnittliche marginale Effekt nach Parteien", booktabs = TRUE, linesep = "") %>% 
+  add_header_above(c(" " = 1, "Zielgrösse: Stimmenanteil (standardisiert)" = 4)) %>%
+  kable_styling(latex_options = c("HOLD_position"),
+                full_width = FALSE) %>%
+  column_spec(1, width = "3cm") %>%
+  column_spec(2, width = "4.25cm") %>%
+  column_spec(3:4, width = "1.5cm") %>%
+  footnote(general = "*** p < 0.01, ** p < 0.05, * p < 0.1.",
+           general_title = "Hinweis:", 
+           footnote_as_chunk = TRUE)
 ```
 
 ```{r eval=FALSE, include=FALSE}
