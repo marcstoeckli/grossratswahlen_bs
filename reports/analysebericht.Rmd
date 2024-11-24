@@ -16,8 +16,8 @@ header-includes:
   - \floatsetup[table]{capposition=top}
   - \floatsetup[figure]{capposition=top}
 title: "Der Listenrangeffekt bei den Grossratswahlen in Basel-Stadt: Analysebericht"
-subtitle: "Work in Progress (Version 0.1.8) -- aktuellste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
-thanks: "Der Code und die Daten der Analysen sind auf Github abgelegt ([[Link]{.ul}](https://github.com/marcstoeckli/grossratswahlen_bs)). Ich freue mich über Kommentare und Anregungen via kontakt@stoecklieconomics.ch. Einen herzlichen Dank für ihr Feedback gehen an Tamina Graber, Edibe Gölgeli, Michela Seggiani und Salome Bessenich."
+subtitle: "Work in Progress (Version 0.1.10) -- aktuellste Version [[hier]{.ul}](https://www.dropbox.com/scl/fi/1qpggskxxumjpiexj2kwm/analysebericht.pdf?rlkey=baxspwclhphpl945nvj5nhmw6&st=zcmkrqta&dl=0) herunterladen"
+thanks: "Der Code und die Daten der Analysen sind auf Github abgelegt ([[Link]{.ul}](https://github.com/marcstoeckli/grossratswahlen_bs)). Ich freue mich über Kommentare und Anregungen via kontakt@stoecklieconomics.ch. Einen herzlichen Dank für ihr Feedback gehen an Tamina Graber, Edibe Gölgeli, Michela Seggiani, Salome Bessenich und Stefan Wittlin."
 author: "Marc Stöckli"
 abstract: "In diesem Bericht untersuche ich den Einfluss des Listenrangs auf den Wahlerfolg bei den Grossratswahlen 2008 bis 2024 in Basel-Stadt. Meine Analysen zeigen, dass ein niedrigerer Listenrang (= weiter oben auf der Liste) zu einem besseren Wahlergebnis führt. Der Effekt tritt besonders bei der GLP, SP, SVP und der BastA! auf und variiert je nach Wahljahr und -kreis. Bei der SP stelle ich einen deutlichen Anstieg des Listenrangeffekts in den Wahljahren 2020 und 2024 fest. Die Ergebnisse zeigen, dass es aus Sicht der Frauenförderung ein effektives Instrument ist, die Frauen bei Listenwahlen zuerst aufzuführen. Für eine aktive Gleichstellungspolitik ist diese Trennung nach Geschlecht sinnvoll und sollte in der SP beibehalten werden. Hingegen kann es problematisch sein, Kandidierende alphabetisch aufzulisten."
 date: "`r format(Sys.time(), '%d. %B %Y')`"
@@ -205,6 +205,8 @@ In diesem Bericht untersuche ich den Einfluss der Reihenfolge, in der die Kandid
 
 Es gibt mehrere Hypothesen, wieso Wählende von unten her streichen. Einerseits können die Listenplätze die Präferenz der Partei widerspiegeln (wie es bei anderen Parteien durchaus üblich ist). Wenn Wählende dieser Präferenz folgen möchten, streichen sie daher die unteren Listenplätze, wenn sie kumulieren oder panaschieren. Andererseits ist es beim Kumulieren mehrerer Kandidierender einfacher, die erforderliche Anzahl an zu streichenden Personen als \enquote{Gruppe} von unten her zu streichen, bis genug Kandidierende entfernt wurden.
 
+Ein weiterer Grund für einen Listenrangeffekt ist die Praxis der Staatskanzlei, mit überzähligen Stimmen umzugehen. Auf schriftliche Nachfrage hat die Staatskanzlei Basel-Stadt bestätigt, dass aktuell die Regelung der Nationalratswahlen angewendet wird (insbesondere BPR Art. 38 Abs. 2 und 3). Diese sieht vor, dass wenn ein Wahlzettel mehr Namen als zu vergebende Sitze enthält, erst die letzten vorgedruckten nicht handschriftlich kumulierten Namen gestrichen werden, danach die letzten handschriftlich ausgefüllten Namen.
+
 Widerspiegeln die Listenplätze die Präferenz der Partei, ist der Listenrangeffekt nicht zwingend problematisch (und aus Sicht der Partei gegebenenfalls sogar erwünscht). Für die Wählenden ist es jedoch nicht immer ersichtlich, ob die Reihenfolge der Kandidierenden wirklich eine Präferenz der Partei darstellt. Zahlreiche Parteien führen bei den Grossratswahlen beispielsweise die amtierenden Grossrät:innen auf den niedrigsten Listenrängen auf (siehe Tabelle \ref{tab:tab10} im Anhang), was jedoch nicht zwingend impliziert, dass auch die restlichen Ränge einer Präferenz folgen.
 
 Wenn die Reihenfolge nicht die Präferenz der Partei widerspiegelt, ist der Listenrangeffekt in der Regel unerwünscht. Das Wahl- und Abstimmungsreglement der SP Basel-Stadt legt beispielsweise unter anderem fest, dass bei Listenwahlen die Kandidierenden in alphabetischer Reihenfolge aufzuführen sind. Dies führt dazu, dass Kandidierende mit Nachnamen hinten im Alphabet bei einem allfälligen Listenrangeffekt systematisch benachteiligt werden. Dieselbe Person würde zudem bei *jeder* Wahl benachteiligt werden, da sie aufgrund ihres Nachnamens immer einen schlechten Listenplatz hätte.
@@ -380,6 +382,8 @@ Ziel der Analyse ist es, $\hat{\beta}_4$ (der geschätzte Wert von $\beta_4$) *k
 Für die kausale Interpretation von $\hat{\beta}_4$ hilft es, dass bei der SP und anderen Parteien innerhalb der Geschlechter die Kandidat:innen alphabetisch auf der Liste aufgeführt werden. Wird auf das Geschlecht und den Bisherigen-Status kontrolliert, ist es durch die alphabetische Vergabe unwahrscheinlich, dass der Listenrang mit weiteren Variablen korreliert ist, die einen Effekt auf $y_{it}$ haben. Denn der Listenrang widerspiegelt in diesem Fall weder die Präferenz der Partei noch die Eignung oder Bekanntheit der Kandidierenden.
 
 # Ergebnisse für die SP {#sec_results}
+
+Im Folgenden zeige ich die Regressionsergebnisse mit dem Wahlergebnisrang als Zielgrösse. Die Ergebnisse mit dem Stimmenanteil als Zielgrösse befinden sich im Anhang (Tabellen \ref{tab:tab11} bis \ref{tab:tab19}).
 
 ## Basismodell {#subsec_basemodel}
 
